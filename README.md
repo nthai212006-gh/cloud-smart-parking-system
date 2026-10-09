@@ -3,6 +3,7 @@
 Dự án môn học **Điện toán đám mây (Cloud Computing)** - Đợt 1 (2026 - 2027)  
 **Giảng viên hướng dẫn:** Huỳnh Xuân Phụng  
 **Môi trường triển khai:** AWS Learner Lab (`us-east-1`)  
+**Git Branch:** `dev` (phát triển) / `main` (nghiệm thu)
 
 ---
 
@@ -30,20 +31,30 @@ Hệ thống quản lý bãi giữ xe thông minh ứng dụng kiến trúc Serv
 
 ---
 
-## 📁 4. Cấu trúc thư mục dự án
+## 📁 4. Cấu trúc thư mục dự án (Project Structure)
 ```text
 cloud-smart-parking-system/
-├── backend/                  # Mã nguồn các hàm AWS Lambda (Python 3.11)
-├── docs/                     # Tài liệu thiết kế kiến trúc, quy chuẩn tagging
-│   ├── THIET_KE_KIEN_TRUC_HE_THONG.md
-│   └── QUY_CHUAN_TAGGING.md
-├── evidence/                 # Ảnh chụp màn hình minh chứng theo từng tuần
+├── backend/                              # Mã nguồn các hàm AWS Lambda (Python 3.11)
+├── docs/                                 # Tài liệu dự án
+│   ├── architecture/                     # Thiết kế kiến trúc & cơ sở dữ liệu
+│   │   └── architecture-design.md
+│   ├── guidelines/                       # Quy chuẩn đặt tên & gắn tag tài nguyên AWS
+│   │   └── tagging-standards.md
+│   ├── plans/                            # Kế hoạch công việc theo từng tuần & thành viên
+│   │   └── week-01/
+│   │       ├── overview.md               # Kế hoạch tổng quan Tuần 1
+│   │       ├── member-1.md               # Kế hoạch chi tiết Người 1
+│   │       └── member-2.md               # Kế hoạch chi tiết Người 2
+│   └── worklogs/                         # Nhật ký công việc theo từng tuần & thành viên
+│       └── week-01/
+│           ├── overview.md               # Tổng hợp giờ & minh chứng chung Tuần 1
+│           ├── member-1.md               # Nhật ký chi tiết Người 1
+│           └── member-2.md               # Nhật ký chi tiết Người 2
+├── evidence/                             # Ảnh chụp màn hình minh chứng console
 │   └── week1/
-├── scripts/                  # Các script kiểm thử, tự động hóa cục bộ
-├── test-images/              # Bộ ảnh biển số xe mẫu đã che thông tin cá nhân
+├── scripts/                              # Các script kiểm thử, tự động hóa cục bộ
+├── test-images/                          # Bộ 15-20 ảnh biển số xe mẫu đã che thông tin cá nhân
 ├── .gitignore
-├── KE_HOACH_CHI_TIET_TUAN_1.md
-├── NHAT_KY_CONG_VIEC_TUAN_1.md
 └── README.md
 ```
 
@@ -53,3 +64,4 @@ cloud-smart-parking-system/
 - `Project`: `SmartParking`
 - `Owner`: `[MSSV_SV1]_[MSSV_SV2]`
 - `Environment`: `Development`
+Chi tiết xem tại [docs/guidelines/tagging-standards.md](docs/guidelines/tagging-standards.md).
