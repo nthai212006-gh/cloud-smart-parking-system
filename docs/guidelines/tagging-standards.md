@@ -26,7 +26,7 @@ Mọi tài nguyên được khởi tạo trên AWS (S3 Bucket, DynamoDB Table, L
 ## 3. QUY CHUẨN ĐẶT TÊN TÀI NGUYÊN (NAMING CONVENTION)
 | Dịch vụ AWS | Quy tắc đặt tên | Ví dụ |
 | :--- | :--- | :--- |
-| **Amazon S3** | `smart-parking-images-[mssv]` | `smart-parking-images-21110002` |
+| **Amazon S3** | `smart-parking-images-[mssv]` | `smart-parking-images-24110207` |
 | **Amazon DynamoDB** | `ParkingTickets` | `ParkingTickets` (Partition Key: `ticketId`) |
 | **AWS Lambda (Checkin)** | `SmartParking-Checkin` | `SmartParking-Checkin` (Runtime: Python 3.11) |
 | **AWS Lambda (Checkout)**| `SmartParking-Checkout` | `SmartParking-Checkout` (Runtime: Python 3.11) |

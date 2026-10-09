@@ -14,7 +14,7 @@ Hệ thống quản lý bãi giữ xe thông minh ứng dụng kiến trúc Serv
 | STT | Họ và tên | MSSV | Vai trò chính |
 | :---: | :--- | :---: | :--- |
 | 1 | `[Họ và tên SV 1]` | `[MSSV 1]` | Trưởng nhóm: Kiến trúc Serverless, AI Rekognition & Backend Core |
-| 2 | `[Họ và tên SV 2]` | `[MSSV 2]` | Thành viên: Hạ tầng AWS (S3, DynamoDB), Dataset & QA/Audit |
+| 2 | Nguyễn Trung Hải | 24110207 | Thành viên: Hạ tầng AWS (S3, DynamoDB), Dataset & QA/Audit |
 
 ---
 

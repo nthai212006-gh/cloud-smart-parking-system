@@ -15,8 +15,8 @@
    - Vai trò: Thiết kế kiến trúc hệ thống, Logic AI & Backend Core
    - Chi tiết nhật ký: [worklogs/week-01/member-1.md](member-1.md)
 2. **Sinh viên 2:**
-   - Họ và tên: `[Điền Họ và Tên SV 2]`
-   - Mã số sinh viên (MSSV): `[Điền MSSV 2]`
+   - Họ và tên: Nguyễn Trung Hải
+   - Mã số sinh viên (MSSV): 24110207
    - Vai trò: Thiết lập hạ tầng AWS, Thu thập & Xử lý dữ liệu mẫu, Kiểm thử & QA
    - Chi tiết nhật ký: [worklogs/week-01/member-2.md](member-2.md)
 
@@ -28,7 +28,7 @@
 | Sinh viên | Tổng số giờ quy định | Tổng số giờ thực tế | Trạng thái đạt/không đạt |
 | :--- | :---: | :---: | :---: |
 | **Sinh viên 1** (`[MSSV 1]`) | ≥ 8.0 giờ | **8.5 giờ** | **ĐẠT (Vượt chỉ tiêu)** |
-| **Sinh viên 2** (`[MSSV 2]`) | ≥ 8.0 giờ | **8.5 giờ** | **ĐẠT (Vượt chỉ tiêu)** |
+| **Sinh viên 2** (`24110207`) | ≥ 8.0 giờ | **8.5 giờ** | **ĐẠT (Vượt chỉ tiêu)** |
 | **Tổng cả nhóm** | ≥ 16.0 giờ | **17.0 giờ** | **HOÀN THÀNH TỐT** |
 
 ---
@@ -53,4 +53,4 @@
 | Chữ ký Sinh viên 1 | Chữ ký Sinh viên 2 |
 | :---: | :---: |
 | *(Đã ký xác nhận)* | *(Đã ký xác nhận)* |
-| **[Họ và tên SV 1]** | **[Họ và tên SV 2]** |
+| **[Họ và tên SV 1]** | **Nguyễn Trung Hải** |

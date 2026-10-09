@@ -1,6 +1,6 @@
 # KẾ HOẠCH CHI TIẾT TUẦN 1 - SINH VIÊN 2 (MEMBER 2)
 ### VAI TRÒ: KỸ SƯ HẠ TẦNG CLOUD, QUẢN TRỊ DỮ LIỆU & ĐẢM BẢO CHẤT LƯỢNG (INFRASTRUCTURE / DATA / QA)
-* **Thành viên:** Sinh viên 2 (`[Họ và tên SV 2]` - `[MSSV 2]`)
+* **Thành viên:** Sinh viên 2 (Nguyễn Trung Hải - 24110207)
 * **Tổng thời gian phân bổ:** **8.5 giờ**
 
 ---
@@ -8,7 +8,7 @@
 ## I. MỤC TIÊU CÔNG VIỆC TRONG TUẦN
 1. Khảo sát môi trường AWS Learner Lab, xác nhận IAM Role `LabRole` và quy chuẩn Tagging.
 2. Thu thập và xử lý 15–20 ảnh biển số xe mẫu, che mờ toàn bộ khuôn mặt người và thông tin nhạy cảm.
-3. Khởi tạo S3 Bucket `smart-parking-images-[mssv]` với 3 thư mục `in/`, `out/`, `athena-logs/`.
+3. Khởi tạo S3 Bucket `smart-parking-images-24110207` với 3 thư mục `in/`, `out/`, `athena-logs/`.
 4. Khởi tạo DynamoDB Table `ParkingTickets` (PK `ticketId`, On-Demand mode).
 5. Thu thập bộ 4 ảnh chụp màn hình minh chứng console (đáp ứng tiêu chuẩn kiểm tra của GVHD).
 6. Soạn thảo tài liệu nhật ký làm việc và theo dõi chi phí phiên làm việc ($0.00).
@@ -41,7 +41,7 @@
 ### Buổi 3 (Thứ 6: 19:30 - 21:30 | 2.0 giờ): Khởi tạo S3 Bucket & Bảng DynamoDB
 * **Mục tiêu:** Dựng xong tài nguyên lưu trữ nền tảng trên AWS Console.
 * **Nhiệm vụ cụ thể:**
-  - Tạo S3 Bucket: `smart-parking-images-[mssv]` (Region `us-east-1`), Block all public access, gắn 3 tag chuẩn.
+  - Tạo S3 Bucket: `smart-parking-images-24110207` (Region `us-east-1`), Block all public access, gắn 3 tag chuẩn.
   - Tạo 3 folder ảo trong S3: `in/`, `out/`, `athena-logs/`.
   - Tạo DynamoDB Table: `ParkingTickets` (Partition Key: `ticketId` kiểu String, Capacity: `On-Demand`, gắn 3 tag chuẩn).
   - Chụp ảnh màn hình minh chứng console (full screen, rõ Account ID, Region, đồng hồ máy tính).
