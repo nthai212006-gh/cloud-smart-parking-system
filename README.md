@@ -13,21 +13,23 @@ Hệ thống quản lý bãi giữ xe thông minh ứng dụng kiến trúc Serv
 ## 👥 2. Thành viên nhóm
 | STT | Họ và tên | MSSV | Vai trò chính |
 | :---: | :--- | :---: | :--- |
-| 1 | `[Họ và tên SV 1]` | `[MSSV 1]` | Trưởng nhóm: Kiến trúc Serverless, AI Rekognition & Backend Core |
+| 1 | Lê Cao Viết Tín | `[MSSV 1]` | Trưởng nhóm: Kiến trúc Serverless, AI Rekognition & Backend Core |
 | 2 | Nguyễn Trung Hải | 24110207 | Thành viên: Hạ tầng AWS (S3, DynamoDB), Dataset & QA/Audit |
 
 ---
 
 ## 🏗️ 3. Kiến trúc hệ thống (Serverless Architecture)
 - **Frontend / Client:** Web Dashboard hoặc thiết bị camera cổng gửi ảnh qua API.
-- **API Gateway:** Nhận request và định tuyến tới các hàm Lambda xử lý.
+- **API Gateway:** Nhận request RESTful và định tuyến tới các hàm Lambda xử lý.
 - **AWS Lambda:**
   - `SmartParking-Checkin`: Xử lý xe vào, gọi Rekognition bóc tách biển số, ghi vé vào DynamoDB, lưu ảnh vào S3 (`in/`).
   - `SmartParking-Checkout`: Xử lý xe ra, nhận diện biển số, đối soát vé, tính phí gửi xe và cập nhật trạng thái.
 - **Amazon Rekognition:** API `DetectText` nhận diện văn bản / biển số từ hình ảnh.
-- **Amazon DynamoDB:** Bảng `ParkingTickets` lưu trữ thông tin vé gửi xe (Partition Key: `ticketId`).
+- **Amazon DynamoDB:** Bảng `ParkingTickets` lưu trữ thông tin vé gửi xe (Partition Key: `ticketId`, On-Demand).
 - **Amazon S3:** Bucket `smart-parking-images-[mssv]` lưu trữ hình ảnh xe vào/ra (`in/`, `out/`) và logs.
 - **Amazon Athena:** Truy vấn và phân tích báo cáo doanh thu bãi xe.
+
+Chi tiết xem tại tài liệu [docs/THIET_KE_KIEN_TRUC_HE_THONG.md](docs/THIET_KE_KIEN_TRUC_HE_THONG.md).
 
 ---
 
@@ -35,7 +37,10 @@ Hệ thống quản lý bãi giữ xe thông minh ứng dụng kiến trúc Serv
 ```text
 cloud-smart-parking-system/
 ├── backend/                              # Mã nguồn các hàm AWS Lambda (Python 3.11)
+│   ├── checkin.py                        # Lambda xử lý xe vào
+│   └── checkout.py                       # Lambda xử lý xe ra & tính phí
 ├── docs/                                 # Tài liệu dự án
+│   ├── THIET_KE_KIEN_TRUC_HE_THONG.md    # Tài liệu thiết kế kiến trúc chi tiết
 │   ├── architecture/                     # Thiết kế kiến trúc & cơ sở dữ liệu
 │   │   └── architecture-design.md
 │   ├── guidelines/                       # Quy chuẩn đặt tên & gắn tag tài nguyên AWS
@@ -53,6 +58,9 @@ cloud-smart-parking-system/
 ├── evidence/                             # Ảnh chụp màn hình minh chứng console
 │   └── week1/
 ├── scripts/                              # Các script kiểm thử, tự động hóa cục bộ
+│   ├── test_plate_regex.py               # Kiểm thử giải thuật Regex OCR biển số
+│   ├── setup_aws_resources.py            # Tự động khởi tạo S3 & DynamoDB
+│   └── build_curated_dataset.py          # Trích xuất và chuẩn hóa dataset
 ├── test-images/                          # Bộ ảnh biển số xe mẫu đã che thông tin cá nhân
 ├── .gitignore
 └── README.md

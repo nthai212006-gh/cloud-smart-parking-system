@@ -1,45 +1,22 @@
-# Byte-compiled / optimized / DLL files
+# Byte-compiled / Python Cache
 __pycache__/
 *.py[cod]
 *$py.class
 
-# C extensions
-*.so
-
-# Distribution / packaging
-.Python
-build/
-develop-eggs/
-dist/
-downloads/
-eggs/
-.eggs/
-lib/
-lib64/
-parts/
-sdist/
-var/
-wheels/
-*.egg-info/
-.installed.cfg
-*.egg
-
-# Virtual environments
-venv/
-.venv/
-env/
-ENV/
-env.bak/
-venv.bak/
-
-# Environment variables & AWS credentials
+# Môi trường ảo (Virtual Env)
 .env
 .env.local
-*.pem
+.venv/
+venv/
+env/
+ENV/
+
+# AWS credentials & keys
 credentials
 config
+*.pem
 
-# IDEs
+# Editor/IDE
 .vscode/
 .idea/
 *.swp
@@ -53,4 +30,3 @@ Thumbs.db
 *.zip
 *.tar.gz
 *.rar
-
