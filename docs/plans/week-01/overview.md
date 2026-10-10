@@ -16,7 +16,7 @@
    - Khởi tạo DynamoDB Table `ParkingTickets` với Partition Key `ticketId` (On-demand mode).
    - Thiết lập chuẩn Tagging: `Project=SmartParking`, `Owner=[MSSV]`, `Environment=Development`.
    - Nắm rõ giới hạn và quy định sử dụng `LabRole` trong AWS Learner Lab.
-4. **Chuẩn bị dữ liệu thử nghiệm:** Thu thập 15–20 ảnh biển số thực tế, che mờ khuôn mặt người và thông tin cá nhân theo đúng yêu cầu đề tài.
+4. **Chuẩn bị dữ liệu thử nghiệm:** Thu thập bộ ảnh biển số xe mẫu thực tế, che mờ khuôn mặt người và thông tin cá nhân theo đúng yêu cầu đề tài.
 5. **Khởi tạo mã nguồn & Quy trình làm việc:** Thiết lập GitHub repository, phân chia module, quản lý Git branch `dev` và `main`.
 
 ---
@@ -45,7 +45,7 @@
   - [ ] Bảng DynamoDB `ParkingTickets` đã tạo (PK `ticketId`, On-Demand, Active).
   - [ ] Đã xác thực quyền thực thi của `LabRole`.
 - [ ] **Dữ liệu & Mã nguồn:**
-  - [ ] Đã có ít nhất 15 ảnh biển số được che mờ mặt người trong `test-images/`.
+  - [ ] Đã chuẩn bị bộ ảnh biển số xe mẫu được che mờ mặt người trong `test-images/`.
   - [ ] Mã nguồn Lambda trong thư mục `backend/` đã kiểm thử regex cục bộ.
   - [ ] Git repository làm việc trên nhánh `dev`, đẩy đủ commit.
 - [ ] **Hồ sơ minh chứng:**

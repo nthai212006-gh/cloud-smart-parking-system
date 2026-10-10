@@ -7,7 +7,7 @@
 
 ## I. MỤC TIÊU CÔNG VIỆC TRONG TUẦN
 1. Khảo sát môi trường AWS Learner Lab, xác nhận IAM Role `LabRole` và quy chuẩn Tagging.
-2. Thu thập và xử lý 15–20 ảnh biển số xe mẫu, che mờ toàn bộ khuôn mặt người và thông tin nhạy cảm.
+2. Thu thập và xử lý bộ ảnh biển số xe mẫu, che mờ toàn bộ khuôn mặt người và thông tin nhạy cảm.
 3. Khởi tạo S3 Bucket `smart-parking-images-24110207` với 3 thư mục `in/`, `out/`, `athena-logs/`.
 4. Khởi tạo DynamoDB Table `ParkingTickets` (PK `ticketId`, On-Demand mode).
 5. Thu thập bộ 4 ảnh chụp màn hình minh chứng console (đáp ứng tiêu chuẩn kiểm tra của GVHD).
@@ -30,13 +30,13 @@
 * **Sản phẩm:** File `docs/guidelines/tagging-standards.md` và ghi nhận thông tin tài khoản lab.
 
 ### Buổi 2 (Thứ 5: 19:30 - 21:30 | 2.0 giờ): Chuẩn bị Dataset ảnh biển số thực tế
-* **Mục tiêu:** Tạo bộ dữ liệu 15–20 ảnh mẫu đáp ứng tiêu chuẩn riêng tư.
+* **Mục tiêu:** Tạo bộ dữ liệu ảnh mẫu đáp ứng tiêu chuẩn riêng tư.
 * **Nhiệm vụ cụ thể:**
-  - Chụp/thu thập 10 ảnh xe máy (biển 2 dòng) và 5-10 ảnh ô tô (biển 1 dòng/biển vuông), góc thẳng và nghiêng.
-  - Sử dụng công cụ (Paint/Photoshop/Canva/điện thoại) **che mờ/bôi đen toàn bộ khuôn mặt người** và thông tin cá nhân.
+  - Thu thập và phân loại ảnh xe máy (biển 2 dòng) và ô tô (biển 1 dòng/biển vuông), góc thẳng và nghiêng.
+  - Sử dụng công cụ đồ họa **che mờ/bôi đen toàn bộ khuôn mặt người** và thông tin cá nhân.
   - Nén ảnh về khoảng 200KB - 800KB để upload nhanh qua API.
-  - Đặt tên file chuẩn: `test_motor_01.jpg` đến `test_motor_10.jpg`, `test_car_01.jpg` đến `test_car_10.jpg`.
-* **Sản phẩm:** Thư mục `test-images/` chứa đủ 15–20 ảnh đã xử lý.
+  - Chuẩn hóa tên file và cấu trúc phân loại theo các kịch bản kiểm thử.
+* **Sản phẩm:** Thư mục `test-images/` chứa bộ ảnh mẫu đã xử lý và che thông tin nhạy cảm.
 
 ### Buổi 3 (Thứ 6: 19:30 - 21:30 | 2.0 giờ): Khởi tạo S3 Bucket & Bảng DynamoDB
 * **Mục tiêu:** Dựng xong tài nguyên lưu trữ nền tảng trên AWS Console.

@@ -53,7 +53,7 @@ cloud-smart-parking-system/
 ├── evidence/                             # Ảnh chụp màn hình minh chứng console
 │   └── week1/
 ├── scripts/                              # Các script kiểm thử, tự động hóa cục bộ
-├── test-images/                          # Bộ 15-20 ảnh biển số xe mẫu đã che thông tin cá nhân
+├── test-images/                          # Bộ ảnh biển số xe mẫu đã che thông tin cá nhân
 ├── .gitignore
 └── README.md
 ```
