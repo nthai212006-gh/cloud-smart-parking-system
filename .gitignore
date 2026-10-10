@@ -48,3 +48,9 @@ config
 # OS files
 .DS_Store
 Thumbs.db
+
+# Large dataset archives (>100MB limit on GitHub)
+*.zip
+*.tar.gz
+*.rar
+
