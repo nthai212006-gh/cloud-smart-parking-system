@@ -1,50 +1,22 @@
-# Byte-compiled / optimized / DLL files
+# Python Cache
 __pycache__/
 *.py[cod]
 *$py.class
 
-# C extensions
-*.so
-
-# Distribution / packaging
-.Python
-build/
-develop-eggs/
-dist/
-downloads/
-eggs/
-.eggs/
-lib/
-lib64/
-parts/
-sdist/
-var/
-wheels/
-*.egg-info/
-.installed.cfg
-*.egg
-
-# Virtual environments
-venv/
-.venv/
-env/
-ENV/
-env.bak/
-venv.bak/
-
-# Environment variables & AWS credentials
+# Môi trường ảo (Virtual Env)
 .env
-.env.local
-*.pem
-credentials
-config
+.venv/
+venv/
+env/
 
-# IDEs
+# Cấu hình Editor/IDE
 .vscode/
 .idea/
-*.swp
-*.swo
 
-# OS files
+# Bỏ qua các file ảnh test dung lượng lớn, chỉ giữ lại file mẫu nhẹ (nếu cần)
+test-images/*.jpg
+test-images/*.png
+!test-images/.gitkeep
+
+# File hệ thống
 .DS_Store
-Thumbs.db
