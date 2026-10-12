@@ -13,20 +13,20 @@ Hệ thống quản lý bãi giữ xe thông minh ứng dụng kiến trúc Serv
 ## 👥 2. Thành viên nhóm
 | STT | Họ và tên | MSSV | Vai trò chính |
 | :---: | :--- | :---: | :--- |
-| 1 | Lê Cao Viết Tín | `[MSSV 1]` | Trưởng nhóm: Kiến trúc Serverless, AI Rekognition & Backend Core |
+| 1 | Lê Cao Việt Tín | *(Đang cập nhật)* | Trưởng nhóm: Kiến trúc Serverless, AI Rekognition & Backend Core |
 | 2 | Nguyễn Trung Hải | 24110207 | Thành viên: Hạ tầng AWS (S3, DynamoDB), Dataset & QA/Audit |
 
 ---
 
 ## 🏗️ 3. Kiến trúc hệ thống (Serverless Architecture)
 - **Frontend / Client:** Web Dashboard hoặc thiết bị camera cổng gửi ảnh qua API.
-- **API Gateway:** Nhận request RESTful và định tuyến tới các hàm Lambda xử lý.
+- **Amazon API Gateway:** Tiếp nhận request RESTful (`/checkin`, `/checkout`), kiểm soát CORS và định tuyến tới các hàm Lambda xử lý (Đặc tả: `backend/api_gateway_openapi.json`).
 - **AWS Lambda:**
   - `SmartParking-Checkin`: Xử lý xe vào, gọi Rekognition bóc tách biển số, ghi vé vào DynamoDB, lưu ảnh vào S3 (`in/`).
   - `SmartParking-Checkout`: Xử lý xe ra, nhận diện biển số, đối soát vé, tính phí gửi xe và cập nhật trạng thái.
 - **Amazon Rekognition:** API `DetectText` nhận diện văn bản / biển số từ hình ảnh.
 - **Amazon DynamoDB:** Bảng `ParkingTickets` lưu trữ thông tin vé gửi xe (Partition Key: `ticketId`, On-Demand).
-- **Amazon S3:** Bucket `smart-parking-images-[mssv]` lưu trữ hình ảnh xe vào/ra (`in/`, `out/`) và logs.
+- **Amazon S3:** Bucket `smart-parking-images-24110207` lưu trữ hình ảnh xe vào/ra (`in/`, `out/`) và logs.
 - **Amazon Athena:** Truy vấn và phân tích báo cáo doanh thu bãi xe.
 
 Chi tiết xem tại tài liệu [docs/THIET_KE_KIEN_TRUC_HE_THONG.md](docs/THIET_KE_KIEN_TRUC_HE_THONG.md).
@@ -36,9 +36,10 @@ Chi tiết xem tại tài liệu [docs/THIET_KE_KIEN_TRUC_HE_THONG.md](docs/THIE
 ## 📁 4. Cấu trúc thư mục dự án (Project Structure)
 ```text
 cloud-smart-parking-system/
-├── backend/                              # Mã nguồn các hàm AWS Lambda (Python 3.11)
-│   ├── checkin.py                        # Lambda xử lý xe vào
-│   └── checkout.py                       # Lambda xử lý xe ra & tính phí
+├── backend/                              # Mã nguồn Lambda & Cấu hình API Gateway
+│   ├── api_gateway_openapi.json          # Đặc tả REST API Gateway (OpenAPI 3.0 / Swagger)
+│   ├── checkin.py                        # Lambda xử lý xe vào (Check-in)
+│   └── checkout.py                       # Lambda xử lý xe ra & tính phí (Check-out)
 ├── docs/                                 # Tài liệu dự án
 │   ├── THIET_KE_KIEN_TRUC_HE_THONG.md    # Tài liệu thiết kế kiến trúc chi tiết
 │   ├── architecture/                     # Thiết kế kiến trúc & cơ sở dữ liệu

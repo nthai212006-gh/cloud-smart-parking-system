@@ -1,0 +1,164 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "SmartParking-REST-API",
+    "description": "API Gateway REST API phục vụ Hệ thống quản lý bãi giữ xe thông minh (Cloud Smart Parking System) - Môn học Điện toán đám mây.",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://{apiId}.execute-api.us-east-1.amazonaws.com/dev",
+      "variables": {
+        "apiId": {
+          "default": "api-gateway-id"
+        }
+      }
+    }
+  ],
+  "paths": {
+    "/checkin": {
+      "post": {
+        "summary": "Xử lý xe vào bãi (Check-in)",
+        "description": "Nhận ảnh phương tiện dạng Base64 và loại xe, gọi Rekognition bóc tách biển số, lưu ảnh vào S3 in/ và lưu bản ghi vào DynamoDB ParkingTickets.",
+        "operationId": "handleCheckin",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["image"],
+                "properties": {
+                  "image": {
+                    "type": "string",
+                    "description": "Chuỗi dữ liệu ảnh mã hóa Base64"
+                  },
+                  "vehicleType": {
+                    "type": "string",
+                    "enum": ["MOTORBIKE", "CAR"],
+                    "default": "MOTORBIKE",
+                    "description": "Loại phương tiện gửi"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Check-in thành công",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": { "type": "string" },
+                    "ticketId": { "type": "string", "format": "uuid" },
+                    "plateNumber": { "type": "string" },
+                    "checkinTime": { "type": "string", "format": "date-time" },
+                    "status": { "type": "string", "example": "PARKED" }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Lỗi nội bộ hệ thống hoặc ảnh không hợp lệ"
+          }
+        },
+        "x-amazon-apigateway-integration": {
+          "type": "aws_proxy",
+          "httpMethod": "POST",
+          "uri": "arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-1:*:function:SmartParking-Checkin/invocations",
+          "passthroughBehavior": "when_no_match"
+        }
+      },
+      "options": {
+        "summary": "CORS preflight checkin",
+        "responses": {
+          "200": {
+            "description": "CORS support headers",
+            "headers": {
+              "Access-Control-Allow-Origin": { "schema": { "type": "string" } },
+              "Access-Control-Allow-Methods": { "schema": { "type": "string" } },
+              "Access-Control-Allow-Headers": { "schema": { "type": "string" } }
+            }
+          }
+        }
+      }
+    },
+    "/checkout": {
+      "post": {
+        "summary": "Xử lý xe ra bãi & tính tiền (Check-out)",
+        "description": "Nhận ticketId hoặc ảnh đối soát, truy xuất bản ghi từ DynamoDB, tính toán thời gian gửi và phí gửi theo block giờ, cập nhật trạng thái COMPLETED.",
+        "operationId": "handleCheckout",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["ticketId"],
+                "properties": {
+                  "ticketId": {
+                    "type": "string",
+                    "format": "uuid",
+                    "description": "Mã vé cần thanh toán và lấy xe"
+                  },
+                  "outImage": {
+                    "type": "string",
+                    "description": "Ảnh phương tiện lúc ra (tùy chọn để lưu audit)"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Check-out thành công và trả về số tiền phải trả",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": { "type": "string" },
+                    "ticketId": { "type": "string" },
+                    "checkoutTime": { "type": "string", "format": "date-time" },
+                    "totalHours": { "type": "integer" },
+                    "fee": { "type": "number", "description": "Số tiền gửi xe tính bằng VNĐ" }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Không tìm thấy vé trong hệ thống"
+          },
+          "500": {
+            "description": "Lỗi xử lý hệ thống"
+          }
+        },
+        "x-amazon-apigateway-integration": {
+          "type": "aws_proxy",
+          "httpMethod": "POST",
+          "uri": "arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-1:*:function:SmartParking-Checkout/invocations",
+          "passthroughBehavior": "when_no_match"
+        }
+      },
+      "options": {
+        "summary": "CORS preflight checkout",
+        "responses": {
+          "200": {
+            "description": "CORS support headers",
+            "headers": {
+              "Access-Control-Allow-Origin": { "schema": { "type": "string" } },
+              "Access-Control-Allow-Methods": { "schema": { "type": "string" } },
+              "Access-Control-Allow-Headers": { "schema": { "type": "string" } }
+            }
+          }
+        }
+      }
+    }
+  }
+}
