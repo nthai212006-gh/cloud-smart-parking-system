@@ -1,4 +1,4 @@
-# KẾ HOẠCH TRIỂN KHAI CHI TIẾT TUẦN 2 (WEEK 2 IMPLEMENTATION PLAN)
+﻿# KẾ HOẠCH TRIỂN KHAI CHI TIẾT TUẦN 2 (WEEK 2 IMPLEMENTATION PLAN)
 ## ĐỀ TÀI: HỆ THỐNG QUẢN LÝ BÃI GIỮ XE THÔNG MINH (SMART PARKING SYSTEM)
 
 * **Học phần:** Điện toán đám mây (Cloud Computing) · Đợt 1 (2026 - 2027)
@@ -54,7 +54,7 @@ Căn cứ theo đề cương của GVHD Huỳnh Xuân Phụng: **"Tuần 2: tri�
 3. **Tuân thủ quy chế môn học & môi trường AWS Learner Lab:**
    - Định mức thời gian: Mỗi thành viên dành **≥ 8.0 giờ/tuần** (Kế hoạch phân bổ **8.5 giờ/người** x 2 = **17.0 giờ**).
    - Tuyệt đối chỉ dùng IAM `LabRole`, Region `us-east-1`, không tạo IAM User/Role mới.
-   - Gắn 3 tag chuẩn cho toàn bộ tài nguyên: `Project=SmartParking`, `Owner=25110159_24110207`, `Environment=Development`.
+   - Gắn 3 tag chuẩn cho toàn bộ tài nguyên: `Project=SmartParking`, `Owner=24110354_24110207`, `Environment=Development`.
    - Kiểm soát chi phí phát sinh = $0.00 (sử dụng tài nguyên trong hạn mức Free Tier/Learner Lab).
    - Chụp màn hình minh chứng đầy đủ thông tin: Account ID, Region `us-east-1`, đồng hồ máy tính.
 
@@ -66,7 +66,7 @@ Căn cứ theo đề cương của GVHD Huỳnh Xuân Phụng: **"Tuần 2: tri�
 
 | STT | Thành viên | MSSV | Vai trò chính trong Tuần 2 | Số giờ dự kiến | File kế hoạch chi tiết |
 | :---: | :--- | :---: | :--- | :---: | :---: |
-| 1 | **Lê Cao Việt Tín** | 25110159 | **Trưởng nhóm:** Nâng cấp code Boto3, triển khai Lambda Functions, cấu hình API Gateway REST API, viết test script tự động | **8.5 giờ** | [docs/plans/week-02/member-1.md](docs/plans/week-02/member-1.md) |
+| 1 | **Lê Cao Việt Tín** | 24110354 | **Trưởng nhóm:** Nâng cấp code Boto3, triển khai Lambda Functions, cấu hình API Gateway REST API, viết test script tự động | **8.5 giờ** | [docs/plans/week-02/member-1.md](docs/plans/week-02/member-1.md) |
 | 2 | **Nguyễn Trung Hải** | 24110207 | **Thành viên:** Cấu hình hạ tầng S3 CORS, đánh giá Rekognition trên 120 ảnh dataset, kiểm thử tích hợp DynamoDB/S3, thu thập minh chứng console & kiểm toán Billing | **8.5 giờ** | [docs/plans/week-02/member-2.md](docs/plans/week-02/member-2.md) |
 | **Tổng** | **Cả nhóm** | — | **Toàn bộ khối lượng công việc Tuần 2** | **17.0 giờ** | *(Đạt chỉ tiêu môn học)* |
 
@@ -138,7 +138,7 @@ Buổi 4 (Chủ nhật: 19/10/2026, 14:00 - 16:00 | 2.0h):
 | **Memory** | 256 MB | 256 MB |
 | **Timeout** | 15 giây (Xử lý OCR và I/O mạng an toàn) | 15 giây |
 | **Environment Variables** | `BUCKET_NAME`: `smart-parking-images-24110207`<br>`TABLE_NAME`: `ParkingTickets`<br>`REGION_NAME`: `us-east-1` | `BUCKET_NAME`: `smart-parking-images-24110207`<br>`TABLE_NAME`: `ParkingTickets`<br>`REGION_NAME`: `us-east-1` |
-| **Mandatory Tags** | `Project=SmartParking`<br>`Owner=25110159_24110207`<br>`Environment=Development` | `Project=SmartParking`<br>`Owner=25110159_24110207`<br>`Environment=Development` |
+| **Mandatory Tags** | `Project=SmartParking`<br>`Owner=24110354_24110207`<br>`Environment=Development` | `Project=SmartParking`<br>`Owner=24110354_24110207`<br>`Environment=Development` |
 
 ---
 
@@ -310,3 +310,4 @@ Theo quy định bắt buộc của GVHD Huỳnh Xuân Phụng, toàn bộ ảnh
   - [ ] Nhật ký cá nhân SV2 (`docs/worklogs/week-02/member-2.md`) ghi nhận đủ 8.5 giờ.
   - [ ] Nhật ký tổng hợp nhóm (`docs/worklogs/week-02/overview.md`) ghi nhận đủ 17.0 giờ.
   - [ ] Toàn bộ mã nguồn, tài liệu và ảnh minh chứng được commit lên nhánh `dev`.
+

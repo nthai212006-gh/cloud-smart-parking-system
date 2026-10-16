@@ -1,4 +1,4 @@
-# KẾ HOẠCH TỔNG QUAN TUẦN 2 (WEEK 2 PLAN - OVERVIEW)
+﻿# KẾ HOẠCH TỔNG QUAN TUẦN 2 (WEEK 2 PLAN - OVERVIEW)
 ## ĐỀ TÀI: HỆ THỐNG QUẢN LÝ BÃI GIỮ XE THÔNG MINH (SMART PARKING)
 * **Học phần:** Điện toán đám mây (Cloud Computing) - Đợt 1 (2026 - 2027)
 * **Giảng viên hướng dẫn:** ThS. Huỳnh Xuân Phụng
@@ -44,7 +44,7 @@ Theo yêu cầu đề cương môn học của GVHD Huỳnh Xuân Phụng: **"Tu
    - **Test API Gateway Endpoints:** Viết test script tự động `scripts/test_api_endpoints.py` gửi request Base64 qua HTTP POST tới `/checkin` và `/checkout`.
 4. **Kiểm soát chi phí & An toàn môi trường Learner Lab:**
    - Đảm bảo 100% tài nguyên dùng `LabRole`, Region `us-east-1`.
-   - Gắn đầy đủ 3 tag quy chuẩn: `Project=SmartParking`, `Owner=25110159_24110207`, `Environment=Development`.
+   - Gắn đầy đủ 3 tag quy chuẩn: `Project=SmartParking`, `Owner=24110354_24110207`, `Environment=Development`.
    - Theo dõi sát sao chỉ số Billing/Cost Explorer đảm bảo không phát sinh chi phí vượt định mức.
    - Chụp đầy đủ bộ minh chứng console có Account ID, Region và đồng hồ hệ thống.
 
@@ -55,7 +55,7 @@ Theo yêu cầu đề cương môn học của GVHD Huỳnh Xuân Phụng: **"Tu
 
 | Thành viên | MSSV | Vai trò chính | Thời lượng | Kế hoạch chi tiết | Nhật ký thực hiện |
 | :--- | :---: | :--- | :---: | :---: | :---: |
-| **Lê Cao Việt Tín** | 25110159 | **Trưởng nhóm:** Triển khai Lambda Core, Rekognition OCR, API Gateway & Test Scripts | **8.5 giờ** | [plans/week-02/member-1.md](member-1.md) | `docs/worklogs/week-02/member-1.md` |
+| **Lê Cao Việt Tín** | 24110354 | **Trưởng nhóm:** Triển khai Lambda Core, Rekognition OCR, API Gateway & Test Scripts | **8.5 giờ** | [plans/week-02/member-1.md](member-1.md) | `docs/worklogs/week-02/member-1.md` |
 | **Nguyễn Trung Hải** | 24110207 | **Thành viên:** Cấu hình tài nguyên AWS, Kiểm thử Dataset 120 ảnh, QA & Minh chứng | **8.5 giờ** | [plans/week-02/member-2.md](member-2.md) | `docs/worklogs/week-02/member-2.md` |
 | **Cả nhóm** | — | **Họp tích hợp, rà soát lỗi chéo, kiểm toán chi phí $0.00 & Git sync** | **17.0 giờ** | [plans/week-02/overview.md](overview.md) | `docs/worklogs/week-02/overview.md` |
 
@@ -99,7 +99,7 @@ flowchart TD
   - [ ] Hàm `SmartParking-Checkout` đã tạo trên AWS Console (`us-east-1`, Python 3.11, `LabRole`).
   - [ ] Thiết lập đúng biến môi trường: `BUCKET_NAME=smart-parking-images-24110207`, `TABLE_NAME=ParkingTickets`, `REGION=us-east-1`.
   - [ ] Cấu hình Timeout = 15 giây, Memory = 256MB (đáp ứng độ trễ mạng khi gọi Rekognition).
-  - [ ] Gắn đầy đủ 3 tag chuẩn: `Project=SmartParking`, `Owner=25110159_24110207`, `Environment=Development`.
+  - [ ] Gắn đầy đủ 3 tag chuẩn: `Project=SmartParking`, `Owner=24110354_24110207`, `Environment=Development`.
 - [ ] **2. Triển khai Amazon API Gateway:**
   - [ ] REST API `SmartParking-API` đã được tạo và kích hoạt trên Region `us-east-1`.
   - [ ] 2 Resource / Method: `POST /checkin` và `POST /checkout` đã nối Lambda Proxy.
@@ -121,3 +121,4 @@ flowchart TD
 - [ ] **5. Báo cáo & Quản lý Git:**
   - [ ] Worklog cá nhân của 2 thành viên ghi nhận đủ ≥ 8.0 giờ/người.
   - [ ] Toàn bộ mã nguồn, tài liệu và ảnh minh chứng được commit và push lên nhánh `dev`.
+

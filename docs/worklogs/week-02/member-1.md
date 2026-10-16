@@ -1,6 +1,6 @@
-# NHẬT KÝ CHI TIẾT TUẦN 2 - SINH VIÊN 1 (MEMBER 1)
+﻿# NHẬT KÝ CHI TIẾT TUẦN 2 - SINH VIÊN 1 (MEMBER 1)
 ### VAI TRÒ: TRƯỞNG NHÓM / KIẾN TRÚC SERVERLESS, AI REKOGNITION & BACKEND CORE
-* **Thành viên:** Lê Cao Việt Tín (MSSV: 25110159)
+* **Thành viên:** Lê Cao Việt Tín (MSSV: 24110354)
 * **Học phần:** Điện toán đám mây (Cloud Computing) · Đợt 1 (2026 - 2027)
 * **Giảng viên hướng dẫn:** ThS. Huỳnh Xuân Phụng
 * **Tổng thời gian thực tế:** **8.5 giờ** (Chỉ tiêu môn học: ≥ 8.0 giờ)
@@ -22,3 +22,4 @@
 - **Tiến độ:** Hoàn thành 100% mục tiêu triển khai chức năng lõi trên AWS.
 - **Khó khăn đã giải quyết:** Ban đầu khi gọi Rekognition từ ảnh Base64 gặp lỗi payload format, đã giải quyết bằng cách sử dụng `base64.b64decode` chuyển đổi sang binary bytes trước khi truyền vào param `Bytes` của Rekognition.
 - **Kế hoạch tuần tiếp theo (Tuần 3):** Tích hợp giám sát CloudWatch Metrics/Alarms, thiết lập phân tích doanh thu qua Amazon Athena, và viết kịch bản tự động hóa Infrastructure as Code (IaC) hoặc CI/CD nếu có.
+

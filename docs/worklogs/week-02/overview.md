@@ -1,4 +1,4 @@
-# NHẬT KÝ TỔNG HỢP CÔNG VIỆC TUẦN 2 (WEEK 2 WORKLOG - OVERVIEW)
+﻿# NHẬT KÝ TỔNG HỢP CÔNG VIỆC TUẦN 2 (WEEK 2 WORKLOG - OVERVIEW)
 ### HỌC PHẦN: ĐIỆN TOÁN ĐÁM MÂY (CLOUD) · ĐỢT 1 (2026 - 2027)
 * **Giảng viên hướng dẫn (GVHD):** ThS. Huỳnh Xuân Phụng
 * **Nhóm đề tài:** Domain Apps — Hệ thống quản lý bãi giữ xe thông minh (Smart Parking)
@@ -11,7 +11,7 @@
 ## 1. THÔNG TIN THÀNH VIÊN NHÓM
 1. **Sinh viên 1 (Trưởng nhóm):**
    - Họ và tên: Lê Cao Việt Tín
-   - Mã số sinh viên (MSSV): 25110159
+   - Mã số sinh viên (MSSV): 24110354
    - Vai trò: Triển khai Lambda Functions, Rekognition OCR, API Gateway & Test Scripts tự động
    - Chi tiết nhật ký: [worklogs/week-02/member-1.md](member-1.md)
 2. **Sinh viên 2:**
@@ -27,7 +27,7 @@
 
 | Sinh viên | Tổng số giờ quy định | Tổng số giờ thực tế | Trạng thái đạt/không đạt |
 | :--- | :---: | :---: | :---: |
-| **Lê Cao Việt Tín** (`25110159`) | ≥ 8.0 giờ | **8.5 giờ** | **ĐẠT (Vượt chỉ tiêu)** |
+| **Lê Cao Việt Tín** (`24110354`) | ≥ 8.0 giờ | **8.5 giờ** | **ĐẠT (Vượt chỉ tiêu)** |
 | **Nguyễn Trung Hải** (`24110207`) | ≥ 8.0 giờ | **8.5 giờ** | **ĐẠT (Vượt chỉ tiêu)** |
 | **Tổng cả nhóm** | ≥ 16.0 giờ | **17.0 giờ** | **HOÀN THÀNH TỐT** |
 
@@ -54,3 +54,4 @@
 | :---: | :---: |
 | *(Đã ký xác nhận)* | *(Đã ký xác nhận)* |
 | **Lê Cao Việt Tín** | **Nguyễn Trung Hải** |
+

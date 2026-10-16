@@ -1,6 +1,6 @@
 # KẾ HOẠCH CHI TIẾT TUẦN 1 - SINH VIÊN 1 (MEMBER 1)
 ### VAI TRÒ: TRƯỞNG NHÓM / KIẾN TRÚC SERVERLESS, AI REKOGNITION & BACKEND CORE
-* **Thành viên:** Sinh viên 1 (`[Họ và tên SV 1]` - `[MSSV 1]`)
+* **Thành viên:** Sinh viên 1 (Lê Cao Việt Tín - 24110354)
 * **Tổng thời gian phân bổ:** **8.5 giờ**
 
 ---

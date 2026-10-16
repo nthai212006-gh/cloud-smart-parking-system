@@ -1,7 +1,7 @@
-# KẾ HOẠCH CHI TIẾT TUẦN 2 - SINH VIÊN 1 (MEMBER 1)
+﻿# KẾ HOẠCH CHI TIẾT TUẦN 2 - SINH VIÊN 1 (MEMBER 1)
 ### VAI TRÒ: TRƯỞNG NHÓM / KIẾN TRÚC SERVERLESS, AI REKOGNITION & BACKEND CORE
 * **Thành viên:** Lê Cao Việt Tín
-* **Mã số sinh viên (MSSV):** 25110159
+* **Mã số sinh viên (MSSV):** 24110354
 * **Học phần:** Điện toán đám mây (Cloud Computing) · Đợt 1 (2026 - 2027)
 * **Giảng viên hướng dẫn:** ThS. Huỳnh Xuân Phụng
 * **Thời gian thực hiện Tuần 2:** 13/10/2026 – 19/10/2026
@@ -78,7 +78,7 @@
       - `REGION_NAME`: `us-east-1`
     - Dán mã nguồn `backend/checkin.py` và nhấn **Deploy**.
   - Khởi tạo hàm `SmartParking-Checkout` với cấu hình tương tự.
-  - Gắn đầy đủ 3 tag theo chuẩn: `Project=SmartParking`, `Owner=25110159_24110207`, `Environment=Development`.
+  - Gắn đầy đủ 3 tag theo chuẩn: `Project=SmartParking`, `Owner=24110354_24110207`, `Environment=Development`.
   - Tạo Test Event trực tiếp trên AWS Console để kiểm tra việc thực thi của hàm (kiểm tra CloudWatch logs xem có lỗi IAM permission hay timeout không).
 * **Sản phẩm:** 2 hàm Lambda hoạt động tốt trên AWS Console, có log CloudWatch xác nhận không phát sinh lỗi.
 
@@ -131,3 +131,4 @@
 | Buổi 4 | 18/10/2026 (Thứ 7) | 14:00 - 16:00 | Xây dựng test script tự động `test_api_endpoints.py`, test ngoại lệ & Git | 2.0h |
 | **Tổng cộng** | | | **Tổng thời gian thực tế cam kết** | **8.5 giờ** |
 *(Đạt chỉ tiêu môn học quy định: ≥ 8.0 giờ/tuần)*
+

@@ -3,7 +3,7 @@
 Dự án môn học **Điện toán đám mây (Cloud Computing)** - Đợt 1 (2026 - 2027)  
 **Giảng viên hướng dẫn:** Huỳnh Xuân Phụng  
 **Môi trường triển khai:** AWS Learner Lab (`us-east-1`)  
-**Git Branch:** `dev` (phát triển) / `main` (nghiệm thu)
+**Git Branch:** `main` (Nhánh chính thức)
 
 ---
 
@@ -13,7 +13,7 @@ Hệ thống quản lý bãi giữ xe thông minh ứng dụng kiến trúc Serv
 ## 👥 2. Thành viên nhóm
 | STT | Họ và tên | MSSV | Vai trò chính |
 | :---: | :--- | :---: | :--- |
-| 1 | Lê Cao Việt Tín | 25110159 | Trưởng nhóm: Kiến trúc Serverless, AI Rekognition & Backend Core |
+| 1 | Lê Cao Việt Tín | 24110354 | Trưởng nhóm: Kiến trúc Serverless, AI Rekognition & Backend Core |
 | 2 | Nguyễn Trung Hải | 24110207 | Thành viên: Hạ tầng AWS (S3, DynamoDB), Dataset & QA/Audit |
 
 ---
@@ -69,6 +69,6 @@ cloud-smart-parking-system/
 
 ## 🚀 5. Quy chuẩn Tagging bắt buộc (AWS Learner Lab)
 - `Project`: `SmartParking`
-- `Owner`: `25110159_24110207`
+- `Owner`: `24110354_24110207`
 - `Environment`: `Development`
 Chi tiết xem tại [docs/guidelines/tagging-standards.md](docs/guidelines/tagging-standards.md).
