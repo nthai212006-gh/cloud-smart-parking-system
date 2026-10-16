@@ -34,3 +34,9 @@ Thumbs.db
 # Documents & Office files (Do not push docx to Git)
 *.docx
 *.doc
+
+# Local folder for Member 1
+gui_cho_tin/
+
+# Local backup folder for evidence
+backup_evidence_week2/

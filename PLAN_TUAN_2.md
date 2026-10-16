@@ -1,4 +1,4 @@
-﻿# KẾ HOẠCH TRIỂN KHAI CHI TIẾT TUẦN 2 (WEEK 2 IMPLEMENTATION PLAN)
+# KẾ HOẠCH TRIỂN KHAI CHI TIẾT TUẦN 2 (WEEK 2 IMPLEMENTATION PLAN)
 ## ĐỀ TÀI: HỆ THỐNG QUẢN LÝ BÃI GIỮ XE THÔNG MINH (SMART PARKING SYSTEM)
 
 * **Học phần:** Điện toán đám mây (Cloud Computing) · Đợt 1 (2026 - 2027)
@@ -6,7 +6,7 @@
 * **Nhóm đề tài:** Domain Apps (Nhóm 2 sinh viên)
 * **Môi trường triển khai:** AWS Learner Lab | Region bắt buộc: `us-east-1` (N. Virginia)
 * **Thời gian thực hiện:** **13/10/2026 – 19/10/2026**
-* **Kho lưu trữ Git:** [nthai212006-gh/cloud-smart-parking-system](https://github.com/nthai212006-gh/cloud-smart-parking-system) (Nhánh làm việc chính: `dev`)
+* **Kho lưu trữ Git:** [nthai212006-gh/cloud-smart-parking-system](https://github.com/nthai212006-gh/cloud-smart-parking-system) (Nhánh chính: `main`)
 
 ---
 
@@ -94,7 +94,7 @@ Buổi 3 (Thứ 6: 17/10/2026, 19:30 - 21:30 | 2.0h):
 Buổi 4 (Thứ 7: 18/10/2026, 14:00 - 16:00 | 2.0h):
 ├── Viết script tự động scripts/test_api_endpoints.py gửi payload Base64 thực tế
 ├── Kiểm thử các ca biên (ảnh mờ UNKNOWN, checkout vé 2 lần, vé không tồn tại 404)
-└── Rà soát mã nguồn, commit và đẩy code lên nhánh dev của GitHub
+└── Rà soát mã nguồn, commit và đẩy code lên nhánh main của GitHub
 ```
 
 ---
@@ -118,10 +118,10 @@ Buổi 3 (Thứ 6: 17/10/2026, 19:30 - 21:30 | 2.0h):
 └── Xác minh trên S3 Console: File ảnh xe vào và xe ra được lưu đúng tại in/ và out/
 
 Buổi 4 (Chủ nhật: 19/10/2026, 14:00 - 16:00 | 2.0h):
-├── Chụp bộ 6 ảnh màn hình minh chứng console (Account ID, Region, Đồng hồ máy tính)
+├── Chụp bộ 8 ảnh màn hình minh chứng console (Account ID, Region, Đồng hồ máy tính)
 ├── Kiểm toán chi phí AWS Billing (đảm bảo $0.00), thực hiện End Lab an toàn
 ├── Viết nhật ký công việc cá nhân và tổng hợp Worklog Tuần 2
-└── Commit toàn bộ minh chứng và tài liệu lên nhánh dev của GitHub
+└── Commit toàn bộ minh chứng và tài liệu lên nhánh main của GitHub
 ```
 
 ---
@@ -266,8 +266,9 @@ Theo quy định bắt buộc của GVHD Huỳnh Xuân Phụng, toàn bộ ảnh
 | `evidence/week2/03_rekognition_cloudwatch.png` | Màn hình CloudWatch Logs của Lambda Check-in. | Thấy log trích xuất các nhãn văn bản và độ chính xác (Confidence) từ Rekognition `DetectText`. |
 | `evidence/week2/04_dynamodb_items.png` | Màn hình DynamoDB Console mục Explore Items của bảng `ParkingTickets`. | Thấy các bản ghi vé xe thật với đầy đủ các trường: `ticketId`, `plateNumber`, `checkinTime`, `checkoutTime`, `fee`, `status`. |
 | `evidence/week2/05_s3_stored_images.png` | Màn hình Amazon S3 Console trong bucket `smart-parking-images-24110207`. | Thấy danh sách các file ảnh thực tế được tải lên trong folder `in/` và `out/`. |
-| `evidence/week2/06_api_test_terminal.png` | Màn hình Terminal hoặc Postman chạy script `test_api_endpoints.py`. | Thấy HTTP Status 200 OK, JSON response chứa đầy đủ dữ liệu vé và chi phí tính toán. |
-| `evidence/week2/07_cost_and_billing.png` | Màn hình AWS Cost Management / Billing Dashboard. | Thấy rõ chi phí phiên làm việc phát sinh an toàn ($0.00), kiểm soát tốt ngân sách Lab. |
+| `evidence/week2/06_api_test_terminal_1.png` | Màn hình Terminal kiểm thử Check-in thành công qua API Gateway. | Thấy HTTP Status 200 OK, JSON response chứa đầy đủ dữ liệu vé và biển số nhận diện. |
+| `evidence/week2/07_api_test_terminal_2.png` | Màn hình Terminal kiểm thử Check-out và các ca biên (400, 404). | Thấy tính phí chính xác 5.000 VNĐ, bắt lỗi vé đã thanh toán hoặc không tồn tại. |
+| `evidence/week2/08_cost_and_billing.png` | Màn hình AWS Cost Management / Billing Dashboard. | Thấy rõ chi phí phiên làm việc phát sinh an toàn ($0.00), kiểm soát tốt ngân sách Lab. |
 
 ---
 
@@ -289,25 +290,26 @@ Theo quy định bắt buộc của GVHD Huỳnh Xuân Phụng, toàn bộ ảnh
 
 ## ✅ PHẦN 8: BẢNG CHECKLIST NGHIỆM THU TUẦN 2 (WEEK 2 CHECKLIST)
 
-- [ ] **Mã nguồn (Source Code):**
-  - [ ] Hoàn thiện code Boto3 cho `backend/checkin.py` (Rekognition, S3 `in/`, DynamoDB `put_item`).
-  - [ ] Hoàn thiện code Boto3 cho `backend/checkout.py` (DynamoDB `get_item`, tính phí, S3 `out/`, DynamoDB `update_item`).
-  - [ ] Viết script kiểm thử tự động `scripts/test_api_endpoints.py`.
-  - [ ] Viết script đánh giá dataset `scripts/evaluate_rekognition_accuracy.py`.
-- [ ] **Hạ tầng AWS (Cloud Infrastructure):**
-  - [ ] Cấu hình S3 CORS Policy cho bucket `smart-parking-images-24110207`.
-  - [ ] Deploy 2 Lambda functions trên AWS Console (`SmartParking-Checkin`, `SmartParking-Checkout`).
-  - [ ] Deploy API Gateway REST API `SmartParking-API` với đầy đủ 2 routes và CORS.
-  - [ ] Gắn đủ 3 Tags cho tất cả tài nguyên (`Project`, `Owner`, `Environment`).
-- [ ] **Kiểm thử & Chất lượng (QA):**
-  - [ ] Kiểm thử thành công Rekognition trên 120 ảnh mẫu.
-  - [ ] Kiểm thử thành công quy trình Check-in và Check-out thực tế trên AWS.
-  - [ ] Kiểm thử chính xác công thức tính phí đỗ xe cho cả xe máy và ô tô.
-  - [ ] Kiểm thử an toàn các trường hợp ngoại lệ (ảnh mờ gán `UNKNOWN`, lỗi 404, lỗi 400).
-- [ ] **Hồ sơ & Báo cáo:**
-  - [ ] Chụp đủ 7 ảnh minh chứng trong `evidence/week2/`.
-  - [ ] Nhật ký cá nhân SV1 (`docs/worklogs/week-02/member-1.md`) ghi nhận đủ 8.5 giờ.
-  - [ ] Nhật ký cá nhân SV2 (`docs/worklogs/week-02/member-2.md`) ghi nhận đủ 8.5 giờ.
-  - [ ] Nhật ký tổng hợp nhóm (`docs/worklogs/week-02/overview.md`) ghi nhận đủ 17.0 giờ.
-  - [ ] Toàn bộ mã nguồn, tài liệu và ảnh minh chứng được commit lên nhánh `dev`.
+- [x] **Mã nguồn (Source Code):**
+  - [x] Hoàn thiện code Boto3 cho `backend/checkin.py` (Rekognition, S3 `in/`, DynamoDB `put_item`).
+  - [x] Hoàn thiện code Boto3 cho `backend/checkout.py` (DynamoDB `get_item`, tính phí, S3 `out/`, DynamoDB `update_item`).
+  - [x] Viết script kiểm thử tự động `scripts/test_api_endpoints.py`.
+  - [x] Viết script đánh giá dataset `scripts/evaluate_rekognition_accuracy.py`.
+- [x] **Hạ tầng AWS (Cloud Infrastructure):**
+  - [x] Cấu hình S3 CORS Policy cho bucket `smart-parking-images-24110207`.
+  - [x] Deploy 2 Lambda functions trên AWS Console (`SmartParking-Checkin`, `SmartParking-Checkout`).
+  - [x] Deploy API Gateway REST API `SmartParking-API` với đầy đủ 2 routes và CORS.
+  - [x] Gắn đủ 3 Tags cho tất cả tài nguyên (`Project`, `Owner`, `Environment`).
+- [x] **Kiểm thử & Chất lượng (QA):**
+  - [x] Kiểm thử thành công Rekognition trên 120 ảnh mẫu (Tỷ lệ chính xác 96.7%).
+  - [x] Kiểm thử thành công quy trình Check-in và Check-out thực tế trên AWS.
+  - [x] Kiểm thử chính xác công thức tính phí đỗ xe cho cả xe máy và ô tô.
+  - [x] Kiểm thử an toàn các trường hợp ngoại lệ (ảnh mờ gán `UNKNOWN`, lỗi 404, lỗi 400).
+- [x] **Hồ sơ & Báo cáo:**
+  - [x] Chụp đủ 8 ảnh minh chứng trong `evidence/week2/`.
+  - [x] Báo cáo đánh giá Rekognition trong `docs/worklogs/week-02/rekognition_evaluation_report.md`.
+  - [x] Nhật ký cá nhân SV1 (`docs/worklogs/week-02/member-1.md`) ghi nhận đủ 8.5 giờ.
+  - [x] Nhật ký cá nhân SV2 (`docs/worklogs/week-02/member-2.md`) ghi nhận đủ 8.5 giờ.
+  - [x] Nhật ký tổng hợp nhóm (`docs/worklogs/week-02/overview.md`) ghi nhận đủ 17.0 giờ.
+  - [x] Toàn bộ mã nguồn, tài liệu và ảnh minh chứng được commit lên nhánh `main`.
 

@@ -52,14 +52,17 @@ cloud-smart-parking-system/
 │   │   └── week-02/                      # Kế hoạch chi tiết Tuần 2 (Overview, SV1, SV2)
 │   └── worklogs/                         # Nhật ký công việc theo từng tuần & thành viên
 │       ├── week-01/
-│       └── week-02/                      # Nhật ký thực hiện Tuần 2
+│       └── week-02/                      # Nhật ký thực hiện Tuần 2 & Báo cáo Rekognition
 ├── evidence/                             # Ảnh chụp màn hình minh chứng console
-│   ├── week1/                            # Minh chứng Tuần 1
-│   └── week2/                            # Minh chứng Tuần 2
-├── scripts/                              # Các script kiểm thử, tự động hóa cục bộ
+│   ├── week1/                            # Minh chứng Tuần 1 (S3, DynamoDB, Billing)
+│   └── week2/                            # Minh chứng Tuần 2 (Lambda, API Gateway, CloudWatch, Items, S3, Tests, Billing)
+├── scripts/                              # Các script kiểm thử, tự động hóa & QA
 │   ├── test_plate_regex.py               # Kiểm thử giải thuật Regex OCR biển số
 │   ├── setup_aws_resources.py            # Tự động khởi tạo S3 & DynamoDB
-│   └── build_curated_dataset.py          # Trích xuất và chuẩn hóa dataset
+│   ├── build_curated_dataset.py          # Trích xuất và chuẩn hóa dataset 120 ảnh
+│   ├── verify_aws_infrastructure.py      # Xác thực quyền LabRole & cấu hình S3 CORS
+│   ├── evaluate_rekognition_accuracy.py  # Đánh giá độ chính xác Rekognition trên 120 ảnh
+│   └── test_api_endpoints.py             # Kiểm thử tự động API Gateway E2E
 ├── test-images/                          # Bộ ảnh biển số xe mẫu đã che thông tin cá nhân
 ├── .gitignore
 └── README.md

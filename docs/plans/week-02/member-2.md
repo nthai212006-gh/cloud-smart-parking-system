@@ -113,10 +113,12 @@
     - `evidence/week2/03_rekognition_cloudwatch.png`: Log thực thi nhận diện biển số trên CloudWatch Logs.
     - `evidence/week2/04_dynamodb_items.png`: Bảng dữ liệu `ParkingTickets` chứa các bản ghi vé xe thực tế.
     - `evidence/week2/05_s3_stored_images.png`: Các tệp ảnh đã upload thành công trong folder `in/` và `out/`.
-    - `evidence/week2/06_cost_and_billing.png`: Màn hình Billing xác nhận mức chi phí an toàn ($0.00).
+    - `evidence/week2/06_api_test_terminal_1.png`: Kiểm thử Check-in thành công qua API Gateway trên PowerShell.
+    - `evidence/week2/07_api_test_terminal_2.png`: Kiểm thử Check-out và các ca ngoại lệ trên PowerShell.
+    - `evidence/week2/08_cost_and_billing.png`: Màn hình Billing xác nhận mức chi phí an toàn ($0.00).
   - Soạn thảo nhật ký thực hiện chi tiết vào `docs/worklogs/week-02/member-2.md` và `docs/worklogs/week-02/overview.md`.
   - Thực hiện lệnh **End Lab** trên AWS Learner Lab để tắt phiên làm việc, chống phát sinh chi phí ngoài ý muốn.
-  - Commit toàn bộ minh chứng và tài liệu lên nhánh `dev`.
+  - Commit toàn bộ minh chứng và tài liệu lên nhánh `main`.
 * **Sản phẩm:** Bộ ảnh minh chứng trong `evidence/week2/`, nhật ký hoàn chỉnh và mã nguồn đồng bộ trên Git.
 
 ---

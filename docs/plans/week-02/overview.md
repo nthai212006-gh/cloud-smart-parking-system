@@ -1,11 +1,11 @@
-﻿# KẾ HOẠCH TỔNG QUAN TUẦN 2 (WEEK 2 PLAN - OVERVIEW)
+# KẾ HOẠCH TỔNG QUAN TUẦN 2 (WEEK 2 PLAN - OVERVIEW)
 ## ĐỀ TÀI: HỆ THỐNG QUẢN LÝ BÃI GIỮ XE THÔNG MINH (SMART PARKING)
 * **Học phần:** Điện toán đám mây (Cloud Computing) - Đợt 1 (2026 - 2027)
 * **Giảng viên hướng dẫn:** ThS. Huỳnh Xuân Phụng
 * **Nhóm đề tài:** Domain Apps (Nhóm 2 sinh viên)
 * **Môi trường triển khai:** AWS Learner Lab (Region bắt buộc: `us-east-1` N. Virginia)
 * **Thời gian thực hiện Tuần 2:** 13/10/2026 – 19/10/2026
-* **Nhánh Git làm việc:** `dev` (GitHub: `nthai212006-gh/cloud-smart-parking-system`)
+* **Nhánh Git làm việc:** `main` (GitHub: `nthai212006-gh/cloud-smart-parking-system`)
 
 ---
 
@@ -94,31 +94,32 @@ flowchart TD
 
 ## V. CHECKLIST NGHIỆM THU TUẦN 2 (ACCEPTANCE CHECKLIST)
 
-- [ ] **1. Triển khai AWS Lambda Functions:**
-  - [ ] Hàm `SmartParking-Checkin` đã tạo trên AWS Console (`us-east-1`, Python 3.11, `LabRole`).
-  - [ ] Hàm `SmartParking-Checkout` đã tạo trên AWS Console (`us-east-1`, Python 3.11, `LabRole`).
-  - [ ] Thiết lập đúng biến môi trường: `BUCKET_NAME=smart-parking-images-24110207`, `TABLE_NAME=ParkingTickets`, `REGION=us-east-1`.
-  - [ ] Cấu hình Timeout = 15 giây, Memory = 256MB (đáp ứng độ trễ mạng khi gọi Rekognition).
-  - [ ] Gắn đầy đủ 3 tag chuẩn: `Project=SmartParking`, `Owner=24110354_24110207`, `Environment=Development`.
-- [ ] **2. Triển khai Amazon API Gateway:**
-  - [ ] REST API `SmartParking-API` đã được tạo và kích hoạt trên Region `us-east-1`.
-  - [ ] 2 Resource / Method: `POST /checkin` và `POST /checkout` đã nối Lambda Proxy.
-  - [ ] Cấu hình `OPTIONS` Method cho CORS preflight (trả về status 200, đầy đủ headers).
-  - [ ] Đã Deploy lên Stage `dev`, ghi nhận URL chính thức dạng: `https://[api-id].execute-api.us-east-1.amazonaws.com/dev`.
-- [ ] **3. Kiểm thử từng thành phần (Component Testing):**
-  - [ ] Test Rekognition: Thống kê tỷ lệ bóc tách thành công trên 120 ảnh mẫu (nhóm ô tô rõ, xe máy rõ, góc nghiêng, ảnh mờ).
-  - [ ] Test Check-in: Gửi ảnh -> S3 có file `in/{ticketId}.jpg` -> DynamoDB có record mới với status `PARKED`.
-  - [ ] Test Check-out: Gửi ticketId -> DynamoDB tính đúng tiền -> chuyển status sang `COMPLETED` -> S3 có file `out/{ticketId}.jpg`.
-  - [ ] Test Edge Cases: Ảnh không có biển số trả về `plateNumber=UNKNOWN`; Vé đã checkout không cho thanh toán lần 2; Vé không tồn tại trả về HTTP 404.
-  - [ ] Test Script tự động: Chạy thành công file `scripts/test_api_endpoints.py`.
-- [ ] **4. Bộ hồ sơ minh chứng Tuần 2 (`evidence/week2/`):**
-  - [ ] Ảnh 1: Console AWS Lambda hiển thị 2 hàm `SmartParking-Checkin` và `SmartParking-Checkout` (Active, Python 3.11, LabRole).
-  - [ ] Ảnh 2: Console API Gateway hiển thị cấu hình Resources, Methods và Stage `dev`.
-  - [ ] Ảnh 3: Console DynamoDB hiển thị các Items vé xe thực tế được tạo và cập nhật trạng thái.
-  - [ ] Ảnh 4: Console S3 Bucket hiển thị ảnh xe vào trong folder `in/` và xe ra trong `out/`.
-  - [ ] Ảnh 5: Kết quả thực thi test API thành công từ Postman/Terminal (HTTP 200, JSON response).
-  - [ ] Ảnh 6: Màn hình AWS Cost Management / Billing xác nhận chi phí kiểm soát an toàn ($0.00).
-- [ ] **5. Báo cáo & Quản lý Git:**
-  - [ ] Worklog cá nhân của 2 thành viên ghi nhận đủ ≥ 8.0 giờ/người.
-  - [ ] Toàn bộ mã nguồn, tài liệu và ảnh minh chứng được commit và push lên nhánh `dev`.
+- [x] **1. Triển khai AWS Lambda Functions:**
+  - [x] Hàm `SmartParking-Checkin` đã tạo trên AWS Console (`us-east-1`, Python 3.11, `LabRole`).
+  - [x] Hàm `SmartParking-Checkout` đã tạo trên AWS Console (`us-east-1`, Python 3.11, `LabRole`).
+  - [x] Thiết lập đúng biến môi trường: `BUCKET_NAME=smart-parking-images-24110207`, `TABLE_NAME=ParkingTickets`, `REGION=us-east-1`.
+  - [x] Cấu hình Timeout = 15 giây, Memory = 256MB (đáp ứng độ trễ mạng khi gọi Rekognition).
+  - [x] Gắn đầy đủ 3 tag chuẩn: `Project=SmartParking`, `Owner=24110207`, `Environment=Development`.
+- [x] **2. Triển khai Amazon API Gateway:**
+  - [x] REST API `SmartParking-API` đã được tạo và kích hoạt trên Region `us-east-1` (ID: `fdbsdxyto1`).
+  - [x] 2 Resource / Method: `POST /checkin` và `POST /checkout` đã nối Lambda Proxy.
+  - [x] Cấu hình `OPTIONS` Method cho CORS preflight (trả về status 200, đầy đủ headers).
+  - [x] Đã Deploy lên Stage `dev`, ghi nhận URL chính thức: `https://fdbsdxyto1.execute-api.us-east-1.amazonaws.com/dev`.
+- [x] **3. Kiểm thử từng thành phần (Component Testing):**
+  - [x] Test Rekognition: Đạt tỷ lệ bóc tách thành công 96.7% (116/120) trên bộ dữ liệu mẫu (báo cáo tại `docs/worklogs/week-02/rekognition_evaluation_report.md`).
+  - [x] Test Check-in: Gửi ảnh -> S3 có file `in/{ticketId}.jpg` -> DynamoDB có record mới với status `PARKED`.
+  - [x] Test Check-out: Gửi ticketId -> DynamoDB tính đúng tiền 5.000 VNĐ -> chuyển status sang `COMPLETED`.
+  - [x] Test Edge Cases: Ảnh không có biển số trả về `plateNumber=UNKNOWN`; Vé đã checkout không cho thanh toán lần 2 (400); Vé không tồn tại trả về HTTP 404.
+  - [x] Test Script tự động: Chạy thành công file `scripts/test_api_endpoints.py`.
+- [x] **4. Bộ hồ sơ minh chứng Tuần 2 (`evidence/week2/`):**
+  - [x] Ảnh 1: Console AWS Lambda hiển thị 2 hàm `SmartParking-Checkin` và `SmartParking-Checkout` (`01_lambda_functions.png`).
+  - [x] Ảnh 2: Console API Gateway hiển thị cấu hình Resources, Methods và Stage `dev` (`02_apigateway_routes.png`).
+  - [x] Ảnh 3: CloudWatch Logs hiển thị chi tiết thời gian thực thi và bộ nhớ (`03_rekognition_cloudwatch.png`).
+  - [x] Ảnh 4: Console DynamoDB hiển thị 2 bản ghi vé xe thật `29B155555` (`04_dynamodb_items.png`).
+  - [x] Ảnh 5: Console S3 Bucket hiển thị ảnh xe vào trong folder `in/` (`05_s3_stored_images.png`).
+  - [x] Ảnh 6 & 7: Kết quả kiểm thử tự động API trên PowerShell Terminal (`06_api_test_terminal_1.png`, `07_api_test_terminal_2.png`).
+  - [x] Ảnh 8: Màn hình AWS Cost Management / Billing xác nhận chi phí an toàn $0.00 (`08_cost_and_billing.png`).
+- [x] **5. Báo cáo & Quản lý Git:**
+  - [x] Worklog cá nhân của 2 thành viên ghi nhận đủ ≥ 8.0 giờ/người (8.5 giờ x 2 = 17.0 giờ).
+  - [x] Toàn bộ mã nguồn, tài liệu và ảnh minh chứng được commit và push lên nhánh `main`.
 
