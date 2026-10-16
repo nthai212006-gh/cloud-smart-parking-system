@@ -30,3 +30,7 @@ Thumbs.db
 *.zip
 *.tar.gz
 *.rar
+
+# Documents & Office files (Do not push docx to Git)
+*.docx
+*.doc

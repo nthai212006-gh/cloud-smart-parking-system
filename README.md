@@ -13,7 +13,7 @@ Hệ thống quản lý bãi giữ xe thông minh ứng dụng kiến trúc Serv
 ## 👥 2. Thành viên nhóm
 | STT | Họ và tên | MSSV | Vai trò chính |
 | :---: | :--- | :---: | :--- |
-| 1 | Lê Cao Việt Tín | *(Đang cập nhật)* | Trưởng nhóm: Kiến trúc Serverless, AI Rekognition & Backend Core |
+| 1 | Lê Cao Việt Tín | 25110159 | Trưởng nhóm: Kiến trúc Serverless, AI Rekognition & Backend Core |
 | 2 | Nguyễn Trung Hải | 24110207 | Thành viên: Hạ tầng AWS (S3, DynamoDB), Dataset & QA/Audit |
 
 ---
@@ -36,6 +36,7 @@ Chi tiết xem tại tài liệu [docs/THIET_KE_KIEN_TRUC_HE_THONG.md](docs/THIE
 ## 📁 4. Cấu trúc thư mục dự án (Project Structure)
 ```text
 cloud-smart-parking-system/
+├── PLAN_TUAN_2.md                        # Kế hoạch chi tiết Tuần 2 (Đối chiếu sát Git Tuần 1)
 ├── backend/                              # Mã nguồn Lambda & Cấu hình API Gateway
 │   ├── api_gateway_openapi.json          # Đặc tả REST API Gateway (OpenAPI 3.0 / Swagger)
 │   ├── checkin.py                        # Lambda xử lý xe vào (Check-in)
@@ -47,17 +48,14 @@ cloud-smart-parking-system/
 │   ├── guidelines/                       # Quy chuẩn đặt tên & gắn tag tài nguyên AWS
 │   │   └── tagging-standards.md
 │   ├── plans/                            # Kế hoạch công việc theo từng tuần & thành viên
-│   │   └── week-01/
-│   │       ├── overview.md               # Kế hoạch tổng quan Tuần 1
-│   │       ├── member-1.md               # Kế hoạch chi tiết Người 1
-│   │       └── member-2.md               # Kế hoạch chi tiết Người 2
+│   │   ├── week-01/
+│   │   └── week-02/                      # Kế hoạch chi tiết Tuần 2 (Overview, SV1, SV2)
 │   └── worklogs/                         # Nhật ký công việc theo từng tuần & thành viên
-│       └── week-01/
-│           ├── overview.md               # Tổng hợp giờ & minh chứng chung Tuần 1
-│           ├── member-1.md               # Nhật ký chi tiết Người 1
-│           └── member-2.md               # Nhật ký chi tiết Người 2
+│       ├── week-01/
+│       └── week-02/                      # Nhật ký thực hiện Tuần 2
 ├── evidence/                             # Ảnh chụp màn hình minh chứng console
-│   └── week1/
+│   ├── week1/                            # Minh chứng Tuần 1
+│   └── week2/                            # Minh chứng Tuần 2
 ├── scripts/                              # Các script kiểm thử, tự động hóa cục bộ
 │   ├── test_plate_regex.py               # Kiểm thử giải thuật Regex OCR biển số
 │   ├── setup_aws_resources.py            # Tự động khởi tạo S3 & DynamoDB
@@ -71,6 +69,6 @@ cloud-smart-parking-system/
 
 ## 🚀 5. Quy chuẩn Tagging bắt buộc (AWS Learner Lab)
 - `Project`: `SmartParking`
-- `Owner`: `[MSSV_SV1]_[MSSV_SV2]`
+- `Owner`: `25110159_24110207`
 - `Environment`: `Development`
 Chi tiết xem tại [docs/guidelines/tagging-standards.md](docs/guidelines/tagging-standards.md).
