@@ -65,15 +65,31 @@ def lambda_handler(event, context):
             body = json.loads(body) if body else {}
             
         image_base64 = body.get("image", "")
-        vehicle_type = body.get("vehicleType", "MOTORBIKE").upper()
-        if vehicle_type not in ["MOTORBIKE", "CAR"]:
-            vehicle_type = "MOTORBIKE"
+        raw_vehicle_type = body.get("vehicleType", "MOTORBIKE")
+        vehicle_type = str(raw_vehicle_type).upper() if raw_vehicle_type else "MOTORBIKE"
             
         if not image_base64:
             return {
                 "statusCode": 400,
                 "headers": cors_headers,
-                "body": json.dumps({"error": "Thiếu dữ liệu ảnh (image base64 is required)"})
+                "body": json.dumps({"error": "Thiếu dữ liệu ảnh (image base64 is required)"}, ensure_ascii=False)
+            }
+
+        # Input Validation (Bảo mật tầng ứng dụng):
+        # 1. Giới hạn kích thước ảnh Base64 <= 5MB (~7,000,000 ký tự)
+        if len(image_base64) > 7_000_000:
+            return {
+                "statusCode": 413,
+                "headers": cors_headers,
+                "body": json.dumps({"error": "Kích thước ảnh vượt quá giới hạn 5MB cho phép (Payload Too Large)"}, ensure_ascii=False)
+            }
+
+        # 2. Kiểm tra danh mục loại xe hợp lệ
+        if vehicle_type not in ["MOTORBIKE", "CAR"]:
+            return {
+                "statusCode": 400,
+                "headers": cors_headers,
+                "body": json.dumps({"error": f"Loại xe '{vehicle_type}' không hợp lệ. Chỉ chấp nhận 'MOTORBIKE' hoặc 'CAR'."}, ensure_ascii=False)
             }
             
         # 2. Giải mã Base64 thành binary bytes

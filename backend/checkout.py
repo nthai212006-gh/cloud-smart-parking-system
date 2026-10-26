@@ -31,11 +31,12 @@ def calculate_fee(vehicle_type, checkin_time_str, checkout_time_str):
         total_hours = 1
         
     fee = 0
-    if vehicle_type == "MOTORBIKE":
+    v_type = str(vehicle_type).upper() if vehicle_type else "MOTORBIKE"
+    if v_type == "MOTORBIKE":
         fee = 5000
         if total_hours > 4:
             fee += (total_hours - 4) * 2000
-    elif vehicle_type == "CAR":
+    elif v_type == "CAR":
         fee = 20000
         if total_hours > 2:
             fee += (total_hours - 2) * 10000
@@ -75,6 +76,14 @@ def lambda_handler(event, context):
                 "statusCode": 400,
                 "headers": cors_headers,
                 "body": json.dumps({"error": "Mã vé (ticketId) là bắt buộc"}, ensure_ascii=False)
+            }
+
+        # Input Validation: Giới hạn kích thước ảnh xe ra nếu có gửi kèm (<= 5MB)
+        if image_base64 and len(image_base64) > 7_000_000:
+            return {
+                "statusCode": 413,
+                "headers": cors_headers,
+                "body": json.dumps({"error": "Ảnh xe ra vượt quá giới hạn cho phép (tối đa 5MB - Payload Too Large)"}, ensure_ascii=False)
             }
             
         # 2. Truy vấn thông tin vé từ DynamoDB

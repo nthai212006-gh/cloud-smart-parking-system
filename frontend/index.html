@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart Parking Dashboard | Hệ Thống Quản Lý Bãi Giữ Xe Thông Minh</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- Header -->
+  <header class="navbar">
+    <div class="nav-container">
+      <div class="brand">
+        <div class="logo-icon">🚗</div>
+        <div>
+          <h1>Smart Parking System</h1>
+          <p class="subtitle">Hệ Thống Quản Lý Bãi Giữ Xe Thông Minh · Kiến Trúc Serverless AWS</p>
+        </div>
+      </div>
+      <div class="status-badge">
+        <span class="status-dot"></span>
+        <span>AWS us-east-1 · Online</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="main-container">
+
+    <!-- Endpoint Configuration Bar -->
+    <section class="config-bar card">
+      <div class="config-header">
+        <span class="config-title">⚙️ Cấu hình API Gateway Endpoint:</span>
+        <button id="toggleConfigBtn" class="btn-text">Ẩn/Hiện</button>
+      </div>
+      <div id="configBody" class="config-body">
+        <div class="input-group">
+          <label for="apiEndpointInput">Invoke Base URL (Stage dev):</label>
+          <div class="endpoint-input-wrapper">
+            <input type="url" id="apiEndpointInput" value="https://fdbsdxyto1.execute-api.us-east-1.amazonaws.com/dev" placeholder="https://xxxx.execute-api.us-east-1.amazonaws.com/dev">
+            <button id="saveEndpointBtn" class="btn btn-secondary">Áp dụng</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2 Columns Grid: Check-in & Check-out -->
+    <div class="dashboard-grid">
+
+      <!-- COLUMN 1: CHECK-IN (CỔNG VÀO) -->
+      <section class="card portal-card checkin-portal">
+        <div class="card-header portal-header checkin-header">
+          <div class="portal-badge badge-in">CỔNG VÀO</div>
+          <h2>Quét Xe Vào & Cấp Vé (Check-in)</h2>
+        </div>
+
+        <form id="checkinForm" class="portal-form">
+          <!-- Chọn ảnh xe -->
+          <div class="form-group">
+            <label class="form-label">Ảnh chụp camera trước xe vào <span class="required">*</span></label>
+            <div class="upload-dropzone" id="checkinDropzone">
+              <input type="file" id="checkinFileInput" accept="image/*" class="file-input">
+              <div class="upload-placeholder" id="checkinPlaceholder">
+                <span class="upload-icon">📷</span>
+                <p>Nhấp chọn ảnh hoặc kéo thả vào đây</p>
+                <span class="upload-hint">Định dạng JPG, PNG, WEBP (tối đa 5MB)</span>
+              </div>
+              <img id="checkinPreview" class="preview-img hidden" alt="Preview ảnh xe vào">
+            </div>
+          </div>
+
+          <!-- Chọn loại xe -->
+          <div class="form-group">
+            <label class="form-label">Phân loại phương tiện <span class="required">*</span></label>
+            <div class="radio-group">
+              <label class="radio-card selected" id="labelMotor">
+                <input type="radio" name="vehicleType" value="MOTORBIKE" checked>
+                <span class="radio-icon">🛵</span>
+                <div>
+                  <strong>Xe máy (Motorbike)</strong>
+                  <span class="tariff-desc">5.000đ / 4h đầu (+2k/h sau)</span>
+                </div>
+              </label>
+              <label class="radio-card" id="labelCar">
+                <input type="radio" name="vehicleType" value="CAR">
+                <span class="radio-icon">🚙</span>
+                <div>
+                  <strong>Ô tô (Car)</strong>
+                  <span class="tariff-desc">20.000đ / 2h đầu (+10k/h sau)</span>
+                </div>
+              </label>
+            </div>
+          </div>
+
+          <!-- Nút Checkin -->
+          <button type="submit" id="checkinSubmitBtn" class="btn btn-primary btn-block">
+            <span class="btn-text">Xác nhận Xe Vào & Cấp Vé</span>
+            <span class="spinner hidden" id="checkinSpinner"></span>
+          </button>
+        </form>
+
+        <!-- Kết quả Check-in -->
+        <div id="checkinResult" class="result-box hidden">
+          <div class="result-header">
+            <span class="result-badge success">Check-in Thành Công</span>
+            <span class="result-timestamp" id="resCheckinTime">--</span>
+          </div>
+          <div class="plate-display">
+            <span class="plate-label">Biển số nhận diện (AI Rekognition):</span>
+            <div class="plate-number" id="resCheckinPlate">--</div>
+            <div id="unknownNotice" class="badge-unknown hidden">⚠️ Ảnh mờ: Cần bảo vệ kiểm tra thủ công</div>
+          </div>
+          <div class="result-details">
+            <div class="detail-row">
+              <span class="detail-label">Mã vé (Ticket ID):</span>
+              <span class="detail-value mono" id="resTicketId">--</span>
+              <button id="copyTicketBtn" class="btn-copy" title="Sao chép mã vé">📋 Chép</button>
+            </div>
+            <div class="detail-row">
+              <span class="detail-label">Loại xe:</span>
+              <span class="detail-value" id="resVehicleType">--</span>
+            </div>
+            <div class="detail-row">
+              <span class="detail-label">Trạng thái vé:</span>
+              <span class="detail-value badge-parked">Đang gửi (PARKED)</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- COLUMN 2: CHECK-OUT (CỔNG RA) -->
+      <section class="card portal-card checkout-portal">
+        <div class="card-header portal-header checkout-header">
+          <div class="portal-badge badge-out">CỔNG RA</div>
+          <h2>Đối Soát Vé & Thu Phí (Check-out)</h2>
+        </div>
+
+        <form id="checkoutForm" class="portal-form">
+          <!-- Nhập mã vé -->
+          <div class="form-group">
+            <label for="checkoutTicketInput" class="form-label">Mã vé xe (Ticket ID UUID) <span class="required">*</span></label>
+            <div class="input-with-action">
+              <input type="text" id="checkoutTicketInput" class="form-input mono" placeholder="Ví dụ: eeca78ee-8957-418e-ba66-88d447a1262d" required>
+              <button type="button" id="pasteLastTicketBtn" class="btn btn-secondary btn-sm" title="Dán mã vé vừa tạo">Dán mã vừa tạo</button>
+            </div>
+          </div>
+
+          <!-- Ảnh xe ra (tùy chọn) -->
+          <div class="form-group">
+            <label class="form-label">Ảnh xe ra phục vụ đối soát <span class="optional">(Tùy chọn)</span></label>
+            <div class="upload-dropzone dropzone-small" id="checkoutDropzone">
+              <input type="file" id="checkoutFileInput" accept="image/*" class="file-input">
+              <div class="upload-placeholder" id="checkoutPlaceholder">
+                <span class="upload-icon">📸</span>
+                <p>Tải ảnh đối chiếu xe ra (nếu có)</p>
+              </div>
+              <img id="checkoutPreview" class="preview-img hidden" alt="Preview ảnh xe ra">
+            </div>
+          </div>
+
+          <!-- Nút Checkout -->
+          <button type="submit" id="checkoutSubmitBtn" class="btn btn-danger btn-block">
+            <span class="btn-text">Tính Cước & Chốt Vé Xe Ra</span>
+            <span class="spinner hidden" id="checkoutSpinner"></span>
+          </button>
+        </form>
+
+        <!-- Kết quả Check-out -->
+        <div id="checkoutResult" class="result-box hidden">
+          <div class="result-header">
+            <span class="result-badge completed">Thanh Toán Hoàn Tất</span>
+            <span class="result-timestamp" id="resCheckoutTime">--</span>
+          </div>
+          <div class="fee-display">
+            <span class="fee-label">TỔNG TIỀN PHÍ GỬI XE:</span>
+            <div class="fee-amount" id="resCheckoutFee">0 VNĐ</div>
+          </div>
+          <div class="result-details">
+            <div class="detail-row">
+              <span class="detail-label">Biển số xe:</span>
+              <span class="detail-value font-bold" id="resCheckoutPlate">--</span>
+            </div>
+            <div class="detail-row">
+              <span class="detail-label">Thời gian vào:</span>
+              <span class="detail-value" id="resCheckoutCheckinTime">--</span>
+            </div>
+            <div class="detail-row">
+              <span class="detail-label">Tổng thời gian đỗ:</span>
+              <span class="detail-value font-bold" id="resCheckoutHours">-- giờ</span>
+            </div>
+            <div class="detail-row">
+              <span class="detail-label">Trạng thái vé:</span>
+              <span class="detail-value badge-completed">ĐÃ HOÀN TẤT (COMPLETED)</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+
+    <!-- Alert Toast Notification -->
+    <div id="toastNotification" class="toast hidden"></div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-container">
+      <p><strong>Học phần:</strong> Điện toán đám mây (Cloud Computing) · <strong>Giảng viên:</strong> ThS. Huỳnh Xuân Phụng</p>
+      <p><strong>Sinh viên thực hiện:</strong> Lê Cao Việt Tín (MSSV: 24110354) & Nguyễn Trung Hải (MSSV: 24110207)</p>
+      <p class="copyright">Trường Đại học Công nghệ Kỹ thuật TP.HCM (HCMUTE) · Khoa Công nghệ Thông tin</p>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

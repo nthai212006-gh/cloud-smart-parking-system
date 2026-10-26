@@ -1,0 +1,371 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: >
+  AWS CloudFormation Template for Smart Parking System (Serverless Architecture).
+  Deploys S3 Bucket, DynamoDB Table, 2 Lambda Functions, API Gateway REST API with Throttling,
+  and CloudWatch Alarms.
+  Học phần: Điện toán đám mây · Giảng viên: ThS. Huỳnh Xuân Phụng
+  Nhóm: Lê Cao Việt Tín (24110354) & Nguyễn Trung Hải (24110207)
+  Region: us-east-1 | Execution Role: LabRole
+
+Parameters:
+  EnvironmentName:
+    Type: String
+    Default: Development
+    AllowedValues:
+      - Development
+      - Staging
+      - Production
+    Description: Môi trường triển khai hệ thống (Development/Staging/Production).
+
+  BucketName:
+    Type: String
+    Default: smart-parking-images-24110207
+    Description: Tên S3 Bucket lưu trữ ảnh xe và logs phân tích.
+
+  TableName:
+    Type: String
+    Default: ParkingTickets
+    Description: Tên bảng Amazon DynamoDB lưu thông tin vé gửi xe.
+
+  OwnerTag:
+    Type: String
+    Default: '24110354_24110207'
+    Description: MSSV của 2 thành viên trong nhóm thực hiện đề tài.
+
+  ProjectTag:
+    Type: String
+    Default: SmartParking
+    Description: Tên dự án chuẩn quy định môn học.
+
+Resources:
+  # ==============================================================================
+  # 1. AMAZON S3 BUCKET (Storage Layer with Encryption & CORS)
+  # ==============================================================================
+  ParkingImageBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: !Ref BucketName
+      BucketEncryption:
+        ServerSideEncryptionConfiguration:
+          - ServerSideEncryptionByDefault:
+              SSEAlgorithm: AES256
+      PublicAccessBlockConfiguration:
+        BlockPublicAcls: true
+        IgnorePublicAcls: true
+        BlockPublicPolicy: true
+        RestrictPublicBuckets: true
+      CorsConfiguration:
+        CorsRules:
+          - AllowedHeaders:
+              - '*'
+            AllowedMethods:
+              - GET
+              - PUT
+              - POST
+              - HEAD
+            AllowedOrigins:
+              - '*'
+            MaxAge: 3000
+      Tags:
+        - Key: Project
+          Value: !Ref ProjectTag
+        - Key: Owner
+          Value: !Ref OwnerTag
+        - Key: Environment
+          Value: !Ref EnvironmentName
+
+  # ==============================================================================
+  # 2. AMAZON DYNAMODB TABLE (NoSQL Database - On-Demand)
+  # ==============================================================================
+  ParkingTicketsTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: !Ref TableName
+      BillingMode: PAY_PER_REQUEST
+      AttributeDefinitions:
+        - AttributeName: ticketId
+          AttributeType: S
+      KeySchema:
+        - AttributeName: ticketId
+          KeyType: HASH
+      PointInTimeRecoverySpecification:
+        PointInTimeRecoveryEnabled: true
+      Tags:
+        - Key: Project
+          Value: !Ref ProjectTag
+        - Key: Owner
+          Value: !Ref OwnerTag
+        - Key: Environment
+          Value: !Ref EnvironmentName
+
+  # ==============================================================================
+  # 3. AWS LAMBDA FUNCTIONS (Serverless Compute Layer - Python 3.11)
+  # ==============================================================================
+  CheckinFunction:
+    Type: AWS::Lambda::Function
+    Properties:
+      FunctionName: SmartParking-Checkin
+      Runtime: python3.11
+      Handler: checkin.lambda_handler
+      Role: !Sub 'arn:aws:iam::${AWS::AccountId}:role/LabRole'
+      Timeout: 15
+      MemorySize: 256
+      Environment:
+        Variables:
+          BUCKET_NAME: !Ref BucketName
+          TABLE_NAME: !Ref TableName
+          REGION_NAME: !Ref AWS::Region
+      Code:
+        ZipFile: |
+          import json
+          def lambda_handler(event, context):
+              return {"statusCode": 200, "body": json.dumps({"message": "SmartParking-Checkin Initialized"})}
+      Tags:
+        - Key: Project
+          Value: !Ref ProjectTag
+        - Key: Owner
+          Value: !Ref OwnerTag
+        - Key: Environment
+          Value: !Ref EnvironmentName
+
+  CheckoutFunction:
+    Type: AWS::Lambda::Function
+    Properties:
+      FunctionName: SmartParking-Checkout
+      Runtime: python3.11
+      Handler: checkout.lambda_handler
+      Role: !Sub 'arn:aws:iam::${AWS::AccountId}:role/LabRole'
+      Timeout: 15
+      MemorySize: 256
+      Environment:
+        Variables:
+          BUCKET_NAME: !Ref BucketName
+          TABLE_NAME: !Ref TableName
+          REGION_NAME: !Ref AWS::Region
+      Code:
+        ZipFile: |
+          import json
+          def lambda_handler(event, context):
+              return {"statusCode": 200, "body": json.dumps({"message": "SmartParking-Checkout Initialized"})}
+      Tags:
+        - Key: Project
+          Value: !Ref ProjectTag
+        - Key: Owner
+          Value: !Ref OwnerTag
+        - Key: Environment
+          Value: !Ref EnvironmentName
+
+  # ==============================================================================
+  # 4. AMAZON API GATEWAY REST API (Gateway Layer with Throttling & CORS)
+  # ==============================================================================
+  SmartParkingApi:
+    Type: AWS::ApiGateway::RestApi
+    Properties:
+      Name: SmartParking-API
+      Description: REST API for Smart Parking System with Throttling and Lambda Proxy
+      EndpointConfiguration:
+        Types:
+          - REGIONAL
+      Tags:
+        - Key: Project
+          Value: !Ref ProjectTag
+        - Key: Owner
+          Value: !Ref OwnerTag
+        - Key: Environment
+          Value: !Ref EnvironmentName
+
+  # Resource: /checkin
+  CheckinResource:
+    Type: AWS::ApiGateway::Resource
+    Properties:
+      RestApiId: !Ref SmartParkingApi
+      ParentId: !GetAtt SmartParkingApi.RootResourceId
+      PathPart: checkin
+
+  CheckinMethodPost:
+    Type: AWS::ApiGateway::Method
+    Properties:
+      RestApiId: !Ref SmartParkingApi
+      ResourceId: !Ref CheckinResource
+      HttpMethod: POST
+      AuthorizationType: NONE
+      Integration:
+        Type: AWS_PROXY
+        IntegrationHttpMethod: POST
+        Uri: !Sub 'arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${CheckinFunction.Arn}/invocations'
+
+  CheckinMethodOptions:
+    Type: AWS::ApiGateway::Method
+    Properties:
+      RestApiId: !Ref SmartParkingApi
+      ResourceId: !Ref CheckinResource
+      HttpMethod: OPTIONS
+      AuthorizationType: NONE
+      Integration:
+        Type: MOCK
+        IntegrationResponses:
+          - StatusCode: '200'
+            ResponseParameters:
+              method.response.header.Access-Control-Allow-Headers: "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'"
+              method.response.header.Access-Control-Allow-Methods: "'POST,OPTIONS'"
+              method.response.header.Access-Control-Allow-Origin: "'*'"
+            ResponseTemplates:
+              application/json: '{"statusCode": 200}'
+        RequestTemplates:
+          application/json: '{"statusCode": 200}'
+      MethodResponses:
+        - StatusCode: '200'
+          ResponseParameters:
+            method.response.header.Access-Control-Allow-Headers: true
+            method.response.header.Access-Control-Allow-Methods: true
+            method.response.header.Access-Control-Allow-Origin: true
+
+  # Resource: /checkout
+  CheckoutResource:
+    Type: AWS::ApiGateway::Resource
+    Properties:
+      RestApiId: !Ref SmartParkingApi
+      ParentId: !GetAtt SmartParkingApi.RootResourceId
+      PathPart: checkout
+
+  CheckoutMethodPost:
+    Type: AWS::ApiGateway::Method
+    Properties:
+      RestApiId: !Ref SmartParkingApi
+      ResourceId: !Ref CheckoutResource
+      HttpMethod: POST
+      AuthorizationType: NONE
+      Integration:
+        Type: AWS_PROXY
+        IntegrationHttpMethod: POST
+        Uri: !Sub 'arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${CheckoutFunction.Arn}/invocations'
+
+  CheckoutMethodOptions:
+    Type: AWS::ApiGateway::Method
+    Properties:
+      RestApiId: !Ref SmartParkingApi
+      ResourceId: !Ref CheckoutResource
+      HttpMethod: OPTIONS
+      AuthorizationType: NONE
+      Integration:
+        Type: MOCK
+        IntegrationResponses:
+          - StatusCode: '200'
+            ResponseParameters:
+              method.response.header.Access-Control-Allow-Headers: "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'"
+              method.response.header.Access-Control-Allow-Methods: "'POST,OPTIONS'"
+              method.response.header.Access-Control-Allow-Origin: "'*'"
+            ResponseTemplates:
+              application/json: '{"statusCode": 200}'
+        RequestTemplates:
+          application/json: '{"statusCode": 200}'
+      MethodResponses:
+        - StatusCode: '200'
+          ResponseParameters:
+            method.response.header.Access-Control-Allow-Headers: true
+            method.response.header.Access-Control-Allow-Methods: true
+            method.response.header.Access-Control-Allow-Origin: true
+
+  # Lambda Permissions for API Gateway
+  CheckinLambdaPermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      Action: lambda:InvokeFunction
+      FunctionName: !Ref CheckinFunction
+      Principal: apigateway.amazonaws.com
+      SourceArn: !Sub 'arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${SmartParkingApi}/*/*'
+
+  CheckoutLambdaPermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      Action: lambda:InvokeFunction
+      FunctionName: !Ref CheckoutFunction
+      Principal: apigateway.amazonaws.com
+      SourceArn: !Sub 'arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${SmartParkingApi}/*/*'
+
+  # Deployment & Stage with Throttling Settings
+  ApiDeployment:
+    Type: AWS::ApiGateway::Deployment
+    DependsOn:
+      - CheckinMethodPost
+      - CheckinMethodOptions
+      - CheckoutMethodPost
+      - CheckoutMethodOptions
+    Properties:
+      RestApiId: !Ref SmartParkingApi
+
+  ApiStageDev:
+    Type: AWS::ApiGateway::Stage
+    Properties:
+      RestApiId: !Ref SmartParkingApi
+      DeploymentId: !Ref ApiDeployment
+      StageName: dev
+      Description: Development Stage with Throttling Limits (10 req/s, burst 20 req)
+      MethodSettings:
+        - ResourcePath: '/*'
+          HttpMethod: '*'
+          ThrottlingRateLimit: 10
+          ThrottlingBurstLimit: 20
+      Tags:
+        - Key: Project
+          Value: !Ref ProjectTag
+        - Key: Owner
+          Value: !Ref OwnerTag
+        - Key: Environment
+          Value: !Ref EnvironmentName
+
+  # ==============================================================================
+  # 5. AMAZON CLOUDWATCH ALARMS (Monitoring & Alerting Layer)
+  # ==============================================================================
+  LambdaErrorsAlarm:
+    Type: AWS::CloudWatch::Alarm
+    Properties:
+      AlarmName: SmartParking-Lambda-Errors
+      AlarmDescription: Cảnh báo khi có lỗi phát sinh trong hàm Lambda Checkin hoặc Checkout
+      Namespace: AWS/Lambda
+      MetricName: Errors
+      Statistic: Sum
+      Period: 300
+      EvaluationPeriods: 1
+      Threshold: 1
+      ComparisonOperator: GreaterThanOrEqualToThreshold
+      Dimensions:
+        - Name: FunctionName
+          Value: !Ref CheckinFunction
+
+  LambdaDurationAlarm:
+    Type: AWS::CloudWatch::Alarm
+    Properties:
+      AlarmName: SmartParking-Lambda-Duration
+      AlarmDescription: Cảnh báo khi thời gian thực thi của Lambda vượt quá ngưỡng 5000ms
+      Namespace: AWS/Lambda
+      MetricName: Duration
+      Statistic: Maximum
+      Period: 300
+      EvaluationPeriods: 1
+      Threshold: 5000
+      ComparisonOperator: GreaterThanThreshold
+      Dimensions:
+        - Name: FunctionName
+          Value: !Ref CheckinFunction
+
+Outputs:
+  ApiInvokeUrl:
+    Description: Base URL for Smart Parking REST API
+    Value: !Sub 'https://${SmartParkingApi}.execute-api.${AWS::Region}.amazonaws.com/dev'
+
+  CheckinEndpoint:
+    Description: Endpoint Check-in xe vào
+    Value: !Sub 'https://${SmartParkingApi}.execute-api.${AWS::Region}.amazonaws.com/dev/checkin'
+
+  CheckoutEndpoint:
+    Description: Endpoint Check-out tính cước xe ra
+    Value: !Sub 'https://${SmartParkingApi}.execute-api.${AWS::Region}.amazonaws.com/dev/checkout'
+
+  S3BucketName:
+    Description: S3 Bucket Name
+    Value: !Ref ParkingImageBucket
+
+  DynamoDBTableName:
+    Description: DynamoDB Table Name
+    Value: !Ref ParkingTicketsTable
