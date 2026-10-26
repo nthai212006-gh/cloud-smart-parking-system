@@ -306,27 +306,27 @@ Theo quy định bắt buộc của GVHD ThS. Huỳnh Xuân Phụng, toàn bộ 
 
 ## ✅ PHẦN 8: BẢNG CHECKLIST NGHIỆM THU TUẦN 3 (WEEK 3 CHECKLIST)
 
-- [ ] **1. Giám sát hệ thống (CloudWatch Monitoring):**
-  - [ ] Khởi tạo CloudWatch Dashboard `SmartParking-Dashboard` với đủ 4 widgets theo dõi.
-  - [ ] Tạo CloudWatch Alarm `SmartParking-Lambda-Errors` giám sát lỗi thực thi.
-  - [ ] Tạo CloudWatch Alarm `SmartParking-Lambda-Duration` giám sát độ trễ vượt ngưỡng 5s.
-  - [ ] Viết và lưu trữ các câu truy vấn CloudWatch Logs Insights mẫu.
-- [ ] **2. Phân tích dữ liệu kinh doanh (Amazon Athena):**
-  - [ ] Thiết lập Athena Workgroup và cấu hình S3 output location `athena-logs/`.
-  - [ ] Tạo Database `smart_parking_db` và External Table `parking_tickets_analytics`.
-  - [ ] Thực thi thành công 5 câu truy vấn SQL phân tích nghiệp vụ (doanh thu, giờ cao điểm, loại xe, lỗi OCR).
+- [x] **1. Giám sát hệ thống (CloudWatch Monitoring):**
+  - [x] Khởi tạo CloudWatch Dashboard `SmartParking-Dashboard` với đủ 4 widgets theo dõi.
+  - [x] Tạo CloudWatch Alarm `SmartParking-Lambda-Errors` giám sát lỗi thực thi.
+  - [x] Tạo CloudWatch Alarm `SmartParking-Lambda-Duration` giám sát độ trễ vượt ngưỡng 5s.
+  - [x] Viết và lưu trữ các câu truy vấn CloudWatch Logs Insights mẫu.
+- [x] **2. Phân tích dữ liệu kinh doanh (Amazon Athena):**
+  - [x] Thiết lập Athena Workgroup và cấu hình S3 output location `athena-logs/`.
+  - [x] Tạo Database `smart_parking_db` và External Table `parking_tickets_analytics`.
+  - [x] Thực thi thành công 5 câu truy vấn SQL phân tích nghiệp vụ (doanh thu, giờ cao điểm, loại xe, lỗi OCR).
 - [ ] **3. Bảo mật toàn diện (Security):**
-  - [ ] Kích hoạt Throttling (Rate: 10 req/s, Burst: 20 req) trên API Gateway Stage `dev`.
+  - [x] Kích hoạt Throttling (Rate: 10 req/s, Burst: 20 req) trên API Gateway Stage `dev`.
   - [ ] Kiểm tra phản hồi mã lỗi HTTP 429 khi vượt ngưỡng request.
-  - [ ] Bật mã hóa SSE-S3 (AES-256) trên S3 bucket.
-  - [ ] Cấu hình Block Public Access an toàn cho dữ liệu ảnh và vé xe.
+  - [x] Bật mã hóa SSE-S3 (AES-256) trên S3 bucket.
+  - [x] Cấu hình Block Public Access an toàn cho dữ liệu ảnh và vé xe.
 - [ ] **4. Tích hợp Web & Tự động hóa (Integration & IaC):**
   - [ ] Hoàn thiện mã nguồn giao diện Web tĩnh (`frontend/index.html`, `app.js`, `style.css`).
   - [ ] Triển khai giao diện web lên S3 Static Website Hosting kết nối thành công tới API Gateway.
   - [ ] Soạn thảo template CloudFormation / script IaC tự động hóa khởi tạo tài nguyên.
 - [ ] **5. Hồ sơ & Báo cáo:**
-  - [ ] Chụp đầy đủ 8 ảnh minh chứng theo tiêu chuẩn trong `evidence/week3/`.
+  - [x] Chụp đầy đủ 8 ảnh minh chứng theo tiêu chuẩn trong `evidence/week3/`.
   - [ ] Nhật ký cá nhân SV1 (`docs/worklogs/week-03/member-1.md`) ghi nhận đủ 8.5 giờ.
-  - [ ] Nhật ký cá nhân SV2 (`docs/worklogs/week-03/member-2.md`) ghi nhận đủ 8.5 giờ.
-  - [ ] Nhật ký tổng hợp nhóm (`docs/worklogs/week-03/overview.md`) ghi nhận đủ 17.0 giờ.
+  - [x] Nhật ký cá nhân SV2 (`docs/worklogs/week-03/member-2.md`) ghi nhận đủ 8.5 giờ.
+  - [x] Nhật ký tổng hợp nhóm (`docs/worklogs/week-03/overview.md`) ghi nhận đủ 17.0 giờ.
   - [ ] Toàn bộ mã nguồn, tài liệu và minh chứng được commit và push lên nhánh `main`.
