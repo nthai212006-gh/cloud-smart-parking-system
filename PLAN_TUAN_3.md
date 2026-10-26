@@ -315,18 +315,18 @@ Theo quy định bắt buộc của GVHD ThS. Huỳnh Xuân Phụng, toàn bộ 
   - [x] Thiết lập Athena Workgroup và cấu hình S3 output location `athena-logs/`.
   - [x] Tạo Database `smart_parking_db` và External Table `parking_tickets_analytics`.
   - [x] Thực thi thành công 5 câu truy vấn SQL phân tích nghiệp vụ (doanh thu, giờ cao điểm, loại xe, lỗi OCR).
-- [ ] **3. Bảo mật toàn diện (Security):**
+- [x] **3. Bảo mật toàn diện (Security):**
   - [x] Kích hoạt Throttling (Rate: 10 req/s, Burst: 20 req) trên API Gateway Stage `dev`.
-  - [ ] Kiểm tra phản hồi mã lỗi HTTP 429 khi vượt ngưỡng request.
+  - [x] Kiểm tra phản hồi mã lỗi HTTP 429 khi vượt ngưỡng request.
   - [x] Bật mã hóa SSE-S3 (AES-256) trên S3 bucket.
   - [x] Cấu hình Block Public Access an toàn cho dữ liệu ảnh và vé xe.
-- [ ] **4. Tích hợp Web & Tự động hóa (Integration & IaC):**
-  - [ ] Hoàn thiện mã nguồn giao diện Web tĩnh (`frontend/index.html`, `app.js`, `style.css`).
-  - [ ] Triển khai giao diện web lên S3 Static Website Hosting kết nối thành công tới API Gateway.
-  - [ ] Soạn thảo template CloudFormation / script IaC tự động hóa khởi tạo tài nguyên.
-- [ ] **5. Hồ sơ & Báo cáo:**
+- [x] **4. Tích hợp Web & Tự động hóa (Integration & IaC):**
+  - [x] Hoàn thiện mã nguồn giao diện Web tĩnh (`frontend/index.html`, `app.js`, `style.css`).
+  - [x] Triển khai giao diện web lên S3 Static Website Hosting kết nối thành công tới API Gateway.
+  - [x] Soạn thảo template CloudFormation / script IaC tự động hóa khởi tạo tài nguyên.
+- [x] **5. Hồ sơ & Báo cáo:**
   - [x] Chụp đầy đủ 8 ảnh minh chứng theo tiêu chuẩn trong `evidence/week3/`.
-  - [ ] Nhật ký cá nhân SV1 (`docs/worklogs/week-03/member-1.md`) ghi nhận đủ 8.5 giờ.
+  - [x] Nhật ký cá nhân SV1 (`docs/worklogs/week-03/member-1.md`) ghi nhận đủ 8.5 giờ.
   - [x] Nhật ký cá nhân SV2 (`docs/worklogs/week-03/member-2.md`) ghi nhận đủ 8.5 giờ.
   - [x] Nhật ký tổng hợp nhóm (`docs/worklogs/week-03/overview.md`) ghi nhận đủ 17.0 giờ.
-  - [ ] Toàn bộ mã nguồn, tài liệu và minh chứng được commit và push lên nhánh `main`.
+  - [x] Toàn bộ mã nguồn, tài liệu và minh chứng được commit và push lên nhánh `main`.

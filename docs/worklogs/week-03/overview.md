@@ -1,9 +1,10 @@
 # BÁO CÁO TIẾN ĐỘ TUẦN 3 - NHÓM DOMAIN APPS
-### DỰ ÁN: HỆ THỐNG QUẢN LÝ BÃI GIỮ XE THÔNG MINH (SMART PARKING)
+### DỰ ÁN: HỆ THỐNG QUẢN LÝ BÃI GIỮ XE THÔNG MINH (SMART PARKING SYSTEM)
 * **Học phần:** Điện toán đám mây (Cloud Computing) – Đợt 1 (2026 - 2027)
 * **Giảng viên hướng dẫn:** ThS. Huỳnh Xuân Phụng
 * **Thời gian thực hiện Tuần 3:** 20/10/2026 – 26/10/2026
 * **Môi trường triển khai:** AWS Learner Lab (`us-east-1`)
+* **Tổng thời gian tích lũy nhóm:** **17.0 giờ** (SV1: 8.5h, SV2: 8.5h – Vượt chỉ tiêu $\ge 16.0$ giờ)
 
 ---
 
@@ -11,54 +12,64 @@
 
 | Thành viên | MSSV | Vai trò chính trong dự án | Thời gian cam kết | Trạng thái Tuần 3 |
 | :--- | :---: | :--- | :---: | :---: |
-| **Lê Cao Việt Tín** | 24110354 | **Thành viên 1 (Trưởng nhóm):** Backend Core, IaC (CloudFormation) & Frontend Web UI | 8.5 giờ | Đang phối hợp tích hợp |
-| **Nguyễn Trung Hải** | 24110207 | **Thành viên 2:** Infrastructure, Data Analytics (Athena), Monitoring (CloudWatch) & Security | 8.5 giờ | **Đã hoàn thành 100%** |
+| **Lê Cao Việt Tín** | 24110354 | **Thành viên 1 (Trưởng nhóm):** Backend Core, IaC (CloudFormation) & Frontend Web UI | **8.5 giờ** | **ĐÃ HOÀN THÀNH 100%** |
+| **Nguyễn Trung Hải** | 24110207 | **Thành viên 2:** Infrastructure, Data Analytics (Athena), Monitoring (CloudWatch) & Security | **8.5 giờ** | **ĐÃ HOÀN THÀNH 100%** |
 
 ---
 
-## 2. TỔNG HỢP KẾT QUẢ TRIỂN KHAI TUẦN 3
+## 2. TỔNG HỢP KẾT QUẢ TRIỂN KHAI TUẦN 3 CỦA CẢ 2 THÀNH VIÊN
 
-### 2.1. Phân hệ Giám sát & Cảnh báo (CloudWatch Monitoring & Alarms)
-* Đã thiết lập thành công **CloudWatch Dashboard** (`SmartParking-Dashboard`) gồm 4 biểu đồ theo dõi hiệu năng hệ thống:
-  1. *Lambda Invocations & Errors*: Theo dõi số lượt gọi hàm Checkin/Checkout và tỷ lệ lỗi.
-  2. *Lambda Execution Duration*: Theo dõi thời gian thực thi (trung bình và tối đa).
-  3. *API Gateway Network Traffic*: Theo dõi lưu lượng mạng và các mã phản hồi HTTP 4XX/5XX.
-  4. *DynamoDB Consumed Capacity*: Theo dõi lưu lượng đọc/ghi trên bảng `ParkingTickets`.
-* Đã tạo và cấu hình 02 **CloudWatch Alarms**:
-  - `SmartParking-Lambda-Errors`: Cảnh báo khi có $\ge 1$ lỗi phát sinh trong 1 phút.
-  - `SmartParking-Lambda-Duration`: Cảnh báo độ trễ vượt ngưỡng $5000\text{ ms}$.
-  - Cả 2 Alarms đều ở trạng thái `OK` xanh lá, đã qua kiểm thử kích hoạt bằng kịch bản test.
-* Đã ứng dụng **CloudWatch Log Analytics (Logs Insights)** truy vấn và bóc tách các dòng log `REPORT` thực tế của Lambda.
+### 2.1. Phân hệ Tự động hóa Hạ tầng (IaC) & Bảo mật API (Thành viên 1 phụ trách)
+* **AWS CloudFormation Template (`iac/cloudformation_template.yaml`)**:
+  - Tự động hóa 100% quy trình khởi tạo toàn bộ hạ tầng Serverless chỉ với một lệnh duy nhất.
+  - Định nghĩa đầy đủ S3 Bucket, DynamoDB Table `ParkingTickets`, 2 hàm Lambda (`SmartParking-Checkin`, `SmartParking-Checkout`), API Gateway REST API (`SmartParking-API`), CloudWatch Alarms kèm 3 thẻ Tag chuẩn môn học.
+* **Tăng cường Bảo mật & Xác thực Dữ liệu đầu vào**:
+  - Bổ sung bộ kiểm soát kích thước payload Base64 $\le 5\text{MB}$ trong Lambda (trả về HTTP 413 Payload Too Large khi vượt quá) và xác thực loại xe hợp lệ.
+  - Viết kịch bản kiểm thử bảo mật `scripts/test_api_throttling.py` bắn 30 requests đồng thời trong 1 giây để xác thực cơ chế chặn spam HTTP 429 Too Many Requests từ API Gateway.
+* **Giao diện Web Dashboard trực quan (`frontend/` Single Page Application)**:
+  - Xây dựng giao diện web gồm `frontend/index.html`, `frontend/app.js`, `frontend/style.css` hiện đại, chia 2 phân hệ rõ ràng: Check-in (chụp/chọn ảnh, chọn loại xe, tạo vé xe thông minh) và Check-out (tra cứu mã vé, tính cước phí, hoàn tất thanh toán).
+  - Tích hợp gọi trực tiếp REST API trên API Gateway, định dạng tiền tệ VNĐ và gắn nhãn cảnh báo trực quan khi biển số mờ (`UNKNOWN`).
 
-### 2.2. Phân hệ Phân tích Dữ liệu Kinh doanh (Amazon Athena Data Lake)
-* Thiết lập Data Lake Serverless với Amazon Athena và Amazon S3:
-  - Database: `smart_parking_db`
-  - External Table: `parking_tickets_analytics` (đọc dữ liệu NDJSON từ `s3://smart-parking-images-24110207/analytics-data/`).
-* Đã nạp tập dữ liệu thực tế 50 lượt xe và chạy 5 câu truy vấn phân tích nghiệp vụ:
-  - **Doanh thu theo loại xe**:
-    * Xe ô tô (CAR): 18 lượt, tổng thu **940.000 VNĐ**, cước trung bình **52.222 VNĐ/lượt**.
-    * Xe máy (MOTORBIKE): 32 lượt, tổng thu **184.000 VNĐ**, cước trung bình **5.750 VNĐ/lượt**.
-  - **Lưu lượng theo khung giờ (Peak Hours)**: Bóc tách giờ cao điểm sáng và chiều phục vụ điều tiết bãi đỗ.
+### 2.2. Phân hệ Giám sát & Cảnh báo Tập trung (Thành viên 2 phụ trách)
+* **CloudWatch Dashboard (`SmartParking-Dashboard`)**:
+  - Tích hợp 4 widgets theo dõi toàn diện: Lambda Invocations & Errors, Lambda Execution Duration, API Gateway Network Traffic (4XX/5XX) và DynamoDB Consumed Read/Write Capacity.
+* **CloudWatch Alarms**:
+  - Thiết lập 02 cảnh báo tự động: `SmartParking-Lambda-Errors` (Errors $\ge 1$) và `SmartParking-Lambda-Duration` (Duration $> 5000\text{ ms}$). Cả 2 đều chuyển trạng thái `OK` xanh lá.
+* **CloudWatch Log Analytics (Logs Insights)**:
+  - Bóc tách thành công 10 dòng log `REPORT` thực tế phục vụ kiểm toán hiệu năng và tài nguyên bộ nhớ.
+
+### 2.3. Phân hệ Phân tích Dữ liệu Kinh doanh (Amazon Athena Data Lake - Thành viên 2 phụ trách)
+* Xây dựng Data Lake Serverless với Amazon Athena đọc trực tiếp từ S3 (`analytics-data/`).
+* Nạp tập dữ liệu 50 vé xe thực tế và chạy 5 câu truy vấn SQL phân tích nghiệp vụ:
+  - **Xe ô tô (CAR)**: 18 lượt, doanh thu **940.000 VNĐ** (chiếm 83.6%), cước trung bình **52.222 VNĐ/lượt**.
+  - **Xe máy (MOTORBIKE)**: 32 lượt, doanh thu **184.000 VNĐ** (chiếm 16.4%), cước trung bình **5.750 VNĐ/lượt**.
+  - **Tổng doanh thu**: **1.124.000 VNĐ** / 50 lượt xe.
+  - Phân tích giờ cao điểm (Peak Hours) và tỷ lệ nhận diện thành công vs ngoại lệ UNKNOWN.
   - Hiệu năng truy vấn Athena: Thời gian quét chỉ **462 ms**, dữ liệu quét **11.60 KB**.
 
-### 2.3. Phân hệ An toàn & Bảo mật (Cloud Security)
-* **API Gateway Throttling**: Kích hoạt trên Stage `dev` với Rate Limit `10 req/s` và Burst Limit `20 req`, ngăn chặn triệt để tấn công DoS và spam request.
-* **S3 Server-side Encryption**: Kích hoạt chuẩn mã hóa `SSE-S3 (AES-256)` cho toàn bộ bucket chứa ảnh biển số xe.
-* **Block Public Access**: Bật bảo vệ 100% ngăn chặn truy cập trái phép từ Internet.
-
-### 2.4. Quản trị Chi phí & Ngân sách Lab
-* Chi phí tháng xác nhận trên AWS Billing & Cost Management duy trì ở mức **`$0.00`**.
-* Đảm bảo an toàn tuyệt đối cho ngân sách $100 của nhà trường cấp.
+### 2.4. An toàn Lưu trữ & Quản trị Chi phí (Thành viên 2 phụ trách)
+* **API Gateway Throttling**: Kích hoạt trên Stage `dev` với Rate Limit `10 req/s`, Burst Limit `20 req`.
+* **S3 Server-side Encryption**: Kích hoạt mã hóa lưu trữ `SSE-S3 (AES-256)` và Block Public Access.
+* **Quản trị chi phí**: Xác nhận trên AWS Billing & Cost Management duy trì an toàn ở mức **`$0.00`**, bảo toàn 100% ngân sách Lab.
 
 ---
 
 ## 3. DANH MỤC HỒ SƠ MINH CHỨNG TUẦN 3 (`evidence/week3/`)
 
-1. [`01_cloudwatch_dashboard.png`](file:///c:/Users/T14%20GEN2/Documents/cloud-smart-parking-system/evidence/week3/01_cloudwatch_dashboard.png) - Màn hình Dashboard 4 widgets.
-2. [`02_cloudwatch_alarms.png`](file:///c:/Users/T14%20GEN2/Documents/cloud-smart-parking-system/evidence/week3/02_cloudwatch_alarms.png) - Danh sách 2 Alarms ở trạng thái OK.
-3. [`03_cloudwatch_logs_insights.png`](file:///c:/Users/T14%20GEN2/Documents/cloud-smart-parking-system/evidence/week3/03_cloudwatch_logs_insights.png) - Kết quả truy vấn bóc tách log Lambda.
-4. [`04_athena_database_tables.png`](file:///c:/Users/T14%20GEN2/Documents/cloud-smart-parking-system/evidence/week3/04_athena_database_tables.png) - Giao diện Athena database và bảng `parking_tickets_analytics`.
-5. [`05_athena_sql_queries.png`](file:///c:/Users/T14%20GEN2/Documents/cloud-smart-parking-system/evidence/week3/05_athena_sql_queries.png) - Kết quả chạy câu truy vấn SQL thống kê doanh thu bãi xe.
-6. [`06_api_security_throttling.png`](file:///c:/Users/T14%20GEN2/Documents/cloud-smart-parking-system/evidence/week3/06_api_security_throttling.png) - Cấu hình Throttling Rate: 10, Burst: 20 trên API Gateway Stage `dev`.
-7. [`07_s3_encryption_security.png`](file:///c:/Users/T14%20GEN2/Documents/cloud-smart-parking-system/evidence/week3/07_s3_encryption_security.png) - Cấu hình Default Encryption SSE-S3 AES-256 trên S3 Bucket.
-8. [`08_cost_and_billing.png`](file:///c:/Users/T14%20GEN2/Documents/cloud-smart-parking-system/evidence/week3/08_cost_and_billing.png) - Kiểm toán chi phí AWS Billing xác nhận $0.00.
+| STT | Tên file minh chứng | Nội dung minh chứng |
+| :---: | :--- | :--- |
+| 1 | [`01_cloudwatch_dashboard.png`](file:///c:/Users/T14%20GEN2/Documents/cloud-smart-parking-system/evidence/week3/01_cloudwatch_dashboard.png) | Màn hình CloudWatch Dashboard tổng hợp 4 widgets |
+| 2 | [`02_cloudwatch_alarms.png`](file:///c:/Users/T14%20GEN2/Documents/cloud-smart-parking-system/evidence/week3/02_cloudwatch_alarms.png) | Danh sách 2 Alarms ở trạng thái OK |
+| 3 | [`03_cloudwatch_logs_insights.png`](file:///c:/Users/T14%20GEN2/Documents/cloud-smart-parking-system/evidence/week3/03_cloudwatch_logs_insights.png) | Truy vấn Log Analytics bóc tách log Lambda |
+| 4 | [`04_athena_database_tables.png`](file:///c:/Users/T14%20GEN2/Documents/cloud-smart-parking-system/evidence/week3/04_athena_database_tables.png) | Giao diện Athena database và bảng `parking_tickets_analytics` |
+| 5 | [`05_athena_sql_queries.png`](file:///c:/Users/T14%20GEN2/Documents/cloud-smart-parking-system/evidence/week3/05_athena_sql_queries.png) | Kết quả chạy SQL thống kê doanh thu và lượt xe |
+| 6 | [`06_api_security_throttling.png`](file:///c:/Users/T14%20GEN2/Documents/cloud-smart-parking-system/evidence/week3/06_api_security_throttling.png) | Cấu hình Throttling Rate: 10, Burst: 20 trên API Gateway Stage `dev` |
+| 7 | [`07_s3_encryption_security.png`](file:///c:/Users/T14%20GEN2/Documents/cloud-smart-parking-system/evidence/week3/07_s3_encryption_security.png) | Cấu hình Default Encryption SSE-S3 AES-256 trên S3 Bucket |
+| 8 | [`08_cost_and_billing.png`](file:///c:/Users/T14%20GEN2/Documents/cloud-smart-parking-system/evidence/week3/08_cost_and_billing.png) | Kiểm toán chi phí AWS Billing xác nhận $0.00 |
+
+---
+
+## 4. TÀI LIỆU VÀ NHẬT KÝ CHI TIẾT
+* Kế hoạch Tuần 3: [`PLAN_TUAN_3.md`](file:///c:/Users/T14%20GEN2/Documents/cloud-smart-parking-system/PLAN_TUAN_3.md)
+* Nhật ký chi tiết Thành viên 1: [`docs/worklogs/week-03/member-1.md`](file:///c:/Users/T14%20GEN2/Documents/cloud-smart-parking-system/docs/worklogs/week-03/member-1.md) (8.5 giờ)
+* Nhật ký chi tiết Thành viên 2: [`docs/worklogs/week-03/member-2.md`](file:///c:/Users/T14%20GEN2/Documents/cloud-smart-parking-system/docs/worklogs/week-03/member-2.md) (8.5 giờ)
