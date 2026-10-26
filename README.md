@@ -37,10 +37,13 @@ Chi tiết xem tại tài liệu [docs/THIET_KE_KIEN_TRUC_HE_THONG.md](docs/THIE
 ```text
 cloud-smart-parking-system/
 ├── PLAN_TUAN_2.md                        # Kế hoạch chi tiết Tuần 2 (Đối chiếu sát Git Tuần 1)
+├── PLAN_TUAN_3.md                        # Kế hoạch chi tiết Tuần 3 (Giám sát CloudWatch, Athena, Bảo mật, IaC, Web UI)
 ├── backend/                              # Mã nguồn Lambda & Cấu hình API Gateway
 │   ├── api_gateway_openapi.json          # Đặc tả REST API Gateway (OpenAPI 3.0 / Swagger)
 │   ├── checkin.py                        # Lambda xử lý xe vào (Check-in)
 │   └── checkout.py                       # Lambda xử lý xe ra & tính phí (Check-out)
+├── frontend/                             # Giao diện Web Dashboard tĩnh (S3 Static Hosting)
+├── iac/                                  # Kịch bản Tự động hóa hạ tầng (AWS CloudFormation IaC)
 ├── docs/                                 # Tài liệu dự án
 │   ├── THIET_KE_KIEN_TRUC_HE_THONG.md    # Tài liệu thiết kế kiến trúc chi tiết
 │   ├── architecture/                     # Thiết kế kiến trúc & cơ sở dữ liệu
@@ -49,13 +52,16 @@ cloud-smart-parking-system/
 │   │   └── tagging-standards.md
 │   ├── plans/                            # Kế hoạch công việc theo từng tuần & thành viên
 │   │   ├── week-01/
-│   │   └── week-02/                      # Kế hoạch chi tiết Tuần 2 (Overview, SV1, SV2)
+│   │   ├── week-02/
+│   │   └── week-03/                      # Kế hoạch chi tiết Tuần 3 (Overview, SV1, SV2)
 │   └── worklogs/                         # Nhật ký công việc theo từng tuần & thành viên
 │       ├── week-01/
-│       └── week-02/                      # Nhật ký thực hiện Tuần 2 & Báo cáo Rekognition
+│       ├── week-02/                      # Nhật ký thực hiện Tuần 2 & Báo cáo Rekognition
+│       └── week-03/                      # Nhật ký thực hiện Tuần 3
 ├── evidence/                             # Ảnh chụp màn hình minh chứng console
 │   ├── week1/                            # Minh chứng Tuần 1 (S3, DynamoDB, Billing)
-│   └── week2/                            # Minh chứng Tuần 2 (Lambda, API Gateway, CloudWatch, Items, S3, Tests, Billing)
+│   ├── week2/                            # Minh chứng Tuần 2 (Lambda, API Gateway, CloudWatch, Items, S3, Tests, Billing)
+│   └── week3/                            # Minh chứng Tuần 3 (CloudWatch Dashboard/Alarms, Athena SQL, Throttling, Web UI)
 ├── scripts/                              # Các script kiểm thử, tự động hóa & QA
 │   ├── test_plate_regex.py               # Kiểm thử giải thuật Regex OCR biển số
 │   ├── setup_aws_resources.py            # Tự động khởi tạo S3 & DynamoDB
