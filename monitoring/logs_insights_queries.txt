@@ -1,0 +1,31 @@
+====================================================================
+BỘ TRUY VẤN MẪU CLOUDWATCH LOGS INSIGHTS (TUẦN 3)
+HỆ THỐNG QUẢN LÝ BÃI GIỮ XE THÔNG MINH (SMART PARKING)
+====================================================================
+
+Cách sử dụng:
+1. Đăng nhập AWS Console -> Mở dịch vụ CloudWatch -> Chọn Logs -> Logs Insights.
+2. Chọn Log groups: /aws/lambda/SmartParking-Checkin và /aws/lambda/SmartParking-Checkout.
+3. Dán một trong các câu query bên dưới vào ô soạn thảo và bấm "Run query".
+
+--------------------------------------------------------------------
+TRUY VẤN 1: Tra cứu 20 sự kiện Check-in/Check-out gần nhất & thời gian xử lý
+--------------------------------------------------------------------
+fields @timestamp, @message
+| filter @message like /ticketId/ or @message like /plateNumber/ or @message like /REPORT/
+| sort @timestamp desc
+| limit 20
+
+--------------------------------------------------------------------
+TRUY VẤN 2: Lọc các trường hợp biển số không nhận diện được (UNKNOWN)
+--------------------------------------------------------------------
+fields @timestamp, @message
+| filter @message like /UNKNOWN/
+| sort @timestamp desc
+| limit 20
+
+--------------------------------------------------------------------
+TRUY VẤN 3: Thống kê hiệu năng thực thi Lambda (Billed Duration & Max Memory)
+--------------------------------------------------------------------
+filter @type = "REPORT"
+| stats avg(@billedDuration) as AvgDuration_ms, max(@billedDuration) as MaxDuration_ms, max(@maxMemoryUsed) / 1000000 as MaxMemory_MB by bin(5m)
