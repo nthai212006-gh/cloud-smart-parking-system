@@ -5,6 +5,7 @@ import base64
 import os
 import boto3
 from decimal import Decimal
+import botocore.exceptions
 
 # Lấy cấu hình từ biến môi trường
 BUCKET_NAME = os.environ.get("BUCKET_NAME", "smart-parking-images-24110207")
@@ -135,11 +136,13 @@ def lambda_handler(event, context):
             except Exception as img_err:
                 print(f"Lỗi lưu ảnh out: {str(img_err)}")
                 
-        # 6. Cập nhật trạng thái COMPLETED và lưu tiền vào DynamoDB
+        # 6. Cập nhật trạng thái COMPLETED và lưu tiền vào DynamoDB (Atomic Conditional Write)
         update_expr = "SET #st = :completed, checkoutTime = :checkoutTime, fee = :fee, totalHours = :totalHours"
         expr_names = {"#st": "status"}
         expr_values = {
             ":completed": "COMPLETED",
+            ":parked": "PARKED",
+            ":active": "ACTIVE",
             ":checkoutTime": checkout_time,
             ":fee": Decimal(str(fee)),
             ":totalHours": Decimal(str(total_hours))
@@ -149,12 +152,22 @@ def lambda_handler(event, context):
             update_expr += ", outImageKey = :outImageKey"
             expr_values[":outImageKey"] = out_image_key
             
-        table.update_item(
-            Key={"ticketId": ticket_id},
-            UpdateExpression=update_expr,
-            ExpressionAttributeNames=expr_names,
-            ExpressionAttributeValues=expr_values
-        )
+        try:
+            table.update_item(
+                Key={"ticketId": ticket_id},
+                UpdateExpression=update_expr,
+                ConditionExpression="#st = :parked OR #st = :active",
+                ExpressionAttributeNames=expr_names,
+                ExpressionAttributeValues=expr_values
+            )
+        except botocore.exceptions.ClientError as err:
+            if err.response.get("Error", {}).get("Code") == "ConditionalCheckFailedException":
+                return {
+                    "statusCode": 400,
+                    "headers": cors_headers,
+                    "body": json.dumps({"error": "Vé này đã được thanh toán và hoàn tất trước đó!"}, ensure_ascii=False)
+                }
+            raise err
         
         # 7. Trả về kết quả thanh toán
         response_data = {

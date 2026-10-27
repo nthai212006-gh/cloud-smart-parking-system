@@ -3,197 +3,221 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Smart Parking Dashboard | Hệ Thống Quản Lý Bãi Giữ Xe Thông Minh</title>
+  <title>Smart Parking POS | Hệ Thống Kiểm Soát Bãi Đỗ Xe Thông Minh</title>
   <link rel="stylesheet" href="style.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
 </head>
-<body>
-  <!-- Header -->
-  <header class="navbar">
-    <div class="nav-container">
-      <div class="brand">
-        <div class="logo-icon">🚗</div>
+<body class="pos-theme">
+
+  <!-- TOP BAR / HEADER (ENTERPRISE POS STYLE) -->
+  <header class="pos-header">
+    <div class="pos-header-inner">
+      <div class="pos-brand">
+        <div class="pos-logo-badge">POS</div>
         <div>
-          <h1>Smart Parking System</h1>
-          <p class="subtitle">Hệ Thống Quản Lý Bãi Giữ Xe Thông Minh · Kiến Trúc Serverless AWS</p>
+          <h1 class="pos-title">SMART PARKING SYSTEM</h1>
+          <p class="pos-subtitle">Hệ Thống Kiểm Soát Bãi Xe Thông Minh · Kiến Trúc AWS Serverless</p>
         </div>
       </div>
-      <div class="status-badge">
-        <span class="status-dot"></span>
-        <span>AWS us-east-1 · Online</span>
+
+      <div class="pos-status-panel">
+        <div class="pos-stat-item">
+          <span class="stat-label">XE TRONG BÃI</span>
+          <span class="stat-val" id="activeVehiclesCount">0</span>
+        </div>
+        <div class="pos-stat-item">
+          <span class="stat-label">HỆ THỐNG</span>
+          <span class="system-status-pill">
+            <span class="pulse-dot"></span>
+            AWS us-east-1 · Online
+          </span>
+        </div>
+        <div class="pos-clock-box">
+          <div class="pos-clock-time" id="digitalClockTime">--:--:--</div>
+          <div class="pos-clock-date" id="digitalClockDate">--/--/----</div>
+        </div>
+        <button id="openSettingsBtn" class="pos-btn-icon" title="Cấu hình API Gateway">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+        </button>
       </div>
     </div>
   </header>
 
-  <!-- Main Content -->
-  <main class="main-container">
+  <!-- MAIN OPERATING WORKSPACE -->
+  <main class="pos-workspace">
 
-    <!-- Endpoint Configuration Bar -->
-    <section class="config-bar card">
-      <div class="config-header">
-        <span class="config-title">⚙️ Cấu hình API Gateway Endpoint:</span>
-        <button id="toggleConfigBtn" class="btn-text">Ẩn/Hiện</button>
-      </div>
-      <div id="configBody" class="config-body">
-        <div class="input-group">
-          <label for="apiEndpointInput">Invoke Base URL (Stage dev):</label>
-          <div class="endpoint-input-wrapper">
-            <input type="url" id="apiEndpointInput" value="https://fdbsdxyto1.execute-api.us-east-1.amazonaws.com/dev" placeholder="https://xxxx.execute-api.us-east-1.amazonaws.com/dev">
-            <button id="saveEndpointBtn" class="btn btn-secondary">Áp dụng</button>
-          </div>
-        </div>
-      </div>
-    </section>
+    <!-- TOP SECTION: DUAL GATE OPERATING LANES (16:9 VIEWPORTS) -->
+    <div class="pos-lanes-grid">
 
-    <!-- 2 Columns Grid: Check-in & Check-out -->
-    <div class="dashboard-grid">
-
-      <!-- COLUMN 1: CHECK-IN (CỔNG VÀO) -->
-      <section class="card portal-card checkin-portal">
-        <div class="card-header portal-header checkin-header">
-          <div class="portal-badge badge-in">CỔNG VÀO</div>
-          <h2>Quét Xe Vào & Cấp Vé (Check-in)</h2>
+      <!-- ================= LANE 1: INWARD GATE (CỔNG VÀO) ================= -->
+      <section class="pos-lane-panel lane-in">
+        <div class="lane-header">
+          <div class="lane-tag in-tag">LÀN 1 · CỔNG VÀO</div>
+          <h2 class="lane-title">TIẾP NHẬN XE VÀO & CẤP VÉ</h2>
         </div>
 
-        <form id="checkinForm" class="portal-form">
-          <!-- Chọn ảnh xe -->
-          <div class="form-group">
-            <label class="form-label">Ảnh chụp camera trước xe vào <span class="required">*</span></label>
-            <div class="upload-dropzone" id="checkinDropzone">
-              <input type="file" id="checkinFileInput" accept="image/*" class="file-input">
-              <div class="upload-placeholder" id="checkinPlaceholder">
-                <span class="upload-icon">📷</span>
-                <p>Nhấp chọn ảnh hoặc kéo thả vào đây</p>
-                <span class="upload-hint">Định dạng JPG, PNG, WEBP (tối đa 5MB)</span>
+        <form id="checkinForm" class="lane-form">
+          <!-- 16:9 Camera Viewport / Dropzone -->
+          <div class="camera-viewport-wrapper">
+            <div class="camera-viewport aspect-16-9" id="checkinDropzone">
+              <input type="file" id="checkinFileInput" accept="image/*" class="pos-file-input">
+              
+              <div class="camera-placeholder" id="checkinPlaceholder">
+                <div class="camera-crosshairs"></div>
+                <div class="camera-icon-svg">
+                  <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg>
+                </div>
+                <span class="camera-prompt">CHỌN HOẶC KÉO ẢNH CAMERA XE VÀO</span>
+                <span class="camera-subhint">Định dạng JPG, PNG, WEBP &bull; Giới hạn &le; 5MB</span>
               </div>
-              <img id="checkinPreview" class="preview-img hidden" alt="Preview ảnh xe vào">
+
+              <img id="checkinPreview" class="camera-preview-img hidden" alt="Ảnh chụp xe vào làn">
+              <div class="camera-live-badge in-badge">CAM 01 &bull; 1080P</div>
             </div>
           </div>
 
-          <!-- Chọn loại xe -->
-          <div class="form-group">
-            <label class="form-label">Phân loại phương tiện <span class="required">*</span></label>
-            <div class="radio-group">
-              <label class="radio-card selected" id="labelMotor">
+          <!-- Vehicle Type Selector -->
+          <div class="lane-control-row">
+            <span class="control-label">LOẠI PHƯƠNG TIỆN:</span>
+            <div class="vehicle-pill-selector">
+              <label class="pos-radio-btn active" id="labelMotor">
                 <input type="radio" name="vehicleType" value="MOTORBIKE" checked>
-                <span class="radio-icon">🛵</span>
-                <div>
-                  <strong>Xe máy (Motorbike)</strong>
-                  <span class="tariff-desc">5.000đ / 4h đầu (+2k/h sau)</span>
-                </div>
+                <span class="radio-title">XE MÁY</span>
+                <span class="radio-desc">5.000đ / 4h đầu</span>
               </label>
-              <label class="radio-card" id="labelCar">
+              <label class="pos-radio-btn" id="labelCar">
                 <input type="radio" name="vehicleType" value="CAR">
-                <span class="radio-icon">🚙</span>
-                <div>
-                  <strong>Ô tô (Car)</strong>
-                  <span class="tariff-desc">20.000đ / 2h đầu (+10k/h sau)</span>
-                </div>
+                <span class="radio-title">Ô TÔ</span>
+                <span class="radio-desc">20.000đ / 2h đầu</span>
               </label>
             </div>
           </div>
 
-          <!-- Nút Checkin -->
-          <button type="submit" id="checkinSubmitBtn" class="btn btn-primary btn-block">
-            <span class="btn-text">Xác nhận Xe Vào & Cấp Vé</span>
-            <span class="spinner hidden" id="checkinSpinner"></span>
-          </button>
+          <!-- Action Buttons -->
+          <div class="lane-btn-group">
+            <button type="submit" id="checkinSubmitBtn" class="pos-btn pos-btn-primary">
+              <span class="btn-text">XÁC NHẬN VÀO & CẤP VÉ</span>
+              <span class="pos-spinner hidden" id="checkinSpinner"></span>
+            </button>
+            <button type="button" id="resetCheckinBtn" class="pos-btn pos-btn-subtle" title="Làm mới để chụp xe tiếp theo">
+              LÀM MỚI
+            </button>
+          </div>
         </form>
 
-        <!-- Kết quả Check-in -->
-        <div id="checkinResult" class="result-box hidden">
-          <div class="result-header">
-            <span class="result-badge success">Check-in Thành Công</span>
-            <span class="result-timestamp" id="resCheckinTime">--</span>
+        <!-- Inward Result Card -->
+        <div id="checkinResult" class="pos-result-card hidden">
+          <div class="result-title-bar in-bar">
+            <span>VÉ ĐÃ PHÁT HÀNH THÀNH CÔNG</span>
+            <span class="res-time-pill" id="resCheckinTime">--</span>
           </div>
-          <div class="plate-display">
-            <span class="plate-label">Biển số nhận diện (AI Rekognition):</span>
-            <div class="plate-number" id="resCheckinPlate">--</div>
-            <div id="unknownNotice" class="badge-unknown hidden">⚠️ Ảnh mờ: Cần bảo vệ kiểm tra thủ công</div>
+
+          <div class="plate-highlight-box">
+            <div class="plate-box-label">BIỂN SỐ NHẬN DIỆN (AI REKOGNITION)</div>
+            <div class="plate-box-val" id="resCheckinPlate">--</div>
+            <div id="unknownNotice" class="badge-alert hidden">BIỂN SỐ KHÔNG RÕ &bull; CẦN BẢO VỆ XÁC NHẬN</div>
           </div>
-          <div class="result-details">
-            <div class="detail-row">
-              <span class="detail-label">Mã vé (Ticket ID):</span>
-              <span class="detail-value mono" id="resTicketId">--</span>
-              <button id="copyTicketBtn" class="btn-copy" title="Sao chép mã vé">📋 Chép</button>
+
+          <div class="ticket-info-grid">
+            <div class="info-cell">
+              <span class="cell-k">MÃ VÉ (UUID):</span>
+              <span class="cell-v mono" id="resTicketId">--</span>
             </div>
-            <div class="detail-row">
-              <span class="detail-label">Loại xe:</span>
-              <span class="detail-value" id="resVehicleType">--</span>
+            <div class="info-cell">
+              <span class="cell-k">LOẠI XE:</span>
+              <span class="cell-v" id="resVehicleType">--</span>
             </div>
-            <div class="detail-row">
-              <span class="detail-label">Trạng thái vé:</span>
-              <span class="detail-value badge-parked">Đang gửi (PARKED)</span>
+            <div class="info-cell">
+              <span class="cell-k">TRẠNG THÁI:</span>
+              <span class="cell-v badge-status-parked">ĐANG GỬI (PARKED)</span>
             </div>
           </div>
         </div>
       </section>
 
-      <!-- COLUMN 2: CHECK-OUT (CỔNG RA) -->
-      <section class="card portal-card checkout-portal">
-        <div class="card-header portal-header checkout-header">
-          <div class="portal-badge badge-out">CỔNG RA</div>
-          <h2>Đối Soát Vé & Thu Phí (Check-out)</h2>
+      <!-- ================= LANE 2: OUTWARD GATE (CỔNG RA) ================= -->
+      <section class="pos-lane-panel lane-out">
+        <div class="lane-header">
+          <div class="lane-tag out-tag">LÀN 2 · CỔNG RA</div>
+          <h2 class="lane-title">ĐỐI SOÁT & THU CƯỚC CHECK-OUT</h2>
         </div>
 
-        <form id="checkoutForm" class="portal-form">
-          <!-- Nhập mã vé -->
-          <div class="form-group">
-            <label for="checkoutTicketInput" class="form-label">Mã vé xe (Ticket ID UUID) <span class="required">*</span></label>
-            <div class="input-with-action">
-              <input type="text" id="checkoutTicketInput" class="form-input mono" placeholder="Ví dụ: eeca78ee-8957-418e-ba66-88d447a1262d" required>
-              <button type="button" id="pasteLastTicketBtn" class="btn btn-secondary btn-sm" title="Dán mã vé vừa tạo">Dán mã vừa tạo</button>
+        <form id="checkoutForm" class="lane-form">
+          <!-- Smart Ticket / Plate Search Input -->
+          <div class="smart-search-group">
+            <label for="checkoutTicketInput" class="control-label">
+              NHẬP BIỂN SỐ HOẶC MÃ VÉ UUID:
+            </label>
+            <div class="search-input-wrapper">
+              <input type="text" id="checkoutTicketInput" class="pos-input-text mono" placeholder="Nhập biển số (ví dụ: 59X3-12345) hoặc mã vé..." required autocomplete="off">
+              <button type="button" id="pasteLastTicketBtn" class="pos-btn-sm" title="Dán mã vé vừa Check-in">
+                Dán mã vừa tạo
+              </button>
             </div>
+            <div id="resolvedPlateHint" class="resolved-hint hidden"></div>
           </div>
 
-          <!-- Ảnh xe ra (tùy chọn) -->
-          <div class="form-group">
-            <label class="form-label">Ảnh xe ra phục vụ đối soát <span class="optional">(Tùy chọn)</span></label>
-            <div class="upload-dropzone dropzone-small" id="checkoutDropzone">
-              <input type="file" id="checkoutFileInput" accept="image/*" class="file-input">
-              <div class="upload-placeholder" id="checkoutPlaceholder">
-                <span class="upload-icon">📸</span>
-                <p>Tải ảnh đối chiếu xe ra (nếu có)</p>
+          <!-- 16:9 Camera Viewport Đối Soát Ra -->
+          <div class="camera-viewport-wrapper">
+            <div class="camera-viewport aspect-16-9" id="checkoutDropzone">
+              <input type="file" id="checkoutFileInput" accept="image/*" class="pos-file-input">
+              
+              <div class="camera-placeholder" id="checkoutPlaceholder">
+                <div class="camera-crosshairs"></div>
+                <div class="camera-icon-svg">
+                  <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
+                </div>
+                <span class="camera-prompt">CHỌN HOẶC KÉO ẢNH XE RA ĐỐI SOÁT</span>
+                <span class="camera-subhint">Tùy chọn &bull; Chụp camera cổng ra để lưu vết</span>
               </div>
-              <img id="checkoutPreview" class="preview-img hidden" alt="Preview ảnh xe ra">
+
+              <img id="checkoutPreview" class="camera-preview-img hidden" alt="Ảnh chụp xe ra làn">
+              <div class="camera-live-badge out-badge">CAM 02 &bull; 1080P</div>
             </div>
           </div>
 
-          <!-- Nút Checkout -->
-          <button type="submit" id="checkoutSubmitBtn" class="btn btn-danger btn-block">
-            <span class="btn-text">Tính Cước & Chốt Vé Xe Ra</span>
-            <span class="spinner hidden" id="checkoutSpinner"></span>
-          </button>
+          <!-- Action Buttons -->
+          <div class="lane-btn-group">
+            <button type="submit" id="checkoutSubmitBtn" class="pos-btn pos-btn-success">
+              <span class="btn-text">TÍNH CƯỚC & CHO XE RA</span>
+              <span class="pos-spinner hidden" id="checkoutSpinner"></span>
+            </button>
+            <button type="button" id="resetCheckoutBtn" class="pos-btn pos-btn-subtle" title="Làm mới form xe ra">
+              LÀM MỚI
+            </button>
+          </div>
         </form>
 
-        <!-- Kết quả Check-out -->
-        <div id="checkoutResult" class="result-box hidden">
-          <div class="result-header">
-            <span class="result-badge completed">Thanh Toán Hoàn Tất</span>
-            <span class="result-timestamp" id="resCheckoutTime">--</span>
+        <!-- Outward Result Card -->
+        <div id="checkoutResult" class="pos-result-card hidden">
+          <div class="result-title-bar out-bar">
+            <span>THANH TOÁN HOÀN TẤT &bull; MỞ BARIE</span>
+            <span class="res-time-pill" id="resCheckoutTime">--</span>
           </div>
-          <div class="fee-display">
-            <span class="fee-label">TỔNG TIỀN PHÍ GỬI XE:</span>
-            <div class="fee-amount" id="resCheckoutFee">0 VNĐ</div>
+
+          <div class="fee-banner-display">
+            <div class="fee-banner-title">CƯỚC PHÍ PHẢI THU</div>
+            <div class="fee-banner-val" id="resCheckoutFee">0 VNĐ</div>
           </div>
-          <div class="result-details">
-            <div class="detail-row">
-              <span class="detail-label">Biển số xe:</span>
-              <span class="detail-value font-bold" id="resCheckoutPlate">--</span>
+
+          <div class="ticket-info-grid">
+            <div class="info-cell">
+              <span class="cell-k">BIỂN SỐ XE:</span>
+              <span class="cell-v font-bold" id="resCheckoutPlate">--</span>
             </div>
-            <div class="detail-row">
-              <span class="detail-label">Thời gian vào:</span>
-              <span class="detail-value" id="resCheckoutCheckinTime">--</span>
+            <div class="info-cell">
+              <span class="cell-k">THỜI GIAN VÀO:</span>
+              <span class="cell-v" id="resCheckoutCheckinTime">--</span>
             </div>
-            <div class="detail-row">
-              <span class="detail-label">Tổng thời gian đỗ:</span>
-              <span class="detail-value font-bold" id="resCheckoutHours">-- giờ</span>
+            <div class="info-cell">
+              <span class="cell-k">THỜI LƯỢNG ĐỖ:</span>
+              <span class="cell-v font-bold" id="resCheckoutHours">-- giờ</span>
             </div>
-            <div class="detail-row">
-              <span class="detail-label">Trạng thái vé:</span>
-              <span class="detail-value badge-completed">ĐÃ HOÀN TẤT (COMPLETED)</span>
+            <div class="info-cell">
+              <span class="cell-k">TRẠNG THÁI:</span>
+              <span class="cell-v badge-status-completed">ĐÃ HOÀN TẤT (COMPLETED)</span>
             </div>
           </div>
         </div>
@@ -201,16 +225,71 @@
 
     </div>
 
-    <!-- Alert Toast Notification -->
-    <div id="toastNotification" class="toast hidden"></div>
+    <!-- ================= BOTTOM SECTION: ACTIVE VEHICLES TABLE ================= -->
+    <section class="pos-table-section">
+      <div class="table-header-bar">
+        <div class="table-header-left">
+          <h2 class="table-section-title">DANH SÁCH XE ĐANG TRONG BÃI (ACTIVE VEHICLES)</h2>
+          <span class="badge-counter" id="tableVehiclesBadge">0 xe</span>
+        </div>
+        <div class="table-header-right">
+          <input type="text" id="filterVehicleInput" class="filter-input" placeholder="Lọc theo biển số hoặc mã vé...">
+          <button id="clearAllVehiclesBtn" class="btn-table-action" title="Xóa dữ liệu bộ nhớ đệm bãi xe">Dọn bộ nhớ</button>
+        </div>
+      </div>
+
+      <div class="table-responsive-wrapper">
+        <table class="pos-data-table" id="activeVehiclesTable">
+          <thead>
+            <tr>
+              <th style="width: 50px;">STT</th>
+              <th style="width: 140px;">BIỂN SỐ XE</th>
+              <th style="width: 110px;">LOẠI XE</th>
+              <th style="width: 170px;">THỜI GIAN VÀO</th>
+              <th style="width: 130px;">THỜI LƯỢNG ĐỖ</th>
+              <th>MÃ VÉ (TICKET ID)</th>
+              <th style="width: 150px; text-align: center;">THAO TÁC</th>
+            </tr>
+          </thead>
+          <tbody id="activeVehiclesTableBody">
+            <tr class="empty-row">
+              <td colspan="7">Hiện chưa có xe nào trong bãi. Vui lòng thực hiện Check-in ở Làn 1.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
   </main>
 
-  <!-- Footer -->
-  <footer class="footer">
-    <div class="footer-container">
-      <p><strong>Học phần:</strong> Điện toán đám mây (Cloud Computing) · <strong>Giảng viên:</strong> ThS. Huỳnh Xuân Phụng</p>
-      <p><strong>Sinh viên thực hiện:</strong> Lê Cao Việt Tín (MSSV: 24110354) & Nguyễn Trung Hải (MSSV: 24110207)</p>
-      <p class="copyright">Trường Đại học Công nghệ Kỹ thuật TP.HCM (HCMUTE) · Khoa Công nghệ Thông tin</p>
+  <!-- MODAL: SETTINGS (API ENDPOINT CONFIG) -->
+  <div id="settingsModal" class="pos-modal hidden">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h3>Cấu Hình Kết Nối API Gateway</h3>
+        <button id="closeSettingsBtn" class="modal-close">&times;</button>
+      </div>
+      <div class="modal-body">
+        <label for="apiEndpointInput" class="control-label">Invoke Base URL (Stage dev):</label>
+        <input type="url" id="apiEndpointInput" class="pos-input-text mono" value="https://fdbsdxyto1.execute-api.us-east-1.amazonaws.com/dev">
+        <p class="modal-note">Mặc định: <code>https://fdbsdxyto1.execute-api.us-east-1.amazonaws.com/dev</code></p>
+      </div>
+      <div class="modal-footer">
+        <button id="resetEndpointBtn" class="pos-btn-subtle">Khôi phục mặc định</button>
+        <button id="saveEndpointBtn" class="pos-btn-primary">Lưu cấu hình</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST NOTIFICATION -->
+  <div id="toastNotification" class="pos-toast hidden"></div>
+
+  <!-- FOOTER -->
+  <footer class="pos-footer">
+    <div class="footer-inner">
+      <span><strong>Học phần:</strong> Điện toán đám mây · <strong>GVHD:</strong> ThS. Huỳnh Xuân Phụng</span>
+      <span><strong>Nhóm thực hiện:</strong> Lê Cao Việt Tín (24110354) & Nguyễn Trung Hải (24110207)</span>
+      <span>Đại học Sư phạm Kỹ thuật TP.HCM (HCMUTE)</span>
     </div>
   </footer>
 
