@@ -23,11 +23,13 @@
 * **AWS CloudFormation Template (`iac/cloudformation_template.yaml`)**:
   - Tự động hóa 100% quy trình khởi tạo toàn bộ hạ tầng Serverless chỉ với một lệnh duy nhất.
   - Định nghĩa đầy đủ S3 Bucket, DynamoDB Table `ParkingTickets`, 2 hàm Lambda (`SmartParking-Checkin`, `SmartParking-Checkout`), API Gateway REST API (`SmartParking-API`), CloudWatch Alarms kèm 3 thẻ Tag chuẩn môn học.
-* **Tăng cường Bảo mật & Xác thực Dữ liệu đầu vào**:
+* **Tăng cường Bảo mật, Xác thực Dữ liệu & Chống Race Condition**:
   - Bổ sung bộ kiểm soát kích thước payload Base64 $\le 5\text{MB}$ trong Lambda (trả về HTTP 413 Payload Too Large khi vượt quá) và xác thực loại xe hợp lệ.
+  - Áp dụng cơ chế **DynamoDB Atomic Conditional Write** trong `backend/checkout.py` (`ConditionExpression="#st = :parked OR #st = :active"`), ngăn ngừa hoàn toàn nguy cơ Race Condition thu cước 2 lần khi client gọi đồng thời.
   - Viết kịch bản kiểm thử bảo mật `scripts/test_api_throttling.py` bắn 30 requests đồng thời trong 1 giây để xác thực cơ chế chặn spam HTTP 429 Too Many Requests từ API Gateway.
-* **Giao diện Web Dashboard trực quan (`frontend/` Single Page Application)**:
-  - Xây dựng giao diện web gồm `frontend/index.html`, `frontend/app.js`, `frontend/style.css` hiện đại, chia 2 phân hệ rõ ràng: Check-in (chụp/chọn ảnh, chọn loại xe, tạo vé xe thông minh) và Check-out (tra cứu mã vé, tính cước phí, hoàn tất thanh toán).
+* **Giao diện Web Enterprise POS chuyên dụng (`frontend/`)**:
+  - Tái thiết kế giao diện theo phong cách POS chuyên nghiệp: Viewport Camera 16:9 sắc nét cho Làn Vào / Làn Ra, bảng quản lý xe đang trong bãi theo thời gian thực kèm nút 1-click `[ ➔ Cho Xe Ra ]`.
+  - Khắc phục triệt để lỗi phông chữ tiếng Việt với `Be Vietnam Pro`, lọc sạch chuỗi rác camera (`extractCleanPlate`), nhận diện biển số thông minh (`resolveTicketId`) và cơ chế reset form tự động liên tục không bị đơ ảnh.
   - Tích hợp gọi trực tiếp REST API trên API Gateway, định dạng tiền tệ VNĐ và gắn nhãn cảnh báo trực quan khi biển số mờ (`UNKNOWN`).
 
 ### 2.2. Phân hệ Giám sát & Cảnh báo Tập trung (Thành viên 2 phụ trách)
