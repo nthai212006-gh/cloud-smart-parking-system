@@ -209,7 +209,7 @@ body.pos-theme {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 1.25rem;
-  align-items: stretch;
+  align-items: start;
 }
 
 @media (max-width: 992px) {
@@ -612,63 +612,15 @@ body.pos-theme {
 }
 
 /* ==============================================================================
-   TIER 5: RESULT CARDS, STANDBY MODE & ZERO CLS (MIN-HEIGHT: 195PX)
+   TIER 5: RESULT CARDS & LICENSE PLATE BOX
    ============================================================================== */
-.lane-result-slot {
-  margin: 0 1.25rem 1.25rem 1.25rem;
-  min-height: 195px;
-  display: flex;
-  flex-direction: column;
-}
-
 .pos-result-card {
-  margin: 0;
+  margin: 0 1.25rem 1.25rem 1.25rem;
   border-radius: 6px;
   border: 1px solid var(--border-light);
   background: #ffffff;
   overflow: hidden;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
-  min-height: 195px;
-}
-
-/* Standby Ready State when result card is hidden */
-.lane-result-slot .pos-result-card.hidden + .result-standby {
-  display: flex;
-}
-
-.result-standby {
-  display: none;
-  min-height: 195px;
-  border-radius: 6px;
-  border: 1.5px dashed #cbd5e1;
-  background: #f8fafc;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  color: #64748b;
-  padding: 1.25rem;
-  text-align: center;
-  gap: 0.4rem;
-  box-sizing: border-box;
-}
-
-.result-standby svg {
-  color: #94a3b8;
-  margin-bottom: 0.25rem;
-}
-
-.standby-title {
-  font-size: 0.78rem;
-  font-weight: 700;
-  color: #475569;
-  letter-spacing: 0.5px;
-}
-
-.standby-desc {
-  font-size: 0.72rem;
-  color: #94a3b8;
-  max-width: 320px;
-  line-height: 1.4;
 }
 
 .result-title-bar {
