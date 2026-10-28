@@ -209,6 +209,7 @@ body.pos-theme {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 1.25rem;
+  align-items: stretch;
 }
 
 @media (max-width: 992px) {
@@ -228,12 +229,14 @@ body.pos-theme {
 }
 
 .lane-header {
-  padding: 0.85rem 1.25rem;
+  height: 52px;
+  padding: 0 1.25rem;
   border-bottom: 1px solid var(--border-light);
   background: #f8fafc;
   display: flex;
   align-items: center;
   gap: 0.75rem;
+  box-sizing: border-box;
 }
 
 .lane-tag {
@@ -397,36 +400,46 @@ body.pos-theme {
   border: 1px solid #10b981;
 }
 
-/* Vehicle Type Selector */
+/* ==============================================================================
+   TIER 3: SYNCHRONIZED CONTROLS ROW (48PX HEIGHT LOCK)
+   ============================================================================== */
 .lane-control-row {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
+  gap: 0.75rem;
+  height: 48px;
+  box-sizing: border-box;
 }
 
 .control-label {
+  flex: 0 0 135px;
   font-size: 0.75rem;
   font-weight: 700;
   color: var(--text-secondary);
   letter-spacing: 0.3px;
+  white-space: nowrap;
 }
 
+/* Lane 1: Vehicle Type Selector */
 .vehicle-pill-selector {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 0.5rem;
   flex: 1;
+  height: 48px;
 }
 
 .pos-radio-btn {
   border: 1.5px solid var(--border-light);
   background: #f8fafc;
   border-radius: 6px;
-  padding: 0.5rem 0.75rem;
+  padding: 0 0.75rem;
   cursor: pointer;
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  height: 48px;
+  box-sizing: border-box;
   transition: all 0.15s;
 }
 
@@ -443,34 +456,35 @@ body.pos-theme {
   font-size: 0.85rem;
   font-weight: 700;
   color: var(--pos-navy);
+  line-height: 1.2;
 }
 
 .radio-desc {
   font-size: 0.68rem;
   color: var(--text-muted);
+  line-height: 1.2;
 }
 
-/* Smart Search Group */
-.smart-search-group {
-  display: flex;
-  flex-direction: column;
-  gap: 0.4rem;
-}
-
+/* Lane 2: Smart Search Input Group */
 .search-input-wrapper {
+  position: relative;
   display: flex;
   gap: 0.5rem;
+  flex: 1;
+  height: 48px;
 }
 
 .pos-input-text {
   flex: 1;
-  padding: 0.65rem 0.85rem;
+  height: 48px;
+  padding: 0 0.85rem;
   border: 1.5px solid var(--border-light);
   border-radius: 6px;
-  font-size: 0.9rem;
+  font-size: 0.88rem;
   color: var(--text-primary);
   background: #ffffff;
   outline: none;
+  box-sizing: border-box;
   transition: border-color 0.15s;
 }
 
@@ -487,6 +501,8 @@ body.pos-theme {
   font-size: 0.75rem;
   font-weight: 600;
   padding: 0 0.85rem;
+  height: 48px;
+  box-sizing: border-box;
   cursor: pointer;
   white-space: nowrap;
   transition: background 0.15s;
@@ -497,27 +513,37 @@ body.pos-theme {
 }
 
 .resolved-hint {
-  font-size: 0.75rem;
-  color: #059669;
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  font-size: 0.72rem;
+  color: #065f46;
   font-weight: 600;
-  padding: 0.2rem 0.4rem;
+  padding: 0.25rem 0.5rem;
   background: #ecfdf5;
   border-radius: 4px;
   border: 1px solid #a7f3d0;
+  z-index: 10;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06);
 }
 
-/* Action Buttons (High Contrast Enterprise POS) */
+/* ==============================================================================
+   TIER 4: SYNCHRONIZED ACTION BUTTONS (44PX HEIGHT LOCK)
+   ============================================================================== */
 .lane-btn-group {
   display: flex;
   gap: 0.75rem;
+  height: 44px;
 }
 
 .pos-btn {
   flex: 1;
+  height: 44px;
   border: none;
   border-radius: 6px;
-  padding: 0.85rem 1rem;
-  font-size: 0.92rem;
+  padding: 0 1rem;
+  font-size: 0.88rem;
   font-weight: 700;
   letter-spacing: 0.2px;
   cursor: pointer;
@@ -527,6 +553,7 @@ body.pos-theme {
   gap: 0.5rem;
   text-transform: uppercase;
   transition: all 0.15s;
+  box-sizing: border-box;
 }
 
 .pos-btn-primary {
@@ -551,12 +578,14 @@ body.pos-theme {
 
 .pos-btn-subtle {
   flex: 0 0 auto;
+  height: 44px;
   background: #f1f5f9;
   color: #475569;
   border: 1px solid #cbd5e1;
-  padding: 0.85rem 1rem;
+  padding: 0 1rem;
   font-size: 0.8rem;
   font-weight: 700;
+  box-sizing: border-box;
 }
 
 .pos-btn-subtle:hover {
@@ -583,15 +612,63 @@ body.pos-theme {
 }
 
 /* ==============================================================================
-   3. RESULT CARDS & LICENSE PLATE BOX
+   TIER 5: RESULT CARDS, STANDBY MODE & ZERO CLS (MIN-HEIGHT: 195PX)
    ============================================================================== */
-.pos-result-card {
+.lane-result-slot {
   margin: 0 1.25rem 1.25rem 1.25rem;
+  min-height: 195px;
+  display: flex;
+  flex-direction: column;
+}
+
+.pos-result-card {
+  margin: 0;
   border-radius: 6px;
   border: 1px solid var(--border-light);
   background: #ffffff;
   overflow: hidden;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+  min-height: 195px;
+}
+
+/* Standby Ready State when result card is hidden */
+.lane-result-slot .pos-result-card.hidden + .result-standby {
+  display: flex;
+}
+
+.result-standby {
+  display: none;
+  min-height: 195px;
+  border-radius: 6px;
+  border: 1.5px dashed #cbd5e1;
+  background: #f8fafc;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  color: #64748b;
+  padding: 1.25rem;
+  text-align: center;
+  gap: 0.4rem;
+  box-sizing: border-box;
+}
+
+.result-standby svg {
+  color: #94a3b8;
+  margin-bottom: 0.25rem;
+}
+
+.standby-title {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #475569;
+  letter-spacing: 0.5px;
+}
+
+.standby-desc {
+  font-size: 0.72rem;
+  color: #94a3b8;
+  max-width: 320px;
+  line-height: 1.4;
 }
 
 .result-title-bar {

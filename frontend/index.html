@@ -53,13 +53,14 @@
 
       <!-- ================= LANE 1: INWARD GATE (CỔNG VÀO) ================= -->
       <section class="pos-lane-panel lane-in">
+        <!-- TẦNG 1: HEADER LÀN 1 -->
         <div class="lane-header">
           <div class="lane-tag in-tag">LÀN 1 · CỔNG VÀO</div>
           <h2 class="lane-title">TIẾP NHẬN XE VÀO & CẤP VÉ</h2>
         </div>
 
         <form id="checkinForm" class="lane-form">
-          <!-- 16:9 Camera Viewport / Dropzone -->
+          <!-- TẦNG 2: 16:9 Camera Viewport / Dropzone CAM 01 -->
           <div class="camera-viewport-wrapper">
             <div class="camera-viewport aspect-16-9" id="checkinDropzone">
               <input type="file" id="checkinFileInput" accept="image/*" class="pos-file-input">
@@ -78,7 +79,7 @@
             </div>
           </div>
 
-          <!-- Vehicle Type Selector -->
+          <!-- TẦNG 3: Vehicle Type Selector (Đồng bộ chiều cao 48px) -->
           <div class="lane-control-row">
             <span class="control-label">LOẠI PHƯƠNG TIỆN:</span>
             <div class="vehicle-pill-selector">
@@ -95,7 +96,7 @@
             </div>
           </div>
 
-          <!-- Action Buttons -->
+          <!-- TẦNG 4: Action Buttons (Đồng bộ chiều cao 44px) -->
           <div class="lane-btn-group">
             <button type="submit" id="checkinSubmitBtn" class="pos-btn pos-btn-primary">
               <span class="btn-text">XÁC NHẬN VÀO & CẤP VÉ</span>
@@ -107,59 +108,56 @@
           </div>
         </form>
 
-        <!-- Inward Result Card -->
-        <div id="checkinResult" class="pos-result-card hidden">
-          <div class="result-title-bar in-bar">
-            <span>VÉ ĐÃ PHÁT HÀNH THÀNH CÔNG</span>
-            <span class="res-time-pill" id="resCheckinTime">--</span>
+        <!-- TẦNG 5: KẾT QUẢ VÉ VÀO / CHẾ ĐỘ CHỜ (ZERO CLS) -->
+        <div class="lane-result-slot">
+          <!-- Inward Result Card -->
+          <div id="checkinResult" class="pos-result-card hidden">
+            <div class="result-title-bar in-bar">
+              <span>VÉ ĐÃ PHÁT HÀNH THÀNH CÔNG</span>
+              <span class="res-time-pill" id="resCheckinTime">--</span>
+            </div>
+
+            <div class="plate-highlight-box">
+              <div class="plate-box-label">BIỂN SỐ NHẬN DIỆN (AI REKOGNITION)</div>
+              <div class="plate-box-val" id="resCheckinPlate">--</div>
+              <div id="unknownNotice" class="badge-alert hidden">BIỂN SỐ KHÔNG RÕ &bull; CẦN BẢO VỆ XÁC NHẬN</div>
+            </div>
+
+            <div class="ticket-info-grid">
+              <div class="info-cell">
+                <span class="cell-k">MÃ VÉ (UUID):</span>
+                <span class="cell-v mono" id="resTicketId">--</span>
+              </div>
+              <div class="info-cell">
+                <span class="cell-k">LOẠI XE:</span>
+                <span class="cell-v" id="resVehicleType">--</span>
+              </div>
+              <div class="info-cell">
+                <span class="cell-k">TRẠNG THÁI:</span>
+                <span class="cell-v badge-status-parked">ĐANG GỬI (PARKED)</span>
+              </div>
+            </div>
           </div>
 
-          <div class="plate-highlight-box">
-            <div class="plate-box-label">BIỂN SỐ NHẬN DIỆN (AI REKOGNITION)</div>
-            <div class="plate-box-val" id="resCheckinPlate">--</div>
-            <div id="unknownNotice" class="badge-alert hidden">BIỂN SỐ KHÔNG RÕ &bull; CẦN BẢO VỆ XÁC NHẬN</div>
-          </div>
-
-          <div class="ticket-info-grid">
-            <div class="info-cell">
-              <span class="cell-k">MÃ VÉ (UUID):</span>
-              <span class="cell-v mono" id="resTicketId">--</span>
-            </div>
-            <div class="info-cell">
-              <span class="cell-k">LOẠI XE:</span>
-              <span class="cell-v" id="resVehicleType">--</span>
-            </div>
-            <div class="info-cell">
-              <span class="cell-k">TRẠNG THÁI:</span>
-              <span class="cell-v badge-status-parked">ĐANG GỬI (PARKED)</span>
-            </div>
+          <!-- Standby Ready State Card -->
+          <div class="result-standby">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+            <span class="standby-title">LÀN 1 SẴN SÀNG TIẾP NHẬN</span>
+            <span class="standby-desc">Chụp ảnh camera xe vào để tự động nhận diện biển số và cấp vé</span>
           </div>
         </div>
       </section>
 
       <!-- ================= LANE 2: OUTWARD GATE (CỔNG RA) ================= -->
       <section class="pos-lane-panel lane-out">
+        <!-- TẦNG 1: HEADER LÀN 2 -->
         <div class="lane-header">
           <div class="lane-tag out-tag">LÀN 2 · CỔNG RA</div>
           <h2 class="lane-title">ĐỐI SOÁT & THU CƯỚC CHECK-OUT</h2>
         </div>
 
         <form id="checkoutForm" class="lane-form">
-          <!-- Smart Ticket / Plate Search Input -->
-          <div class="smart-search-group">
-            <label for="checkoutTicketInput" class="control-label">
-              NHẬP BIỂN SỐ HOẶC MÃ VÉ UUID:
-            </label>
-            <div class="search-input-wrapper">
-              <input type="text" id="checkoutTicketInput" class="pos-input-text mono" placeholder="Nhập biển số (ví dụ: 59X3-12345) hoặc mã vé..." required autocomplete="off">
-              <button type="button" id="pasteLastTicketBtn" class="pos-btn-sm" title="Dán mã vé vừa Check-in">
-                Dán mã vừa tạo
-              </button>
-            </div>
-            <div id="resolvedPlateHint" class="resolved-hint hidden"></div>
-          </div>
-
-          <!-- 16:9 Camera Viewport Đối Soát Ra -->
+          <!-- TẦNG 2: 16:9 Camera Viewport Đối Soát Ra CAM 02 (Ngang hàng CAM 01) -->
           <div class="camera-viewport-wrapper">
             <div class="camera-viewport aspect-16-9" id="checkoutDropzone">
               <input type="file" id="checkoutFileInput" accept="image/*" class="pos-file-input">
@@ -178,7 +176,19 @@
             </div>
           </div>
 
-          <!-- Action Buttons -->
+          <!-- TẦNG 3: Smart Ticket / Plate Search Input (Ngang hàng Loại xe Làn 1 - 48px) -->
+          <div class="lane-control-row control-out">
+            <label for="checkoutTicketInput" class="control-label">TRA CỨU XE RA:</label>
+            <div class="search-input-wrapper">
+              <input type="text" id="checkoutTicketInput" class="pos-input-text mono" placeholder="Nhập biển số xe hoặc dán mã vé..." required autocomplete="off">
+              <button type="button" id="pasteLastTicketBtn" class="pos-btn-sm" title="Dán mã vé vừa Check-in">
+                Dán mã vừa tạo
+              </button>
+              <div id="resolvedPlateHint" class="resolved-hint hidden"></div>
+            </div>
+          </div>
+
+          <!-- TẦNG 4: Action Buttons (Ngang hàng nút bấm Làn 1 - 44px) -->
           <div class="lane-btn-group">
             <button type="submit" id="checkoutSubmitBtn" class="pos-btn pos-btn-success">
               <span class="btn-text">TÍNH CƯỚC & CHO XE RA</span>
@@ -190,35 +200,45 @@
           </div>
         </form>
 
-        <!-- Outward Result Card -->
-        <div id="checkoutResult" class="pos-result-card hidden">
-          <div class="result-title-bar out-bar">
-            <span>THANH TOÁN HOÀN TẤT &bull; MỞ BARIE</span>
-            <span class="res-time-pill" id="resCheckoutTime">--</span>
+        <!-- TẦNG 5: HÓA ĐƠN XUẤT BÃI / CHẾ ĐỘ CHỜ (ZERO CLS) -->
+        <div class="lane-result-slot">
+          <!-- Outward Result Card -->
+          <div id="checkoutResult" class="pos-result-card hidden">
+            <div class="result-title-bar out-bar">
+              <span>THANH TOÁN HOÀN TẤT &bull; MỞ BARIE</span>
+              <span class="res-time-pill" id="resCheckoutTime">--</span>
+            </div>
+
+            <div class="fee-banner-display">
+              <div class="fee-banner-title">CƯỚC PHÍ PHẢI THU</div>
+              <div class="fee-banner-val" id="resCheckoutFee">0 VNĐ</div>
+            </div>
+
+            <div class="ticket-info-grid">
+              <div class="info-cell">
+                <span class="cell-k">BIỂN SỐ XE:</span>
+                <span class="cell-v font-bold" id="resCheckoutPlate">--</span>
+              </div>
+              <div class="info-cell">
+                <span class="cell-k">THỜI GIAN VÀO:</span>
+                <span class="cell-v" id="resCheckoutCheckinTime">--</span>
+              </div>
+              <div class="info-cell">
+                <span class="cell-k">THỜI LƯỢNG ĐỖ:</span>
+                <span class="cell-v font-bold" id="resCheckoutHours">-- giờ</span>
+              </div>
+              <div class="info-cell">
+                <span class="cell-k">TRẠNG THÁI:</span>
+                <span class="cell-v badge-status-completed">ĐÃ HOÀN TẤT (COMPLETED)</span>
+              </div>
+            </div>
           </div>
 
-          <div class="fee-banner-display">
-            <div class="fee-banner-title">CƯỚC PHÍ PHẢI THU</div>
-            <div class="fee-banner-val" id="resCheckoutFee">0 VNĐ</div>
-          </div>
-
-          <div class="ticket-info-grid">
-            <div class="info-cell">
-              <span class="cell-k">BIỂN SỐ XE:</span>
-              <span class="cell-v font-bold" id="resCheckoutPlate">--</span>
-            </div>
-            <div class="info-cell">
-              <span class="cell-k">THỜI GIAN VÀO:</span>
-              <span class="cell-v" id="resCheckoutCheckinTime">--</span>
-            </div>
-            <div class="info-cell">
-              <span class="cell-k">THỜI LƯỢNG ĐỖ:</span>
-              <span class="cell-v font-bold" id="resCheckoutHours">-- giờ</span>
-            </div>
-            <div class="info-cell">
-              <span class="cell-k">TRẠNG THÁI:</span>
-              <span class="cell-v badge-status-completed">ĐÃ HOÀN TẤT (COMPLETED)</span>
-            </div>
+          <!-- Standby Ready State Card -->
+          <div class="result-standby">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+            <span class="standby-title">LÀN 2 SẴN SÀNG THU CƯỚC</span>
+            <span class="standby-desc">Nhập biển số hoặc dán mã vé để tính cước tự động và mở barie</span>
           </div>
         </div>
       </section>
