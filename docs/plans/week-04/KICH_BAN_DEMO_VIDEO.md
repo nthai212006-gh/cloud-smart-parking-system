@@ -2,7 +2,9 @@
 ### HỆ THỐNG QUẢN LÝ BÃI GIỮ XE THÔNG MINH (SMART PARKING SYSTEM)
 * **Học phần:** Điện toán đám mây (Cloud Computing) – GVHD: **ThS. Huỳnh Xuân Phụng**
 * **Nhóm thực hiện:** Lê Cao Việt Tín (24110354) & Nguyễn Trung Hải (24110207)
-* **Quy chuẩn thời lượng:** Tối đa 10 phút (Khuyến nghị chuẩn: **7 - 8 phút** vừa đẹp, không bị vội, đủ toàn bộ tiêu chí Thầy yêu cầu).
+* **Quy chuẩn thời lượng:** Tối đa 10 phút (Chuẩn video thực tế: **~8 phút**).
+* **Link lưu trữ Video Demo:** [Google Drive - DEMO.mp4](https://drive.google.com/drive/folders/1iYy8aeg6JkXlWysBVxFYQMlPEZcbFLb6?usp=drive_link)
+* **Bộ ảnh test chính thức:** Ô tô (`test-images/01_car_clear/car_clear_05.jpg`) và Xe máy (`test-images/02_motor_clear/motor_clear_06.jpg`).
 
 ---
 
@@ -10,10 +12,10 @@
 
 ```
 00:00 - 01:00 (1p)  : Mở đầu, giới thiệu nhóm, kiến trúc AWS Serverless & công nghệ
-01:00 - 03:00 (2p)  : Kịch bản 1 - Xe vào Cổng Làn 1 (Ô tô & Xe máy), AI Rekognition
-03:00 - 05:00 (2p)  : Kịch bản 2 - Xe ra Cổng Làn 2 (Tính tiền, Smart Search & 1-Click Checkout)
+01:00 - 03:00 (2p)  : Kịch bản 1 - Xe vào Cổng Làn 1 (Ô tô car_05 & Xe máy motor_06)
+03:00 - 05:00 (2p)  : Kịch bản 2 - Xe ra Cổng Làn 2 (Smart Search & 1-Click Checkout)
 05:00 - 06:45 (1.75p): Kịch bản 3 - Điểm nhấn kỹ thuật: Chống Double-Checkout & Bảo mật
-06:45 - 08:00 (1.25p): Kịch bản 4 - Minh chứng trên AWS Console (S3, DynamoDB, CloudWatch, Athena, $0.00)
+06:45 - 08:00 (1.25p): Kịch bản 4 - Minh chứng trên AWS Console (S3, DynamoDB, Athena, Billing $0.03)
 08:00 - 08:30 (30s) : Kết luận & Kế hoạch dọn dẹp tài nguyên (IaC)
 ```
 
@@ -44,12 +46,12 @@
 #### Case 2.1: Tiếp nhận Ô tô vào bãi
 * **Màn hình hiển thị:** Khung **LÀN 1 · CỔNG VÀO**.
 * **Thao tác chuột:**
-  1. Click vào khung **CAM 01 · 1080P** $\rightarrow$ Chọn ảnh `test-images/01_car_clear/car_clear_01.jpg`.
+  1. Click vào khung **CAM 01 · 1080P** $\rightarrow$ Chọn ảnh `test-images/01_car_clear/car_clear_05.jpg`.
   2. Click chọn thẻ **Ô TÔ** (`20.000đ / 2h đầu`).
   3. Bấm nút màu xanh **`[XÁC NHẬN VÀO & CẤP VÉ]`**.
 
 > **Lời thoại thuyết minh:**
-> *"Đầu tiên là luồng xe vào tại Cổng Làn 1. Khi có một chiếc ô tô tiến vào làn kiểm soát, camera CAM 01 chụp ảnh phương tiện. Em chọn ảnh chụp thực tế và chọn loại phương tiện là Ô tô, sau đó bấm Xác nhận vào & Cấp vé.*
+> *"Đầu tiên là luồng xe vào tại Cổng Làn 1. Khi có một chiếc ô tô tiến vào làn kiểm soát, camera CAM 01 chụp ảnh phương tiện. Em chọn ảnh chụp thực tế `car_clear_05.jpg` và chọn loại phương tiện là Ô tô, sau đó bấm Xác nhận vào & Cấp vé.*
 >
 > *(Chờ 1 giây)*
 > *Như Thầy thấy, hệ thống phản hồi cực kỳ nhanh chóng:*
@@ -61,12 +63,12 @@
 
 #### Case 2.2: Tiếp nhận Xe máy vào bãi
 * **Thao tác chuột:**
-  1. Click vào CAM 01 $\rightarrow$ Chọn ảnh `test-images/02_motor_clear/motor_clear_01.jpg`.
+  1. Click vào CAM 01 $\rightarrow$ Chọn ảnh `test-images/02_motor_clear/motor_clear_06.jpg`.
   2. Click chọn thẻ **XE MÁY** (`5.000đ / 4h đầu`).
   3. Bấm **`[XÁC NHẬN VÀO & CẤP VÉ]`**.
 
 > **Lời thoại thuyết minh:**
-> *"Tiếp theo, một chiếc xe máy tiến vào. Em chọn loại xe máy với mức giá 5.000đ cho 4 giờ đầu và bấm cấp vé. Hệ thống tiếp tục nhận diện chính xác biển số xe máy và thêm vào bảng theo dõi. Hiện tại bãi xe đang có 2 phương tiện đang gửi."*
+> *"Tiếp theo, một chiếc xe máy tiến vào. Em chọn ảnh `motor_clear_06.jpg` với mức giá 5.000đ cho 4 giờ đầu và bấm cấp vé. Hệ thống tiếp tục nhận diện chính xác biển số xe máy 2 dòng và thêm vào bảng theo dõi. Hiện tại bãi xe đang có đồng thời cả 2 phương tiện đang gửi."*
 
 ---
 
@@ -77,7 +79,7 @@
 * **Thao tác chuột:**
   1. Tại ô **TRA CỨU XE RA**, bấm nút **`[Dán mã vừa tạo]`** (hoặc gõ vài ký tự biển số xe máy vừa vào).
   2. Quan sát tooltip xanh lá hiện lên ngay dưới input.
-  3. *(Tùy chọn)*: Chọn ảnh xe ra ở CAM 02 (dùng cùng ảnh xe máy đó).
+  3. Chọn lại ảnh xe máy `motor_clear_06.jpg` ở CAM 02.
   4. Bấm nút màu xanh lá **`[TÍNH CƯỚC & CHO XE RA]`**.
 
 > **Lời thoại thuyết minh:**
@@ -95,7 +97,7 @@
   - Tại dòng của chiếc Ô tô còn lại, bấm trực tiếp nút **`[Cho xe ra]`** ở cột Thao tác.
 
 > **Lời thoại thuyết minh:**
-> *"Đối với các bãi xe giờ cao điểm đông đúc, nhân viên có thể sử dụng tính năng **1-Click Checkout** ngay tại Bảng giám sát. Em bấm nút 'Cho xe ra' của chiếc ô tô, hệ thống tự động hoàn tất tính cước 20.000 VNĐ cho ô tô và xuất bãi trong chưa đầy 1 giây."*
+> *"Đối với chiếc ô tô còn lại, vào những giờ cao điểm bãi xe đông đúc, nhân viên có thể sử dụng tính năng **1-Click Checkout** ngay tại Bảng giám sát. Em bấm nút 'Cho xe ra' của chiếc ô tô, hệ thống tự động hoàn tất tính cước 20.000 VNĐ cho ô tô và xuất bãi trong chưa đầy 1 giây."*
 
 ---
 
@@ -119,7 +121,7 @@
 > *Điều này đảm bảo lệnh cập nhật vé chỉ thành công duy nhất một lần ở tầng Database mức nguyên tử (Atomic), ngăn chặn 100% tình trạng hai nhân viên bấm cùng lúc hoặc mạng lag bấm đúp gây sai lệch doanh thu bãi xe."*
 
 #### Test 4.2: Bảo vệ tầng API Gateway & Giới hạn tải
-* **Màn hình hiển thị:** Mở icon **Bánh răng cài đặt** trên Header xem API Endpoint.
+* **Màn hình hiển thị:** Mở icon **Bánh răng cài đặt** trên Header xem API Endpoint hoặc chạy script test tải `scripts/test_api_throttling.py`.
 
 > **Lời thoại thuyết minh:**
 > *"Bên cạnh đó, nhóm đã kiểm thử bảo mật toàn diện:*
@@ -140,7 +142,7 @@
 3. **Amazon Athena (Truy vấn phân tích dữ liệu lớn):**
    > *"Tại Athena, nhóm em đã thực hiện 5 câu truy vấn SQL trên tập dữ liệu thật, thống kê tổng doanh thu đạt 1.124.000 VNĐ, trong đó ô tô chiếm 83.6%, tốc độ truy vấn chỉ 462ms quét 11.6KB dữ liệu."*
 4. **AWS Cost & Billing:**
-   > *"Về mặt tối ưu chi phí, nhờ kiến trúc Serverless 'dùng bao nhiêu trả bấy nhiêu' và tận dụng tối đa AWS Free Tier, tổng chi phí vận hành xuyên suốt đồ án là **$0.00**."*
+   > *"Về mặt chi phí: Trên trang AWS Billing, tổng chi phí phát sinh thực tế xuyên suốt quá trình kiểm thử tải và demo nhiều lượt chỉ vỏn vẹn **$0.03** (trong đó CloudWatch chiếm $0.02, Rekognition chiếm $0.01). Nhóm đã bảo toàn trọn vẹn 99.97% hạn mức ngân sách $100 của AWS Learner Lab."*
 
 ---
 
@@ -154,13 +156,3 @@
 > *Sau buổi báo cáo kết thúc, nhóm em chỉ cần thực thi một lệnh hủy stack CloudFormation duy nhất là toàn bộ tài nguyên sẽ được dọn dẹp sạch sẽ 100%, tuân thủ nghiêm ngặt quy định không để lãng phí tài nguyên của môn học.*
 >
 > *Nhóm em xin chân thành cảm ơn Thầy Huỳnh Xuân Phụng đã theo sát và hướng dẫn nhóm hoàn thành đồ án. Em xin kết thúc phần trình bày video demo tại đây!"*
-
----
-
-## 📋 BẢNG CHECKLIST TRƯỚC KHI BẤM NÚT QUAY VIDEO
-
-- [ ] Trình duyệt mở sẵn tab POS `http://localhost:8000` (nhấn `F11` để phóng to toàn màn hình cho chuyên nghiệp).
-- [ ] Mở sẵn 1 tab AWS Console (đã đăng nhập sẵn S3, DynamoDB, CloudWatch để chuyển tab mượt mà).
-- [ ] Chuẩn bị sẵn thư mục `test-images/01_car_clear` và `test-images/02_motor_clear`.
-- [ ] Dùng phần mềm quay màn hình nét (OBS Studio hoặc Windows Game Bar `Win + G`), micro thu âm rõ ràng, không lẫn tạp âm.
-- [ ] Thời lượng bấm giờ đồng hồ: Dừng video ở mốc **7 đến 9 phút** (Tuyệt đối không để vượt quá 10 phút theo luật của Thầy).

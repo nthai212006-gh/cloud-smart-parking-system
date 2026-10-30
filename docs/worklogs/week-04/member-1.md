@@ -14,7 +14,7 @@
 | :---: | :---: | :---: | :--- | :--- |
 | **28/10/2026**<br>(Thứ 4) | 19:30 - 21:30 | 2.0h | - Tinh chỉnh giao diện Enterprise Desktop POS 5 tầng đối xứng (`frontend/index.html` và `frontend/style.css`).<br>- Khóa chiều cao Tầng 3 (48px) và Tầng 4 (44px) cân bằng tuyệt đối giữa Cổng Vào và Cổng Ra.<br>- Loại bỏ các khung chờ nét đứt để tối ưu diện tích hiển thị POS.<br>- Kiểm tra tương thích với API Gateway và DynamoDB. | Commit `f90a317`, `986cf0c`<br>Giao diện POS đối xứng hoàn hảo |
 | **29/10/2026**<br>(Thứ 5) | 19:30 - 21:45 | 2.25h | - Xây dựng tài liệu Báo cáo tổng kết đồ án toàn trình 4 tuần.<br>- Chuẩn hóa sơ đồ kiến trúc hệ thống Serverless Decoupled (API Gateway, Lambda, Rekognition, S3, DynamoDB, CloudWatch, Athena).<br>- Tổng hợp báo cáo kiểm thử an toàn dữ liệu: DynamoDB Atomic Conditional Write chống Race Condition. | Bản thảo Báo cáo tổng kết đồ án<br>Sơ đồ kiến trúc hệ thống |
-| **30/10/2026**<br>(Thứ 6) | 14:00 - 16:15 | 2.25h | - Tổng hợp báo cáo kiểm toán chi phí AWS Billing cuối kỳ: Xác nhận duy trì an toàn `$0.00` Month-to-date cost.<br>- Phối hợp với Thành viên 2 (Hải) chạy thử nghiệm kịch bản quay video demo toàn trình.<br>- Kiểm tra kịch bản chạy thử tải Throttling với script đa luồng `scripts/test_api_throttling.py` (30 req/s $\rightarrow$ HTTP 429). | Số liệu chi phí Billing `$0.00`<br>Kết quả kiểm thử tải API Gateway |
+| **30/10/2026**<br>(Thứ 6) | 14:00 - 16:15 | 2.25h | - Tổng hợp báo cáo kiểm toán chi phí AWS Billing cuối kỳ: Xác nhận chi phí thực tế phát sinh duy trì ở mức **`$0.03`** Month-to-date cost (trong đó CloudWatch chiếm $0.02, Rekognition chiếm $0.01 do quá trình chạy stress test và demo nhiều lượt), bảo toàn trọn vẹn 99.97% ngân sách $100.<br>- Phối hợp với Thành viên 2 (Hải) chạy thử nghiệm kịch bản quay video demo với 2 ảnh `car_clear_05.jpg` và `motor_clear_06.jpg`.<br>- Kiểm tra kịch bản chạy thử tải Throttling với script đa luồng `scripts/test_api_throttling.py` (30 req/s $\rightarrow$ HTTP 429). | Số liệu chi phí Billing `$0.03`<br>Kết quả kiểm thử tải API Gateway |
 | **31/10/2026**<br>(Thứ 7) | 19:30 - 21:30 | 2.0h | - Rà soát file Infrastructure as Code `iac/cloudformation_template.yaml`.<br>- Chuẩn bị kịch bản lệnh dọn dẹp tài nguyên sau khi nghiệm thu (`aws cloudformation delete-stack`).<br>- Hoàn thiện file Báo cáo tổng kết cuối kỳ (Word/PDF) và đồng bộ tài liệu nộp bài. | File Báo cáo tổng kết cuối kỳ<br>Quy trình dọn dẹp tài nguyên IaC |
 | **TỔNG CỘNG** | | **8.5h** | **Đạt và vượt định mức quy định môn học ($\ge$ 8.0 giờ/tuần)** | **Đầy đủ sản phẩm nghiệm thu** |
 
@@ -22,5 +22,5 @@
 
 ## 2. KẾT QUẢ ĐẠT ĐƯỢC
 1. Hoàn tất 100% bộ tài liệu Báo cáo tổng kết đồ án theo quy chuẩn môn học.
-2. Xác nhận chi phí đám mây duy trì tối ưu ở mức **$0.00** nhờ kiến trúc Serverless.
+2. Xác nhận chi phí đám mây thực tế duy trì tối ưu ở mức **$0.03** nhờ kiến trúc Serverless, bảo toàn 99.97% ngân sách Lab.
 3. Toàn bộ hạ tầng đám mây sẵn sàng cho quy trình dọn dẹp 1-chạm bằng CloudFormation.

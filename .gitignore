@@ -40,3 +40,8 @@ gui_cho_tin/
 
 # Local backup folder for evidence
 backup_evidence_week2/
+
+# Video files (>100MB limit on GitHub - store on Drive/YouTube)
+*.mp4
+*.mkv
+*.mov
