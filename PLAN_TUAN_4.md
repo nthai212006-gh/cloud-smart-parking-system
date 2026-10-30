@@ -74,13 +74,13 @@ Nhóm thống nhất chia tách khối lượng công việc thành 2 mũi nhọ
 ---
 
 ### 3.2. SINH VIÊN 2: NGUYỄN TRUNG HẢI (MSSV: 24110207)
-* **Vai trò:** Phụ trách Kịch bản demo, Vận hành hệ thống POS & Quay dựng Video Demo toàn trình.
+* **Vai trò:** Phụ trách Vận hành hệ thống POS, Kiểm thử nghiệp vụ & Quay dựng Video Demo toàn trình.
 * **Tổng số giờ làm việc:** **8.5 giờ**
 
 | Ngày thực hiện | Khung giờ | Số giờ | Hạng mục công việc chi tiết | Sản phẩm bàn giao cụ thể |
 | :---: | :---: | :---: | :--- | :--- |
 | **28/10/2026**<br>(Thứ 4) | 19:30 - 21:30 | 2.0h | - Kiểm tra môi trường cục bộ: khởi chạy máy chủ web `python -m http.server 8000 --directory frontend`.<br>- Lựa chọn bộ ảnh thử nghiệm thực tế chính thức: **Ô tô (`car_clear_05.jpg`)** và **Xe máy (`motor_clear_06.jpg`)**.<br>- Chạy thử nghiệm luồng quét vé qua CAM 01 và CAM 02, xác thực ảnh xe ra được đẩy vào S3 thư mục `out/`. | Môi trường test sẵn sàng<br>2 ảnh test `car_05` & `motor_06` |
-| **29/10/2026**<br>(Thứ 5) | 19:30 - 21:45 | 2.25h | - Soạn thảo Kịch bản Demo chi tiết theo cấu trúc phân cảnh từng giây ("Tay làm đâu - Miệng nói đó").<br>- Phân bổ thời lượng chuẩn cho 8 phân cảnh chính:<br>  + Phân cảnh 1: Mở đầu & Kiến trúc Serverless (40s)<br>  + Phân cảnh 2: Ô tô vào Làn 1 với `car_clear_05.jpg` (1m15s)<br>  + Phân cảnh 3: Xe máy vào Làn 1 với `motor_clear_06.jpg` (45s)<br>  + Phân cảnh 4: Xe máy ra Làn 2 & Thu cước 5.000đ (1m15s)<br>  + Phân cảnh 5: Ô tô ra Làn 2 & 1-Click Checkout 20.000đ (45s)<br>  + Phân cảnh 6: Chống Double-Checkout & Test tải Throttling (1m15s)<br>  + Phân cảnh 7: Minh chứng AWS Console (DynamoDB, S3, Athena, Billing $0.03) (1m15s)<br>  + Phân cảnh 8: Kết luận & Kế hoạch dọn dẹp bằng CloudFormation (30s) | File `docs/plans/week-04/KICH_BAN_DEMO_VIDEO.md`<br>Lời thoại thuyết minh hoàn chỉnh |
+| **29/10/2026**<br>(Thứ 5) | 19:30 - 21:45 | 2.25h | - Thiết kế cấu trúc các phân cảnh demo mượt mà, phân bổ thời lượng chuẩn khống chế $\le$ 10 phút.<br>- Chuẩn bị dữ liệu và mở sẵn các tab điều khiển trên AWS Console (DynamoDB, Athena, S3, CloudWatch, Billing).<br>- Diễn tập thao tác giữa POS và AWS Console. | Bảng phân cảnh demo<br>Môi trường kiểm thử sẵn sàng |
 | **30/10/2026**<br>(Thứ 6) | 14:00 - 16:15 | 2.25h | - Cài đặt phần mềm quay màn hình, mở sẵn các tab: POS Desktop, AWS Console (DynamoDB items, S3 `in/` và `out/`, Athena SQL, CloudWatch Alarms `OK`, Billing `$0.03`).<br>- Chạy diễn tập và thực hiện quay video toàn trình chính thức `DEMO.mp4` với âm thanh rõ ràng, thời lượng đạt chuẩn $\le$ 10 phút. | File video `DEMO.mp4`<br>Đạt chuẩn thời lượng và nội dung |
 | **31/10/2026**<br>(Thứ 7) | 19:30 - 21:30 | 2.0h | - Tải video lên Google Drive tại thư mục chia sẻ: [Google Drive Folder](https://drive.google.com/drive/folders/1iYy8aeg6JkXlWysBVxFYQMlPEZcbFLb6?usp=drive_link).<br>- Kiểm tra mở quyền xem công khai (Anyone with the link can view).<br>- Cập nhật nhật ký tuần `docs/worklogs/week-04/member-2.md` và đồng bộ tài liệu nghiệm thu. | Link Google Drive video demo<br>Worklog Tuần 4 hoàn tất |
 | **TỔNG CỘNG** | | **8.5h** | **Đạt và vượt chuẩn quy định môn học ($\ge$ 8.0 giờ/tuần)** | **Hoàn tất 100% video demo** |
