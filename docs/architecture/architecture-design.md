@@ -6,20 +6,20 @@
 ## 1. SƠ ĐỒ KIẾN TRÚC SERVERLESS TỔNG THỂ
 
 ```mermaid
-graph TD
+flowchart TD
     Client["Client / Web UI / Camera Cổng"] -->|1. Upload Ảnh Xe| APIGW["Amazon API Gateway"]
     
     APIGW -->|Check-in Route| LambdaIn["AWS Lambda: SmartParking-Checkin"]
     APIGW -->|Check-out Route| LambdaOut["AWS Lambda: SmartParking-Checkout"]
     
-    LambdaIn -->|2. Nhận diện biển số| Rekog["Amazon Rekognition (DetectText)"]
+    LambdaIn -->|2. Nhận diện biển số| Rekog["Amazon Rekognition - DetectText"]
     LambdaOut -->|2. Nhận diện biển số| Rekog
     
-    LambdaIn -->|3. Lưu ảnh vào s3://.../in/| S3["Amazon S3 Bucket"]
-    LambdaOut -->|3. Lưu ảnh ra s3://.../out/| S3
+    LambdaIn -->|3. Lưu ảnh vào S3 in/| S3["Amazon S3 Bucket"]
+    LambdaOut -->|3. Lưu ảnh ra S3 out/| S3
     
-    LambdaIn -->|4. Tạo vé mới (PARKED)| DDB[("Amazon DynamoDB (ParkingTickets)")]
-    LambdaOut -->|4. Cập nhật vé, tính phí (COMPLETED)| DDB
+    LambdaIn -->|4. Tạo vé mới - PARKED| DDB[("Amazon DynamoDB - ParkingTickets")]
+    LambdaOut -->|4. Cập nhật vé và tính phí - COMPLETED| DDB
     
     S3 -.->|Truy vấn dữ liệu báo cáo| Athena["Amazon Athena"]
 ```
