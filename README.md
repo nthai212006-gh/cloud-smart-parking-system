@@ -13,8 +13,8 @@ Hệ thống quản lý bãi giữ xe thông minh ứng dụng kiến trúc Serv
 ## 👥 2. Thành viên nhóm
 | STT | Họ và tên | MSSV | Vai trò chính |
 | :---: | :--- | :---: | :--- |
-| 1 | Lê Cao Việt Tín | 24110354 | Trưởng nhóm: Kiến trúc Serverless, AI Rekognition & Backend Core |
-| 2 | Nguyễn Trung Hải | 24110207 | Thành viên: Hạ tầng AWS (S3, DynamoDB), Dataset & QA/Audit |
+| 1 | Lê Cao Việt Tín | 24110354 | Trưởng nhóm: Kiến trúc Serverless, AI Rekognition, Master Report |
+| 2 | Nguyễn Trung Hải | 24110207 | Thành viên: Hạ tầng AWS (S3, DynamoDB), Báo cáo Chương 5 (Kiểm thử & Giám sát), Video Demo |
 
 ---
 

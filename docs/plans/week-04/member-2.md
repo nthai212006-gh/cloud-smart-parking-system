@@ -1,5 +1,5 @@
 # KẾ HOẠCH CHI TIẾT TUẦN 4 - SINH VIÊN 2 (MEMBER 2)
-### VAI TRÒ: PHỤ TRÁCH VẬN HÀNH KIỂM THỬ POS, QUAY DỰNG VIDEO DEMO TOÀN TRÌNH & NGHIỆM THU ĐỒ ÁN
+### VAI TRÒ: SOẠN THẢO BÁO CÁO CHƯƠNG 5, VẬN HÀNH KIỂM THỬ POS & QUAY DỰNG VIDEO DEMO TOÀN TRÌNH
 * **Thành viên:** Nguyễn Trung Hải
 * **Mã số sinh viên (MSSV):** 24110207
 * **Học phần:** Điện toán đám mây (Cloud Computing) · Đợt 1 (2026 - 2027)
@@ -11,15 +11,19 @@
 ---
 
 ## I. MỤC TIÊU CÔNG VIỆC TRONG TUẦN 4
-1. **Kiểm thử vận hành thực tế hệ thống POS Desktop:**
+1. **Soạn thảo Chương 5 của Báo cáo đồ án tổng kết:**
+   - Soạn thảo tài liệu **Chương 5: Thực nghiệm, Kiểm thử và Giám sát hệ thống** (`BaoCao_Chuong_5_KiemThu_Va_GiamSat.docx`) dài khoảng 8 trang theo đúng chuẩn văn phong báo cáo kỹ thuật.
+   - Thể hiện đầy đủ 3 nội dung trọng tâm: kiểm thử chức năng trạm thu phí POS (Rekognition 120 ảnh, luồng ô tô/xe máy, chống Race Condition DynamoDB); kiểm thử hiệu năng và bảo vệ tầng mạng (Throttling 30 req/s, tối ưu RAM Lambda); phân tích dữ liệu kinh doanh với Amazon Athena (50 vé, 1.124.000 VNĐ) và giám sát CloudWatch Dashboard/Alarms xanh lá `OK`.
+   - Bàn giao file docx hoàn chỉnh cho Thành viên 1 để tích hợp vào cuốn Báo cáo Master toàn trình.
+2. **Kiểm thử vận hành thực tế hệ thống POS Desktop:**
    - Khởi chạy máy chủ web cục bộ (`python -m http.server 8000 --directory frontend`) để kiểm tra toàn bộ tính năng giao diện POS 5 tầng mới.
    - Thử nghiệm nhận diện biển số thực tế qua Amazon Rekognition trên tập ảnh mẫu; lựa chọn 2 ảnh đại diện chính thức: **Ô tô (`car_clear_05.jpg`)** và **Xe máy (`motor_clear_06.jpg`)**.
    - Xác thực luồng đối soát CAM 02: Ảnh xe ra khi thanh toán được tải lên và lưu trữ chính xác tại thư mục `out/` trên Amazon S3.
-2. **Chuẩn bị và phân bổ thời lượng kịch bản Demo:**
+3. **Chuẩn bị và phân bổ thời lượng kịch bản Demo:**
    - Xây dựng trình tự các phân cảnh demo logic, mượt mà ("Tay làm đâu - Thuyết minh đó").
    - Khống chế nghiêm ngặt tổng thời lượng demo không vượt quá **10 phút** theo đúng yêu cầu bắt buộc của GVHD ThS. Huỳnh Xuân Phụng.
    - Chuẩn bị sẵn dữ liệu kiểm thử, các tab điều khiển AWS Console và tài nguyên liên quan.
-3. **Thực hiện quay và biên tập Video Demo toàn trình (`DEMO.mp4`):**
+4. **Thực hiện quay và biên tập Video Demo toàn trình (`DEMO.mp4`):**
    - Thiết lập phần mềm ghi hình chất lượng Full HD 1080p, âm thanh rõ ràng.
    - Thực hiện ghi hình toàn bộ luồng nghiệp vụ thực tế:
      * Check-in ô tô Làn 1 (`car_clear_05.jpg` - `52Z-9755`).
@@ -28,7 +32,7 @@
      * Cơ chế chống Double-Checkout & Test tải API Gateway Throttling (HTTP 429).
      * Minh chứng trực tiếp trên AWS Console: DynamoDB (`ParkingTickets`), Athena SQL, S3 folders, CloudWatch Alarms (trạng thái `OK` xanh lá), AWS Billing (`$0.03`).
      * Mở file CloudFormation `cloudformation_template.yaml` chứng minh giải pháp tự động hóa dọn dẹp.
-4. **Lưu trữ đám mây & Đồng bộ hồ sơ nộp bài:**
+5. **Lưu trữ đám mây & Đồng bộ hồ sơ nộp bài:**
    - Tải video `DEMO.mp4` lên Google Drive tại thư mục chia sẻ công khai.
    - Cập nhật nhật ký tuần `docs/worklogs/week-04/member-2.md` và phối hợp với Thành viên 1 hoàn tất bộ tài liệu nghiệm thu.
 
@@ -76,26 +80,28 @@
 
 ---
 
-### Buổi 3 (Thứ 6: 30/10/2026 | 14:00 - 16:15 | 2.25 giờ): Quay và hoàn thiện Video Demo toàn trình
-* **Mục tiêu:** Sản xuất video demo `DEMO.mp4` đạt chuẩn chất lượng Full HD, thời lượng $\le$ 10 phút.
+### Buổi 3 (Thứ 6: 30/10/2026 | 14:00 - 16:15 | 2.25 giờ): Soạn thảo Báo cáo Chương 5 & Quay Video Demo
+* **Mục tiêu:** Soạn thảo hoàn thiện Chương 5 của Báo cáo đồ án và sản xuất video demo `DEMO.mp4` đạt chuẩn chất lượng Full HD, thời lượng $\le$ 10 phút.
 * **Nhiệm vụ cụ thể:**
+  - Soạn thảo tài liệu **Chương 5: Thực nghiệm, Kiểm thử và Giám sát hệ thống** (`BaoCao_Chuong_5_KiemThu_Va_GiamSat.docx`) dài ~8 trang, đầy đủ 9 hình ảnh và 3 bảng số liệu thật.
   - Cài đặt phần mềm quay màn hình ở độ phân giải 1920x1080 (30 FPS).
   - Tiến hành ghi hình xuyên suốt toàn bộ các phân cảnh đã thiết kế.
   - Thao tác mượt mà giữa giao diện POS và các màn hình console dịch vụ AWS.
   - Xác nhận thời lượng video đạt chuẩn: **9 phút 16 giây** ($\le 10$ phút).
   - Kiểm tra chất lượng âm thanh, hình ảnh sau khi xuất file `DEMO.mp4`.
-* **Sản phẩm:** File video `DEMO.mp4` hoàn chỉnh, đạt 100% tiêu chí môn học.
+* **Sản phẩm:** File Báo cáo Chương 5 (.docx) và file video `DEMO.mp4` hoàn chỉnh, đạt 100% tiêu chí môn học.
 
 ---
 
-### Buổi 4 (Thứ 7: 31/10/2026 | 19:30 - 21:30 | 2.0 giờ): Upload Google Drive & Nghiệm thu
-* **Mục tiêu:** Lưu trữ video lên đám mây và hoàn thiện nhật ký công việc.
+### Buổi 4 (Thứ 7: 31/10/2026 | 19:30 - 21:30 | 2.0 giờ): Bàn giao Chương 5, Upload Google Drive & Nghiệm thu
+* **Mục tiêu:** Bàn giao Báo cáo Chương 5 cho Thành viên 1, lưu trữ video lên đám mây và hoàn thiện nhật ký công việc.
 * **Nhiệm vụ cụ thể:**
+  - Bàn giao file `BaoCao_Chuong_5_KiemThu_Va_GiamSat.docx` cho Thành viên 1 (Tín) để tích hợp vào Báo cáo Master toàn trình (Chương 1 đến 8).
   - Tải file `DEMO.mp4` lên thư mục Google Drive: [Google Drive - DEMO.mp4](https://drive.google.com/drive/folders/1iYy8aeg6JkXlWysBVxFYQMlPEZcbFLb6?usp=drive_link).
   - Bật tính năng chia sẻ quyền xem công khai (*Anyone with the link can view*).
   - Cập nhật nhật ký tuần `docs/worklogs/week-04/member-2.md`.
   - Phối hợp cùng Thành viên 1 rà soát toàn bộ hồ sơ nghiệm thu trước khi nộp bài.
-* **Sản phẩm:** Link Google Drive video demo công khai, nhật ký tuần 4 hoàn tất.
+* **Sản phẩm:** File Báo cáo Chương 5 docx đã bàn giao, link Google Drive video demo công khai, nhật ký tuần 4 hoàn tất.
 
 ---
 

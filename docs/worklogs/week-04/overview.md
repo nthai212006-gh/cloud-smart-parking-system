@@ -14,8 +14,8 @@
 
 | Thành viên | Trách nhiệm chính Tuần 4 | Số giờ thực hiện | Tỷ lệ đóng góp | Trạng thái hoàn thành |
 | :--- | :--- | :---: | :---: | :---: |
-| **Lê Cao Việt Tín** (`lcvt438`) | - Xây dựng Báo cáo tổng kết đồ án toàn trình 4 tuần.<br>- Chuẩn hóa sơ đồ kiến trúc Serverless Decoupled.<br>- Báo cáo phân tích chi phí thực tế AWS Billing ($0.03).<br>- Rà soát kịch bản dọn dẹp tài nguyên CloudFormation (IaC). | **8.5 giờ** | 50% | **Đã hoàn thành 100%** |
-| **Nguyễn Trung Hải** (`nthai212006-gh`) | - Xây dựng Kịch bản Demo đồng bộ 2 ảnh `car_clear_05.jpg` & `motor_clear_06.jpg`.<br>- Vận hành & kiểm thử toàn diện POS Desktop.<br>- Thực hiện quay và biên tập video demo toàn trình `DEMO.mp4` ($\le$ 10 phút).<br>- Tải video lên Google Drive, kiểm tra phân quyền truy cập. | **8.5 giờ** | 50% | **Đã hoàn thành 100%** |
+| **Lê Cao Việt Tín** (`lcvt438`) | - Xây dựng Báo cáo đồ án các chương 1, 2, 3, 4, 6, 7, 8 và hợp nhất Master Report.<br>- Chuẩn hóa sơ đồ kiến trúc Serverless Decoupled.<br>- Báo cáo phân tích chi phí thực tế AWS Billing ($0.03).<br>- Rà soát kịch bản dọn dẹp tài nguyên CloudFormation (IaC). | **8.5 giờ** | 50% | **Đã hoàn thành 100%** |
+| **Nguyễn Trung Hải** (`nthai212006-gh`) | - Soạn thảo Chương 5 của Báo cáo đồ án: Thực nghiệm, Kiểm thử & Giám sát hệ thống (`BaoCao_Chuong_5_KiemThu_Va_GiamSat.docx`).<br>- Xây dựng Kịch bản Demo đồng bộ 2 ảnh `car_clear_05.jpg` & `motor_clear_06.jpg`.<br>- Vận hành & kiểm thử toàn diện POS Desktop.<br>- Thực hiện quay và biên tập video demo toàn trình `DEMO.mp4` ($\le$ 10 phút), tải lên Google Drive. | **8.5 giờ** | 50% | **Đã hoàn thành 100%** |
 | **TỔNG CỘNG CẢ NHÓM** | **2 thành viên phối hợp chặt chẽ** | **17.0 giờ** | **100%** | **Đạt và vượt chuẩn môn học** |
 
 ---

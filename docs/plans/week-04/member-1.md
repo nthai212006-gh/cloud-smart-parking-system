@@ -1,5 +1,5 @@
 # KẾ HOẠCH CHI TIẾT TUẦN 4 - SINH VIÊN 1 (MEMBER 1)
-### VAI TRÒ: PHỤ TRÁCH BÁO CÁO TỔNG KẾT, KIẾN TRÚC SERVERLESS, KIỂM TOÁN CHI PHÍ & TỰ ĐỘNG HÓA DỌN DẸP
+### VAI TRÒ: PHỤ TRÁCH BÁO CÁO MASTER, KIẾN TRÚC SERVERLESS, KIỂM TOÁN CHI PHÍ & TỰ ĐỘNG HÓA DỌN DẸP
 * **Thành viên:** Lê Cao Việt Tín
 * **Mã số sinh viên (MSSV):** 24110354
 * **Học phần:** Điện toán đám mây (Cloud Computing) · Đợt 1 (2026 - 2027)
@@ -15,10 +15,10 @@
    - Chuẩn hóa layout 5 tầng đối xứng giữa Làn 1 (Vào) và Làn 2 (Ra) trên `frontend/index.html` và `style.css`.
    - Khóa cứng kích thước tầng hiển thị thông tin và điều khiển barie để triệt tiêu hiện tượng giật cục layout (Cumulative Layout Shift - CLS).
    - Loại bỏ các khung nét đứt giữ chỗ thừa, đảm bảo giao diện POS sạch sẽ, trực quan cho buổi quay demo.
-2. **Xây dựng Báo cáo tổng kết đồ án toàn trình (Word & PDF):**
-   - Soạn thảo tài liệu báo cáo tổng kết hoàn chỉnh 5 chương theo chuẩn học thuật.
+2. **Xây dựng Báo cáo tổng kết đồ án Master (Word & PDF):**
+   - Soạn thảo các Chương 1, 2, 3, 4, 6, 7, 8 theo chuẩn học thuật.
    - Hoàn thiện sơ đồ kiến trúc Serverless Decoupled độ nét cao, thể hiện rõ luồng dữ liệu hai chiều giữa POS, API Gateway, Lambda, Rekognition, S3, DynamoDB, CloudWatch và Athena.
-   - Thuyết minh chi tiết các giải pháp kỹ thuật nâng cao: Xử lý Race Condition với DynamoDB Atomic Conditional Write, Giới hạn tần suất gọi API Gateway Throttling.
+   - Tiếp nhận file Chương 5 (`BaoCao_Chuong_5_KiemThu_Va_GiamSat.docx`) từ Thành viên 2 (Hải) để hợp nhất thành cuốn Báo cáo Master hoàn chỉnh.
 3. **Lập Báo cáo kiểm toán chi phí thực tế (AWS Billing & Cost Management):**
    - Phân tích chi phí thực tế phát sinh trên tài khoản AWS Learner Lab: **`$0.03`** (CloudWatch $0.02, Rekognition $0.01 do kiểm thử tải và demo nhiều lượt).
    - Chứng minh kiến trúc Serverless giúp tiết kiệm chi phí tối đa, bảo toàn 99.97% hạn mức $100 của tài khoản Lab.
@@ -64,29 +64,27 @@
 
 ---
 
-### Buổi 3 (Thứ 6: 30/10/2026 | 14:00 - 16:15 | 2.25 giờ): Soạn thảo chương Kỹ thuật chuyên sâu & Báo cáo Chi phí
-* **Mục tiêu:** Trình bày chi tiết các cơ chế kỹ thuật xuất sắc và báo cáo tài chính AWS.
+### Buổi 3 (Thứ 6: 30/10/2026 | 14:00 - 16:15 | 2.25 giờ): Soạn thảo chương Kỹ thuật & Báo cáo Chi phí
+* **Mục tiêu:** Trình bày chi tiết triển khai dịch vụ AWS và báo cáo tài chính.
 * **Nhiệm vụ cụ thể:**
-  - Soạn thảo Chương 4: *"Kiểm thử an toàn, Xử lý Race Condition & Giới hạn tải"*:
-    + Giải thích cơ chế DynamoDB Atomic Conditional Write (`ConditionExpression="#st = :parked OR #st = :active"`).
-    + Phân tích cơ chế chống DDoS/Spam qua API Gateway Throttling (Rate: 10 req/s, Burst: 20 req).
-  - Soạn thảo Chương 5: *"Kiểm toán chi phí & Đánh giá hiệu năng"*:
-    + Trích xuất dữ liệu từ AWS Billing & Cost Management: Month-to-date cost = **`$0.03`** (CloudWatch $0.02, Rekognition $0.01).
-    + Phân tích hiệu quả kinh tế so với mô hình máy chủ truyền thống (EC2).
-* **Sản phẩm:** Nội dung Chương 4, 5 hoàn chỉnh kèm biểu đồ phân tích chi phí.
+  - Soạn thảo Chương 4 (Triển khai các dịch vụ AWS) và Chương 6 (Đánh giá chi phí AWS Billing & Tối ưu hóa).
+  - Trích xuất dữ liệu từ AWS Billing & Cost Management: Month-to-date cost = **`$0.03`** (CloudWatch $0.02, Rekognition $0.01).
+  - Phối hợp cùng Thành viên 2 (Hải) chạy thử nghiệm kịch bản quay video demo.
+* **Sản phẩm:** Nội dung Chương 4, 6 hoàn chỉnh kèm biểu đồ phân tích chi phí $0.03.
 
 ---
 
-### Buổi 4 (Thứ 7: 31/10/2026 | 19:30 - 21:30 | 2.0 giờ): Hướng dẫn dọn dẹp IaC & Xuất bản Báo cáo
-* **Mục tiêu:** Hoàn thiện bản báo cáo cuối cùng và quy trình dọn dẹp tài nguyên.
+### Buổi 4 (Thứ 7: 31/10/2026 | 19:30 - 21:30 | 2.0 giờ): Hợp nhất Báo cáo Master & Hướng dẫn dọn dẹp IaC
+* **Mục tiêu:** Tiếp nhận Chương 5 từ Thành viên 2, hợp nhất và xuất bản Báo cáo Master hoàn chỉnh.
 * **Nhiệm vụ cụ thể:**
-  - Soạn thảo phần phụ lục: *"Quy trình dọn dẹp và hủy tài nguyên 1-chạm qua AWS CloudFormation"*:
+  - Tiếp nhận file `BaoCao_Chuong_5_KiemThu_Va_GiamSat.docx` từ Thành viên 2 (Hải) để tích hợp vào bản Báo cáo Master toàn trình (Chương 1 đến 8).
+  - Soạn thảo Chương 8: *"Quy trình dọn dẹp và hủy tài nguyên 1-chạm qua AWS CloudFormation"*:
     + Lệnh xóa stack: `aws cloudformation delete-stack --stack-name SmartParkingStack`.
     + Lệnh làm rỗng bucket S3: `aws s3 rm s3://smart-parking-images-24110207 --recursive`.
   - Soát lỗi chính tả, căn chỉnh định dạng tài liệu theo chuẩn đồ án (Font Times New Roman, dãn dòng 1.3, lề chuẩn).
-  - Xuất bản file Báo cáo định dạng Word (.docx) và PDF (.pdf).
+  - Xuất bản file Báo cáo Master định dạng Word (.docx) và PDF (.pdf).
   - Cập nhật nhật ký tuần `docs/worklogs/week-04/member-1.md`.
-* **Sản phẩm:** File Báo cáo tổng kết đồ án hoàn chỉnh sẵn sàng nộp bài.
+* **Sản phẩm:** File Báo cáo tổng kết đồ án Master hoàn chỉnh sẵn sàng nộp bài.
 
 ---
 
@@ -96,6 +94,6 @@
 | :--- | :---: | :---: | :--- | :---: |
 | Tinh chỉnh POS đối xứng & clean layout | 28/10/2026 | 2.0h | Commit `f90a317`, `986cf0c` trên Git | Đã hoàn thành |
 | Soạn thảo Báo cáo chương 1, 2, 3 & Kiến trúc | 29/10/2026 | 2.25h | Bản thảo Báo cáo và Sơ đồ kiến trúc | Đã hoàn thành |
-| Soạn thảo Báo cáo chương 4, 5 & Chi phí $0.03 | 30/10/2026 | 2.25h | Chương kỹ thuật và Báo cáo chi phí $0.03 | Đã hoàn thành |
-| Hoàn thiện Báo cáo Word/PDF & Hướng dẫn IaC | 31/10/2026 | 2.0h | File Báo cáo đồ án chính thức (.pdf) | Đang thực hiện |
+| Soạn thảo Báo cáo chương 4, 6 & Chi phí $0.03 | 30/10/2026 | 2.25h | Bản thảo Chương 4, 6 và Chi phí $0.03 | Đã hoàn thành |
+| Hợp nhất Chương 5, xuất bản Master Doc & IaC | 31/10/2026 | 2.0h | File Báo cáo Master chính thức (.pdf) | Đang thực hiện |
 | **TỔNG CỘNG** | | **8.5h** | **Đạt và vượt chuẩn quy định môn học ($\ge$ 8.0h)** | **Sẵn sàng nghiệm thu** |

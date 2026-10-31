@@ -5,8 +5,8 @@
 * **Giảng viên hướng dẫn (GVHD):** ThS. Huỳnh Xuân Phụng
 * **Nhóm đề tài:** Domain Apps (Nhóm 2 sinh viên)
 * **Phân công trách nhiệm chính:**
-  - **Sinh viên 1 (Lê Cao Việt Tín - 24110354):** Phụ trách Báo cáo tổng kết đồ án, Sơ đồ kiến trúc, Báo cáo chi phí AWS ($0.03) & Kiểm thử an toàn.
-  - **Sinh viên 2 (Nguyễn Trung Hải - 24110207):** Phụ trách Kịch bản demo, Kiểm thử vận hành hệ thống POS & Quay dựng Video Demo toàn trình ($\le$ 10 phút).
+  - **Sinh viên 1 (Lê Cao Việt Tín - 24110354):** Phụ trách Báo cáo tổng kết đồ án (Chương 1, 2, 3, 4, 6, 7, 8 & Hợp nhất Master Report), Sơ đồ kiến trúc, Báo cáo chi phí AWS ($0.03) & Hướng dẫn dọn dẹp IaC.
+  - **Sinh viên 2 (Nguyễn Trung Hải - 24110207):** Phụ trách Soạn thảo Chương 5 Báo cáo đồ án (Thực nghiệm, Kiểm thử & Giám sát hệ thống), Vận hành hệ thống POS, Kịch bản demo & Quay dựng Video Demo toàn trình ($\le$ 10 phút).
 * **Môi trường triển khai:** AWS Learner Lab | Region: `us-east-1` (N. Virginia)
 * **Thời gian thực hiện Tuần 4:** **28/10/2026 – 02/11/2026**
 * **Kho lưu trữ Git:** [nthai212006-gh/cloud-smart-parking-system](https://github.com/nthai212006-gh/cloud-smart-parking-system) (Nhánh: `main`)
@@ -44,12 +44,12 @@ Nhóm thống nhất chia tách khối lượng công việc thành 2 mũi nhọ
 │                        KẾ HOẠCH BÀN GIAO TUẦN 4 (17.0 GIỜ)                             │
 ├──────────────────────────────────────────┬─────────────────────────────────────────────┤
 │  SINH VIÊN 1: LÊ CAO VIỆT TÍN (8.5 GIỜ)  │  SINH VIÊN 2: NGUYỄN TRUNG HẢI (8.5 GIỜ)    │
-│       [TRỌNG TÂM: BÁO CÁO & KIẾN TRÚC]   │           [TRỌNG TÂM: VIDEO DEMO]           │
+│  [TRỌNG TÂM: MASTER REPORT & KIẾN TRÚC]  │  [TRỌNG TÂM: BÁO CÁO CHƯƠNG 5 & VIDEO DEMO] │
 ├──────────────────────────────────────────┼─────────────────────────────────────────────┤
-│ 1. Viết Báo cáo tổng kết đồ án (Word/PDF)│ 1. Vận hành & kiểm thử hệ thống Desktop POS │
-│ 2. Hoàn thiện sơ đồ kiến trúc Serverless │ 2. Thực hiện demo với ảnh car_05 & motor_06 │
+│ 1. Viết Báo cáo Chương 1, 2, 3, 4, 6, 7,8│ 1. Viết Báo cáo Chương 5: Kiểm thử & Giám sát│
+│ 2. Hoàn thiện sơ đồ kiến trúc Serverless │ 2. Vận hành & kiểm thử hệ thống Desktop POS │
 │ 3. Lập báo cáo kiểm toán chi phí $0.03   │ 3. Quay và biên tập Video Demo DEMO.mp4     │
-│ 4. Soạn tài liệu hướng dẫn dọn dẹp IaC   │ 4. Đăng tải video lên Google Drive & nộp    │
+│ 4. Hợp nhất Master Report & Hướng dẫn IaC│ 4. Đăng tải video lên Google Drive & nộp    │
 └──────────────────────────────────────────┴─────────────────────────────────────────────┘
 ```
 
@@ -67,23 +67,23 @@ Nhóm thống nhất chia tách khối lượng công việc thành 2 mũi nhọ
 | :---: | :---: | :---: | :--- | :--- |
 | **28/10/2026**<br>(Thứ 4) | 19:30 - 21:30 | 2.0h | - Tinh chỉnh giao diện POS Desktop 5 tầng đối xứng (`frontend/index.html` và `frontend/style.css`).<br>- Khóa cứng kích thước Tầng 3 (48px) và Tầng 4 (44px) cân bằng giữa Cổng Vào và Cổng Ra.<br>- Loại bỏ các khung chờ nét đứt để giao diện gọn gàng, chuyên nghiệp.<br>- Kiểm tra tính toàn vẹn 45 DOM IDs trong `frontend/app.js`. | Commit `f90a317`, `986cf0c`<br>Giao diện POS đối xứng hoàn hảo |
 | **29/10/2026**<br>(Thứ 5) | 19:30 - 21:45 | 2.25h | - Khởi tạo cấu trúc tài liệu Báo cáo tổng kết đồ án toàn trình 4 tuần.<br>- Xây dựng sơ đồ kiến trúc hệ thống chuẩn AWS Serverless Decoupled (API Gateway $\rightarrow$ Lambda $\rightarrow$ Rekognition/S3/DynamoDB $\rightarrow$ CloudWatch/Athena).<br>- Soạn thảo chương: *"Thiết kế kiến trúc hệ thống và luồng dữ liệu"*, bóc tách chi tiết luồng xử lý Check-in và Check-out. | Bản thảo Báo cáo chương 1, 2, 3<br>Sơ đồ kiến trúc độ nét cao |
-| **30/10/2026**<br>(Thứ 6) | 14:00 - 16:15 | 2.25h | - Soạn thảo chương: *"Kiểm thử an toàn, Xử lý Race Condition và Stress Testing"*:<br>  + Giải thích cơ chế DynamoDB Atomic Write với `ConditionExpression`.<br>  + Phân tích cơ chế giới hạn tải API Gateway Throttling (10 req/s, burst 20).<br>- Lập báo cáo kiểm toán chi phí đám mây AWS Billing & Cost Management: Phân tích thực tế chi phí **`$0.03`** (trong đó CloudWatch chiếm $0.02, Rekognition chiếm $0.01 do quá trình test tải và demo nhiều lượt), khẳng định mức tối ưu vượt trội, bảo toàn 99.97% ngân sách $100. | Báo cáo chương 4 & 5<br>Bảng phân tích chi phí AWS `$0.03` |
-| **31/10/2026**<br>(Thứ 7) | 19:30 - 21:30 | 2.0h | - Rà soát file CloudFormation `iac/cloudformation_template.yaml`, bổ sung chương tài liệu hướng dẫn dọn dẹp tài nguyên 1-chạm (`aws cloudformation delete-stack`).<br>- Định dạng chuẩn hóa toàn bộ file Báo cáo tổng kết đồ án (Word và xuất bản PDF).<br>- Cập nhật nhật ký tuần `docs/worklogs/week-04/member-1.md`. | File Báo cáo tổng kết hoàn chỉnh<br>Tài liệu hướng dẫn dọn dẹp IaC |
-| **TỔNG CỘNG** | | **8.5h** | **Đạt và vượt chuẩn quy định môn học ($\ge$ 8.0 giờ/tuần)** | **Hoàn thành 100% tài liệu báo cáo** |
+| **30/10/2026**<br>(Thứ 6) | 14:00 - 16:15 | 2.25h | - Soạn thảo Chương 4 (Triển khai các dịch vụ AWS) và Chương 6 (Đánh giá chi phí & Tối ưu hóa).<br>- Lập báo cáo kiểm toán chi phí đám mây AWS Billing & Cost Management: Phân tích thực tế chi phí **`$0.03`** (trong đó CloudWatch chiếm $0.02, Rekognition chiếm $0.01 do quá trình test tải và demo nhiều lượt), khẳng định mức tối ưu vượt trội, bảo toàn 99.97% ngân sách $100. | Bản thảo Chương 4, 6<br>Bảng phân tích chi phí AWS `$0.03` |
+| **31/10/2026**<br>(Thứ 7) | 19:30 - 21:30 | 2.0h | - Tiếp nhận file Chương 5 (`BaoCao_Chuong_5_KiemThu_Va_GiamSat.docx`) từ Thành viên 2 (Hải) để hợp nhất vào Báo cáo tổng thể toàn trình (Chương 1 đến Chương 8).<br>- Rà soát file CloudFormation `iac/cloudformation_template.yaml`, hoàn thiện Chương 8: hướng dẫn dọn dẹp tài nguyên 1-chạm (`aws cloudformation delete-stack`).<br>- Định dạng chuẩn hóa toàn bộ file Báo cáo tổng kết đồ án Master (Word và xuất bản PDF).<br>- Cập nhật nhật ký tuần `docs/worklogs/week-04/member-1.md`. | File Báo cáo Master hoàn chỉnh<br>Tài liệu hướng dẫn dọn dẹp IaC |
+| **TỔNG CỘNG** | | **8.5h** | **Đạt và vượt chuẩn quy định môn học ($\ge$ 8.0 giờ/tuần)** | **Hoàn thành Master Report** |
 
 ---
 
 ### 3.2. SINH VIÊN 2: NGUYỄN TRUNG HẢI (MSSV: 24110207)
-* **Vai trò:** Phụ trách Vận hành hệ thống POS, Kiểm thử nghiệp vụ & Quay dựng Video Demo toàn trình.
+* **Vai trò:** Phụ trách Soạn thảo Chương 5 Báo cáo đồ án, Vận hành kiểm thử POS & Quay dựng Video Demo toàn trình.
 * **Tổng số giờ làm việc:** **8.5 giờ**
 
 | Ngày thực hiện | Khung giờ | Số giờ | Hạng mục công việc chi tiết | Sản phẩm bàn giao cụ thể |
 | :---: | :---: | :---: | :--- | :--- |
 | **28/10/2026**<br>(Thứ 4) | 19:30 - 21:30 | 2.0h | - Kiểm tra môi trường cục bộ: khởi chạy máy chủ web `python -m http.server 8000 --directory frontend`.<br>- Lựa chọn bộ ảnh thử nghiệm thực tế chính thức: **Ô tô (`car_clear_05.jpg`)** và **Xe máy (`motor_clear_06.jpg`)**.<br>- Chạy thử nghiệm luồng quét vé qua CAM 01 và CAM 02, xác thực ảnh xe ra được đẩy vào S3 thư mục `out/`. | Môi trường test sẵn sàng<br>2 ảnh test `car_05` & `motor_06` |
 | **29/10/2026**<br>(Thứ 5) | 19:30 - 21:45 | 2.25h | - Thiết kế cấu trúc các phân cảnh demo mượt mà, phân bổ thời lượng chuẩn khống chế $\le$ 10 phút.<br>- Chuẩn bị dữ liệu và mở sẵn các tab điều khiển trên AWS Console (DynamoDB, Athena, S3, CloudWatch, Billing).<br>- Diễn tập thao tác giữa POS và AWS Console. | Bảng phân cảnh demo<br>Môi trường kiểm thử sẵn sàng |
-| **30/10/2026**<br>(Thứ 6) | 14:00 - 16:15 | 2.25h | - Cài đặt phần mềm quay màn hình, mở sẵn các tab: POS Desktop, AWS Console (DynamoDB items, S3 `in/` và `out/`, Athena SQL, CloudWatch Alarms `OK`, Billing `$0.03`).<br>- Chạy diễn tập và thực hiện quay video toàn trình chính thức `DEMO.mp4` với âm thanh rõ ràng, thời lượng đạt chuẩn $\le$ 10 phút. | File video `DEMO.mp4`<br>Đạt chuẩn thời lượng và nội dung |
-| **31/10/2026**<br>(Thứ 7) | 19:30 - 21:30 | 2.0h | - Tải video lên Google Drive tại thư mục chia sẻ: [Google Drive Folder](https://drive.google.com/drive/folders/1iYy8aeg6JkXlWysBVxFYQMlPEZcbFLb6?usp=drive_link).<br>- Kiểm tra mở quyền xem công khai (Anyone with the link can view).<br>- Cập nhật nhật ký tuần `docs/worklogs/week-04/member-2.md` và đồng bộ tài liệu nghiệm thu. | Link Google Drive video demo<br>Worklog Tuần 4 hoàn tất |
-| **TỔNG CỘNG** | | **8.5h** | **Đạt và vượt chuẩn quy định môn học ($\ge$ 8.0 giờ/tuần)** | **Hoàn tất 100% video demo** |
+| **30/10/2026**<br>(Thứ 6) | 14:00 - 16:15 | 2.25h | - Soạn thảo hoàn thiện **Chương 5: Thực nghiệm, Kiểm thử và Giám sát hệ thống** (`BaoCao_Chuong_5_KiemThu_Va_GiamSat.docx`) gồm 3 nội dung: kiểm thử nhận diện biển số 120 ảnh & luồng POS; kiểm thử an toàn Race Condition DynamoDB; kiểm thử Throttling 30 req/s, phân tích SQL Athena 50 vé 1.124.000đ và CloudWatch Dashboard/Alarms.<br>- Cài đặt phần mềm quay màn hình, mở sẵn các tab: POS Desktop, AWS Console (DynamoDB items, S3 `in/` và `out/`, Athena SQL, CloudWatch Alarms `OK`, Billing `$0.03`).<br>- Chạy diễn tập và thực hiện quay video toàn trình chính thức `DEMO.mp4` với âm thanh rõ ràng, thời lượng đạt chuẩn $\le$ 10 phút. | File Báo cáo Chương 5 docx<br>File video `DEMO.mp4` |
+| **31/10/2026**<br>(Thứ 7) | 19:30 - 21:30 | 2.0h | - Bàn giao file `BaoCao_Chuong_5_KiemThu_Va_GiamSat.docx` cho Thành viên 1 (Tín) ráp vào Báo cáo Master.<br>- Tải video lên Google Drive tại thư mục chia sẻ: [Google Drive Folder](https://drive.google.com/drive/folders/1iYy8aeg6JkXlWysBVxFYQMlPEZcbFLb6?usp=drive_link).<br>- Kiểm tra mở quyền xem công khai (Anyone with the link can view).<br>- Cập nhật nhật ký tuần `docs/worklogs/week-04/member-2.md` và đồng bộ tài liệu nghiệm thu. | Bàn giao Chương 5 docx<br>Link Google Drive video demo |
+| **TỔNG CỘNG** | | **8.5h** | **Đạt và vượt chuẩn quy định môn học ($\ge$ 8.0 giờ/tuần)** | **Hoàn tất Báo cáo Ch.5 & Video Demo** |
 
 ---
 
@@ -93,16 +93,16 @@ Nhóm thống nhất chia tách khối lượng công việc thành 2 mũi nhọ
 gantt
     title LỊCH TRÌNH THỰC HIỆN TUẦN 4 (DOMAIN APPS)
     dateFormat  YYYY-MM-DD
-    section SV 1 - Lê Cao Việt Tín (Báo cáo)
+    section SV 1 - Lê Cao Việt Tín (Master Report)
     Tinh chỉnh POS đối xứng & clean layout    :done, 2026-10-28, 1d
     Viết báo cáo chương 1, 2, 3 (Kiến trúc)    :done, 2026-10-29, 1d
-    Viết báo cáo chương 4, 5 & Billing $0.03  :done, 2026-10-30, 1d
-    Hoàn thiện file Word/PDF Báo cáo cuối kỳ  :active, 2026-10-31, 1d
-    section SV 2 - Nguyễn Trung Hải (Demo)
+    Viết báo cáo chương 4, 6 & Billing $0.03  :done, 2026-10-30, 1d
+    Hợp nhất Chương 5 & Hoàn thiện Master Doc :active, 2026-10-31, 1d
+    section SV 2 - Nguyễn Trung Hải (Ch.5 & Demo)
     Kiểm thử luồng POS với car_05 & motor_06   :done, 2026-10-28, 1d
     Xây dựng kịch bản demo đồng bộ từng giây   :done, 2026-10-29, 1d
-    Quay video DEMO.mp4 & verify Billing $0.03:done, 2026-10-30, 1d
-    Upload Google Drive & hoàn tất nghiệm thu :active, 2026-10-31, 1d
+    Soạn Báo cáo Chương 5 & Quay Video Demo   :done, 2026-10-30, 1d
+    Bàn giao Ch.5 docx & Upload Google Drive  :active, 2026-10-31, 1d
     section Nghiệm thu & Nộp bài
     Tổng hợp hồ sơ & nộp bài lên hệ thống     :2026-11-01, 1d
     Dọn dẹp tài nguyên CloudFormation         :2026-11-02, 1d

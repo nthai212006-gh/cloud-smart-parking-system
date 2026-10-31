@@ -39,12 +39,12 @@ Nhóm thống nhất chia tách khối lượng công việc thành 2 mũi nhọ
 │                        KẾ HOẠCH BÀN GIAO TUẦN 4 (17.0 GIỜ)                             │
 ├──────────────────────────────────────────┬─────────────────────────────────────────────┤
 │  SINH VIÊN 1: LÊ CAO VIỆT TÍN (8.5 GIỜ)  │  SINH VIÊN 2: NGUYỄN TRUNG HẢI (8.5 GIỜ)    │
-│       [TRỌNG TÂM: BÁO CÁO & KIẾN TRÚC]   │           [TRỌNG TÂM: VIDEO DEMO]           │
+│  [TRỌNG TÂM: MASTER REPORT & KIẾN TRÚC]  │  [TRỌNG TÂM: BÁO CÁO CHƯƠNG 5 & VIDEO DEMO] │
 ├──────────────────────────────────────────┼─────────────────────────────────────────────┤
-│ 1. Viết Báo cáo tổng kết đồ án (Word/PDF)│ 1. Vận hành & kiểm thử hệ thống Desktop POS │
-│ 2. Hoàn thiện sơ đồ kiến trúc Serverless │ 2. Thực hiện demo với ảnh car_05 & motor_06 │
+│ 1. Viết Báo cáo Chương 1, 2, 3, 4, 6, 7,8│ 1. Viết Báo cáo Chương 5: Kiểm thử & Giám sát│
+│ 2. Hoàn thiện sơ đồ kiến trúc Serverless │ 2. Vận hành & kiểm thử hệ thống Desktop POS │
 │ 3. Lập báo cáo kiểm toán chi phí $0.03   │ 3. Quay và biên tập Video Demo DEMO.mp4     │
-│ 4. Soạn tài liệu hướng dẫn dọn dẹp IaC   │ 4. Đăng tải video lên Google Drive & nộp    │
+│ 4. Hợp nhất Master Report & Hướng dẫn IaC│ 4. Đăng tải video lên Google Drive & nộp    │
 └──────────────────────────────────────────┴─────────────────────────────────────────────┘
 ```
 
@@ -53,8 +53,8 @@ Nhóm thống nhất chia tách khối lượng công việc thành 2 mũi nhọ
 
 | Thành viên | MSSV | Vai trò chính Tuần 4 | Thời lượng | Kế hoạch chi tiết | Nhật ký thực hiện |
 | :--- | :---: | :--- | :---: | :---: | :---: |
-| **Lê Cao Việt Tín** | 24110354 | **Thành viên 1:** Viết Báo cáo tổng kết (Word/PDF), Sơ đồ kiến trúc Serverless, Báo cáo chi phí AWS ($0.03), Hướng dẫn dọn dẹp CloudFormation | **8.5 giờ** | [member-1.md](member-1.md) | `docs/worklogs/week-04/member-1.md` |
-| **Nguyễn Trung Hải** | 24110207 | **Thành viên 2:** Vận hành hệ thống POS, Kiểm thử nghiệp vụ, Quay và hoàn thiện Video Demo toàn trình ($\le$ 10 phút), Upload Google Drive | **8.5 giờ** | [member-2.md](member-2.md) | `docs/worklogs/week-04/member-2.md` |
+| **Lê Cao Việt Tín** | 24110354 | **Thành viên 1:** Viết Báo cáo các Chương 1, 2, 3, 4, 6, 7, 8 và hợp nhất Master Report, Sơ đồ kiến trúc Serverless, Báo cáo chi phí AWS ($0.03), Hướng dẫn dọn dẹp CloudFormation | **8.5 giờ** | [member-1.md](member-1.md) | `docs/worklogs/week-04/member-1.md` |
+| **Nguyễn Trung Hải** | 24110207 | **Thành viên 2:** Soạn thảo Chương 5 Báo cáo đồ án (Kiểm thử & Giám sát), Vận hành POS, Quay và hoàn thiện Video Demo toàn trình ($\le$ 10 phút), Upload Google Drive | **8.5 giờ** | [member-2.md](member-2.md) | `docs/worklogs/week-04/member-2.md` |
 | **CẢ NHÓM** | — | **Nghiệm thu đồ án, rà soát hồ sơ bàn giao, sẵn sàng dọn dẹp hạ tầng** | **17.0 giờ** | [overview.md](overview.md) | `docs/worklogs/week-04/overview.md` |
 
 ---
@@ -65,16 +65,16 @@ Nhóm thống nhất chia tách khối lượng công việc thành 2 mũi nhọ
 gantt
     title LỊCH TRÌNH TRIỂN KHAI TUẦN 4 (DOMAIN APPS)
     dateFormat  YYYY-MM-DD
-    section SV 1 - Lê Cao Việt Tín (Báo cáo)
+    section SV 1 - Lê Cao Việt Tín (Master Report)
     Tinh chỉnh POS 5 tầng đối xứng & clean layout :done, 2026-10-28, 1d
     Viết báo cáo chương 1, 2, 3 (Kiến trúc)       :done, 2026-10-29, 1d
-    Viết báo cáo chương 4, 5 & Kiểm toán $0.03   :done, 2026-10-30, 1d
-    Hoàn thiện file Word/PDF Báo cáo cuối kỳ     :active, 2026-10-31, 1d
-    section SV 2 - Nguyễn Trung Hải (Demo)
+    Viết báo cáo chương 4, 6 & Kiểm toán $0.03   :done, 2026-10-30, 1d
+    Hợp nhất Chương 5 & Hoàn thiện Master Doc     :active, 2026-10-31, 1d
+    section SV 2 - Nguyễn Trung Hải (Ch.5 & Demo)
     Kiểm thử luồng POS với car_05 & motor_06      :done, 2026-10-28, 1d
     Chuẩn bị dữ liệu demo & kịch bản phân cảnh    :done, 2026-10-29, 1d
-    Quay video DEMO.mp4 & verify Billing $0.03   :done, 2026-10-30, 1d
-    Upload Google Drive & hoàn tất nghiệm thu    :active, 2026-10-31, 1d
+    Soạn Báo cáo Chương 5 & Quay Video DEMO.mp4   :done, 2026-10-30, 1d
+    Bàn giao Ch.5 docx & Upload Google Drive      :active, 2026-10-31, 1d
     section Nghiệm thu & Nộp bài
     Tổng hợp hồ sơ & nộp bài lên hệ thống        :2026-11-01, 1d
     Dọn dẹp tài nguyên CloudFormation            :2026-11-02, 1d
